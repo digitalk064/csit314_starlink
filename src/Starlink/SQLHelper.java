@@ -1,13 +1,20 @@
 package Starlink;
 
+import java.io.File;
 import java.sql.*;
 
 public class SQLHelper {
     private static Connection conn = null;
 
-    public static void startDBConnection() throws Exception
+    public static void startDBConnection(String filename) throws Exception
     {
-        String url = "jdbc:sqlite:src/Starlink/contactTracing.db";
+        File file = new File (filename); //Check if db file exists
+        if(!file.exists())
+        {
+            System.out.println("The db file could not be found!");
+            throw new Exception("The db file could not be found");
+        }
+        String url = "jdbc:sqlite:contactTracing.db";
         conn = DriverManager.getConnection(url);
         conn.setAutoCommit(false); // Don't need to write to disk every time we change the database
         System.out.println("Connected to SQLite db file");

@@ -1,6 +1,7 @@
 package Starlink;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,11 +34,12 @@ public class Starlink extends Application {
     public static void main(String[] args) {
         //Connect to the db file first
         try{
-            SQLHelper.startDBConnection();
+            SQLHelper.startDBConnection("contactTracing.db");
         }
         catch(Exception e)
         {
-            System.out.println("Cannot connect to the db file");
+            System.out.println("Error in main(): Cannot connect to the db file");
+            Platform.exit();
             System.exit(-1);
         }
 
@@ -51,7 +53,7 @@ public class Starlink extends Application {
         }
         catch(Exception e)
         {
-            System.out.println("Cannot close connection to the db file");
+            System.out.println("Error in main(): Cannot close connection to the db file");
         }
 
     }
