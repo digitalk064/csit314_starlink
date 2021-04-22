@@ -31,6 +31,28 @@ public class Starlink extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        //Connect to the db file first
+        try{
+            SQLHelper.startDBConnection();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Cannot connect to the db file");
+            System.exit(-1);
+        }
+
+        //Open the application window
+        launch(args);        
+
+        //Now close the connection to the db before shutting odwn
+        //Connect to the db file first
+        try{
+            SQLHelper.closeConnection();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Cannot close connection to the db file");
+        }
+
     }
 }

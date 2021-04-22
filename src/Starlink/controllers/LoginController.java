@@ -17,10 +17,10 @@ public class LoginController {
             return false;
         
         //Second step: contact the entity
-        //... Not sure how to do this yet
-
-        //If passed, return true
-
-        return true;
+        // Might not be correct here
+        User user = new User();
+        if(user.login(username, password))
+            return true;
+        else return false;
     }
 }
