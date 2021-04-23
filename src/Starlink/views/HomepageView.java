@@ -32,4 +32,21 @@ public class HomepageView {
     {
         header.setText(String.format("Hello, %s. You are a %s", User.session.getID(), User.session.getUserType()));
     }
+
+    @FXML
+    void onLogoutClicked(ActionEvent event) throws Exception
+    {
+        Logout(event);
+    }
+
+    void Logout(ActionEvent event) throws Exception
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+    }
 }
