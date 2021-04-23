@@ -57,7 +57,7 @@ public class User {
             ResultSet results = SQLHelper.selectStatement(String.format("select * from user where username = '%s' and password = '%s'", username, password));
             if(results.next()){ //If there are any rows returned at all we have succeeded
                 //Save the userType and userid from the logged in account to the persistent variables
-                UserType type = UserType.valueOf(results.getString("usertype").replaceAll("\\s","")); //Temporarily removing space
+                UserType type = UserType.valueOf(results.getString("usertype")); //Temporarily removing space
                 int id = results.getInt("userID");
                 String _username = results.getString("username");
                 String _password = results.getString("password");
