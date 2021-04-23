@@ -7,11 +7,48 @@ import javafx.application.Platform;
 //User entity
 //This is the superclass for all the user types
 public class User {
+    //Fields
+    private int userid;
+    private String username;
+    private String password;
+    private String email;
+    private UserType userType;
+
     //Static variables acting as session information
     //Not sure yet
-    public static UserType session_userType;
-    public static int session_userid;
-    // Some other info like name?
+    public static User session;
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getID() {
+        return userid;
+    }
+
+    public User()
+    {}
+
+    public User(int userid, String username, String password, String email, UserType userType) {
+        this.userid = userid;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.userType = userType;
+    }
+
     
     public boolean login(String username, String password)
     {
@@ -20,9 +57,14 @@ public class User {
             ResultSet results = SQLHelper.selectStatement(String.format("select * from user where username = '%s' and password = '%s'", username, password));
             if(results.next()){ //If there are any rows returned at all we have succeeded
                 //Save the userType and userid from the logged in account to the persistent variables
-                session_userType = UserType.valueOf(results.getString("usertype").replaceAll("\\s","")); //Temporarily removing space
-                session_userid = results.getInt("userID");
-                System.out.println("Found login record: " + session_userid + " " + session_userType);
+                UserType type = UserType.valueOf(results.getString("usertype").replaceAll("\\s","")); //Temporarily removing space
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+                System.out.println("Found login record: " + id + " " + type);
+                //Create the persistent User entity for the logged in user
+                session = new User(id, _username, _password, _email, type);
                 return true;
             }
             //If we reach this part then there is no row found, return false
