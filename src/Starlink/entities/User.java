@@ -14,10 +14,6 @@ public class User {
     private String email;
     private UserType userType;
 
-    //Static variables acting as session information
-    //Not sure yet
-    public static User session;
-
     public UserType getUserType() {
         return userType;
     }
@@ -50,34 +46,42 @@ public class User {
     }
 
     
-    public boolean login(String username, String password)
+    public User login(String username, String password) throws Exception
     {
-        // Put SQL code here
-        try{
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user where username = '%s' and password = '%s'", username, password));
-            if(results.next()){ //If there are any rows returned at all we have succeeded
-                //Save the userType and userid from the logged in account to the persistent variables
-                UserType type = UserType.valueOf(results.getString("usertype")); //Temporarily removing space
-                int id = results.getInt("userID");
-                String _username = results.getString("username");
-                String _password = results.getString("password");
-                String _email = results.getString("email");
-                System.out.println("Found login record: " + id + " " + type);
-                //Create the persistent User entity for the logged in user
-                session = new User(id, _username, _password, _email, type);
-                return true;
+        ResultSet results = SQLHelper.selectStatement(String.format("select * from user where username = '%s' and password = '%s'", username, password));
+        if(results.next()){ //If there are any rows returned at all we have succeeded
+            //Save the userType and userid from the logged in account to the persistent variables
+            if(results.getString("suspended").equals("yes"))
+                throw new Exception("This account has been suspended.");
+            UserType type = UserType.valueOf(results.getString("usertype")); //Temporarily removing space
+            int id = results.getInt("userID");
+            String _username = results.getString("username");
+            String _password = results.getString("password");
+            String _email = results.getString("email");
+            System.out.println("Found login record: " + id + " " + type);
+            //Create the persistent User entity for the logged in user
+            User session;
+            switch(type){
+                case PublicUser:
+                    session = new PublicUser(id, _username, _password, _email, type);
+                    break;
+                case HealthStaff:
+                    session = new HealthStaff(id, _username, _password, _email, type);
+                    break;
+                case HealthOrganization:
+                    session = new HealthOrganization(id, _username, _password, _email, type);
+                    break;
+                case Business:
+                    session = new Business(id, _username, _password, _email, type);
+                    break;
+                default:
+                    System.out.println("Unknown user type for " + id);
+                    throw new Exception("Found user record with unknown user type!");
             }
-            //If we reach this part then there is no row found, return false
-            return false;
+            return session;
         }
-        catch(Exception e) //Error
-        {
-            System.out.println("Error in login(): ");
-            e.printStackTrace();
-            Platform.exit();
-            System.exit(-1);
-            return false;
-        }
+        //If we reach this part then there is no row found, return false
+        throw new Exception("Your username or password might be incorrect.");
     }
 }
 

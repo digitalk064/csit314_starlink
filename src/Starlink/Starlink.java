@@ -10,7 +10,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Starlink extends Application {
-
+    
+    //Save the main window (stage) as a static variable so it can be accessed
+    //Technically the main class is a boundary so this should be allowed
+    public static Stage stage;
+    
     @Override
     public void init() throws Exception {
         super.init();
@@ -19,6 +23,7 @@ public class Starlink extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
 
         primaryStage.setScene(new Scene(root));
@@ -55,6 +60,9 @@ public class Starlink extends Application {
         {
             System.out.println("Error in main(): Cannot close connection to the db file");
         }
+    }
 
+    public static Stage getStage(){
+        return stage;
     }
 }

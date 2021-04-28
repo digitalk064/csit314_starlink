@@ -9,18 +9,22 @@ public class LoginController {
 
     }
 
-    public boolean validateLogin(String username, String password)
+    public User validateLogin(String username, String password) throws Exception
     {
         //First step: validate the fields
         System.out.println("validate " + username + " " + password);
         if(username.isBlank() || password.isBlank())
-            return false;
+            throw new Exception("Please fill out both the username and password fields.");
         
         //Second step: contact the entity
-        // Might not be correct here
-        User user = new User();
-        if(user.login(username, password))
-            return true;
-        else return false;
+        try{
+            User user = new User();
+            user = user.login(username, password);
+            return user;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
     }
 }
