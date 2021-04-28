@@ -63,16 +63,16 @@ public class User {
             User session;
             switch(type){
                 case PublicUser:
-                    session = new PublicUser(id, _username, _password, _email, type);
+                    session = new PublicUser(id, _username, _password, _email);
                     break;
                 case HealthStaff:
-                    session = new HealthStaff(id, _username, _password, _email, type);
+                    session = new HealthStaff(id, _username, _password, _email);
                     break;
                 case HealthOrganization:
-                    session = new HealthOrganization(id, _username, _password, _email, type);
+                    session = new HealthOrganization(id, _username, _password, _email);
                     break;
                 case Business:
-                    session = new Business(id, _username, _password, _email, type);
+                    session = new Business(id, _username, _password, _email);
                     break;
                 default:
                     System.out.println("Unknown user type for " + id);
