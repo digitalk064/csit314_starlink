@@ -22,8 +22,46 @@ public class HealthStaff extends User{
         throw new Exception("Cannot find health staff account with userid " + userid + " in healthStaff table!");
     }
 
-    public void createHealthStaffAccount()
-    {
+    public HealthStaff(int userid, String username, String password, String email, String staffID, String name){
+        super(userid, username, password, email, UserType.HealthStaff);
+        this.staffID = staffID;
+        this.name = name; 
+    }
 
+    public boolean createHealthStaffAccount(String username, String password, String email, String staffID, String name)
+    {
+        try{
+            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, HealthStaff, no)",
+            username, password, email));
+
+            //get the userID
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username));
+
+            SQLHelper.updateStatement(String.format("insert into healthStaff (staffID, name, userID) values (%s, %s, %d)",
+            staffID, name, userID));
+            return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
+            return false;
+        }
+    }
+
+    public boolean updateHealthStaffAccount(int userID, String username, String password, String email, String staffID, String name)
+    {
+        try{
+            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            username, password, email, userID));
+
+            SQLHelper.updateStatement(String.format("update healthStaff set staffID = %s, name = %s where userID = %d",
+            staffID, name, userID));
+            return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
+            return false;
+        }
     }
 }
