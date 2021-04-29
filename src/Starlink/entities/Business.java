@@ -38,7 +38,32 @@ public class Business extends User{
     {
         try{
             SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, Business, no)",
-            username, password, email))
+            username, password, email));
+
+            //get the userID
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username));
+
+            SQLHelper.updateStatement(String.format("insert into business (businessID, name, address, userID) values (%s, %s, %s, %d)",
+            businessID, name, address, userID));
+
+            return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
+            return false;
+        }
+    }
+
+    public boolean updateBusinessAccount(int userID, String username, String password, String email, String businessID, String name, String address) throws Exception
+    {
+        try{
+            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            username, password, email, userID));
+
+            SQLHelper.updateStatement(String.format("update business set businessID = %s, name = %s, address = %s where userID = %d",
+            businessID, name, address, userID));
+
             return true;
         }
         catch(Exception e)
