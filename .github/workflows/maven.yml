@@ -32,8 +32,8 @@ jobs:
     - name: Upload as release
       uses: svenstaro/upload-release-action@v2
       with:
-        release_name: "CD: Executable JAR"
+        release_name: "Executable JAR v${{ github.run_number }}"
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: staging/csit314_starlink.jar
-        tag: ${{ github.ref }}
-        body: "Delivered by Continuous Deployment"
+        tag: "v${{ github.run_number }}"
+        body: "Automatically uploaded by Continuous Deployment"
