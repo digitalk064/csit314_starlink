@@ -36,7 +36,7 @@ public class PublicUser extends User{
             username, password, email));
 
             //get the userID
-            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username));
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username)).getInt("userID");;
 
             SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID) values (%s, %s, %d)",
             IDNum, name, userID));

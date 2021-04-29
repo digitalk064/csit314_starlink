@@ -41,7 +41,7 @@ public class Business extends User{
             username, password, email));
 
             //get the userID
-            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username));
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username)).getInt("userID");
 
             SQLHelper.updateStatement(String.format("insert into business (businessID, name, address, userID) values (%s, %s, %s, %d)",
             businessID, name, address, userID));
