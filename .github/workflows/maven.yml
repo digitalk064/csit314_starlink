@@ -29,6 +29,12 @@ jobs:
       with:
         name: Package
         path: staging
+    - name: Get commit message
+      id: changelog
+      uses: TriPSs/conventional-changelog-action@v3
+      with:
+        github-token: ${{ secrets.github_token }}
+        output-file: "false"
     - name: Upload as release
       uses: svenstaro/upload-release-action@v2
       with:
@@ -36,4 +42,4 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: staging/csit314_starlink.jar
         tag: "v${{ github.run_number }}"
-        body: "Automatically uploaded by Continuous Deployment"
+        body: "Automatically uploaded by Continuous Deployment. Changelog: ${{ steps.changelog.outputs.clean_changelog }}"
