@@ -43,7 +43,6 @@ public class HealthStaff extends User{
         }
         catch(Exception e)
         {
-            throw e;
             return false;
         }
     }
@@ -60,7 +59,6 @@ public class HealthStaff extends User{
         }
         catch(Exception e)
         {
-            throw e;
             return false;
         }
     }
