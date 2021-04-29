@@ -22,4 +22,47 @@ public class PublicUser extends User{
         }
         throw new Exception("Cannot find public user account with userid " + userid + " in publicUser table!");
     }
+
+    public PublicUser(int userid, String username, String password, String email, String IDNum, String name) {
+        super(userid, username, password, email, UserType.PublicUser);
+        this.IDNum = IDNum;
+        this.name = name;
+    }
+
+    public boolean createPublicUserAccount(String username, String password, String email, String IDNum, String name) throws Exception
+    {
+        try{
+            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, PublicUser, no)",
+            username, password, email));
+
+            //get the userID
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username)).getInt("userID");
+
+            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID) values (%s, %s, %d)",
+            IDNum, name, userID));
+
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
+
+    public boolean updatePublicUserAccount(int userID, String username, String password, String email, String IDNum, String name) throws Exception
+    {
+        try{
+            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            username, password, email, userID));
+
+            SQLHelper.updateStatement(String.format("update publicUser set IDNum = %s, name = %s where userID = %d",
+            IDNum, name, userID));
+
+            return true;
+        }
+        catch(Exception e)
+        {
+            return false;
+        }
+    }
 }
