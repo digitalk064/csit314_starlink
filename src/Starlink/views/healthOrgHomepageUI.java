@@ -14,7 +14,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
 public class healthOrgHomepageUI {
 
     @FXML
@@ -23,15 +22,15 @@ public class healthOrgHomepageUI {
     @FXML
     private Text header;
 
-     //FXML callbacks
-     @FXML
-     protected void initialize() //Called when the view is loaded
-     {
-         Stage stage = Starlink.getStage();
-         //Get the logged in user
-         User user = (User)stage.getUserData();
-         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
-     }
+    //FXML callbacks
+    @FXML
+    protected void initialize() //Called when the view is loaded
+    {
+        Stage stage = Starlink.getStage();
+        //Get the logged in user
+        User user = (User)stage.getUserData();
+        header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
+    }
 
     @FXML
     private JFXButton logoutButton;
@@ -41,6 +40,9 @@ public class healthOrgHomepageUI {
 
     @FXML
     private JFXButton manageBusinessButton;
+
+    @FXML
+    private JFXButton managePublicButton;
 
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception {
@@ -66,6 +68,11 @@ public class healthOrgHomepageUI {
 
     @FXML
     void onManageHealthStaffAccountClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onManagePublicUserAccountClicked(ActionEvent event) {
 
     }
 
