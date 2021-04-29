@@ -7,6 +7,7 @@ import Starlink.entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXSpinner;
@@ -29,6 +30,14 @@ public class HomepageUI {
 
     @FXML
     private StackPane rootPane;
+    @FXML
+    private JFXButton manageHealthButton;
+
+    @FXML
+    private JFXButton managePublicButton;
+
+    @FXML
+    private JFXButton manageBusinessButton;
 
 
     @FXML
@@ -60,4 +69,25 @@ public class HomepageUI {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    @FXML
+void onManageBusinessAccountClicked(ActionEvent event) {
+
 }
+
+@FXML
+void onManageHealthStaffAccountClicked(ActionEvent event) {
+
+}
+
+@FXML
+void onManagePublicUserAccountClicked(ActionEvent event) {
+
+}
+}
+
+
+
+
+
