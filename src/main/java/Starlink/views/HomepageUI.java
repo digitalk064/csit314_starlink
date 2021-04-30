@@ -77,8 +77,13 @@ void onManageBusinessAccountClicked(ActionEvent event) {
 }
 
 @FXML
-void onManageHealthStaffAccountClicked(ActionEvent event) {
+void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
+{
+    Parent root = FXMLLoader.load(getClass().getResource("homepage_test.fxml"));
+    //Scene scene = new Scene(root);
 
+    //stage.setScene(scene);
+    //stage.show();
 }
 
 @FXML
