@@ -1,26 +1,25 @@
 
 
-package Starlink.views;
+ package Starlink.views;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+ import com.jfoenix.controls.JFXButton;
+ import com.jfoenix.controls.JFXPasswordField;
+ import com.jfoenix.controls.JFXTextField;
+ 
+ import Starlink.Starlink;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+ import javafx.scene.Parent;
+ import javafx.scene.Scene;
+ import javafx.scene.control.Label;
+ import javafx.scene.layout.AnchorPane;
+ import javafx.stage.Stage;
+ import javafx.scene.Node;
 
-import Starlink.Starlink;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.scene.Node;
+public class updateStaffAccountUI {
 
-public class admin_createHealthStaff {
-
-
-    Stage stage ;
+    
     String id, staffname,staffusername,staffemail,staffpassword;
     @FXML
     private AnchorPane anchorpane;
@@ -29,7 +28,7 @@ public class admin_createHealthStaff {
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton CreateButton;
+    private JFXButton updateButton;
 
     @FXML
     private JFXButton HomeButton;
@@ -67,7 +66,7 @@ public class admin_createHealthStaff {
     @FXML
     void onBackClicked(ActionEvent event) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
         Scene scene = new Scene(root);
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -77,20 +76,6 @@ public class admin_createHealthStaff {
 
     }
 
-    @FXML
-    void onCreateBtnClicked(ActionEvent event) throws Exception {
-
-        stage = Starlink.getStage();
-        System.out.println("Create button pressed");
-        //Get the user's text input from the fields
-        id = staffidField.getText();
-        staffname = staffnamefield.getText();
-        staffusername = usernameField.getText();
-        staffemail = emailField.getText();
-        staffpassword= passowordField.getText();
-
-
-    }
 
     @FXML
     void onHomeClicked(ActionEvent event) throws Exception{
@@ -125,4 +110,24 @@ public class admin_createHealthStaff {
         stage.show();
     }
 
+    @FXML
+    void onUpdateBtnClicked(ActionEvent event) {
+
+        Stage stage = Starlink.getStage();
+        System.out.println("Update button pressed");
+        //Get the user's text input from the fields
+        id = staffidField.getText();
+        staffname = staffnamefield.getText();
+        staffusername = usernameField.getText();
+        staffemail = emailField.getText();
+        staffpassword= passowordField.getText();
+
+        //validate
+        //dialog box
+
+    }
+
 }
+
+    
+

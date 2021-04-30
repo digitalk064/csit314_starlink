@@ -1,6 +1,10 @@
 package Starlink.views;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 
@@ -9,52 +13,33 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class admin_HealthStaffManage {
 
-    //admin_healthStaffManageController
+public class adminPublicManage {
+
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton SuspendEditHealthStaffAccountButton;
+    private JFXButton SearchButton;
 
     @FXML
-    private JFXButton CreateHealthStaffAccountButton;
+    private JFXButton CreatePublicUserAccountButton;
 
     @FXML
     private JFXButton BacktoHomepageButton;
 
     @FXML
-    void SuspendEditHealthStaffAccountClicked(ActionEvent event) throws Exception {
-        // need to change the file name
-        Parent root = FXMLLoader.load(getClass().getResource("HSSuspendEditUI.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-
-
-    }
+    private JFXComboBox<?> userid;
 
     @FXML
-    void onCreateHealthStaffAccountClicked(ActionEvent event)  throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("admin_createhealthstaff.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
+    private JFXTextField inputtextfield;
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception
@@ -87,6 +72,32 @@ public class admin_HealthStaffManage {
         stage.show();
     }
 
-    
+
+    @FXML
+    void onCreatePublicUserAccountClicked(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("createPublicAccountUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void onSearchClicked(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("SearchPublicAccUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 
 }

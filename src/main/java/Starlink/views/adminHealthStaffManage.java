@@ -1,54 +1,55 @@
 package Starlink.views;
 
-import Starlink.Starlink;
-import Starlink.controllers.LoginController;
-import Starlink.entities.User;
+import java.io.IOException;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXSpinner;
-
-import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-public class admin_BusinessManaging {
 
-    //admin_BusinessManageController
+
+public class adminHealthStaffManage {
+
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton SuspendEditBusinessButton;
+    private JFXButton SearchButton;
 
     @FXML
-    private JFXButton CreateBusinessAccountButton;
+    private JFXButton CreateHealthStaffAccountButton;
 
     @FXML
     private JFXButton BacktoHomepageButton;
 
     @FXML
-    void SuspendEditBusinessAccountClicked(ActionEvent event) {
-
-    }
-
+    private JFXTextField inputtextfield;
 
     @FXML
-    void onCreateBusinessAccountClicked(ActionEvent event) {
+    void onCreateHealthStaffAccountClicked(ActionEvent event)  throws Exception
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("createStaffAccountUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
 
     }
+
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception
@@ -63,8 +64,7 @@ public class admin_BusinessManaging {
 
     }
 
-    
-
+  
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception
     {
@@ -82,5 +82,17 @@ public class admin_BusinessManaging {
         stage.show();
     }
 
-}
+    @FXML
+    void onSearchClicked(ActionEvent event) throws IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+}

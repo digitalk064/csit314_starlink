@@ -1,43 +1,76 @@
 package Starlink.views;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class admin_PublicManaging {
 
-    //admin_publicManageController
+public class adminBusinessManage {
+
+    @FXML
+    private AnchorPane pane;
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton SuspendEditPublicUserAccountButton;
+    private JFXButton SearchButton;
 
     @FXML
-    private JFXButton CreateHealthStaffAccountButton;
+    private JFXButton CreateBusinessAccountButton;
 
     @FXML
     private JFXButton BacktoHomepageButton;
 
     @FXML
-    void SuspendEditPublicUserAccountClicked(ActionEvent event) {
-
-    }
+    private JFXComboBox<?> businessid;
 
     @FXML
-    void onCreatePublicUserAccountClicked(ActionEvent event) {
+    private JFXTextField inputtextfield;
+
+  
+
+    @FXML
+    void onCreateBusinessAccountClicked(ActionEvent event) throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("createBusinessAccountUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
 
     }
+
+
+
+    @FXML
+    void onSearchClicked(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("SearchBusinessAccUI.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception
@@ -52,7 +85,7 @@ public class admin_PublicManaging {
 
     }
 
-
+  
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception
     {
@@ -69,6 +102,7 @@ public class admin_PublicManaging {
         stage.setScene(scene);
         stage.show();
     }
+
+   
+
 }
-
-
