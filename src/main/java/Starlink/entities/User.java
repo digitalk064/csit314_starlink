@@ -13,6 +13,7 @@ public class User {
     private String password;
     private String email;
     private UserType userType;
+    private String suspended;
 
     public UserType getUserType() {
         return userType;
@@ -32,6 +33,10 @@ public class User {
 
     public int getID() {
         return userid;
+    }
+
+    public void setSuspended(String suspended) {
+        this.suspended = suspended;
     }
 
     public User()

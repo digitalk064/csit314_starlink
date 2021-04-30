@@ -45,7 +45,7 @@ public class PublicUser extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 
@@ -62,7 +62,7 @@ public class PublicUser extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 }

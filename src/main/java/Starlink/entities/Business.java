@@ -50,7 +50,7 @@ public class Business extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 
@@ -67,7 +67,7 @@ public class Business extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 }

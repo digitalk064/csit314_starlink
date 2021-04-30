@@ -43,7 +43,7 @@ public class HealthStaff extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 
@@ -59,7 +59,55 @@ public class HealthStaff extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
+        }
+    }
+
+    // public boolean searchHealthStaffByName(String search_string)
+    // {
+    //     try{
+    //         ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
+    //         "user.userID = healthStaff.userID where name = %s",
+    //         search_string));
+
+    //         return true;
+    //     }
+    //     catch(Exception e)
+    //     {
+    //         throw e;
+    //     }
+    // }
+
+    // public boolean searchHealthStaffByStaffID(String search_string)
+    // {
+    //     try{
+    //         ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
+    //         "user.userID = healthStaff.userID where staffID = %s",
+    //         search_string));
+
+    //         return true;
+    //     }
+    //     catch(Exception e)
+    //     {
+    //         throw e;
+    //     }
+    // }
+
+    public boolean suspendHealthStaffAccount(String staffID)
+    {
+        try{
+            //get userID
+            int userID = SQLHelper.selectStatement(String.format("select * from healthStaff where staffID = %s",
+            staffID)).getInt("userID");
+
+            //delete from healthStaff
+            SQLHelper.updateStatement(String.format("update user set suspended = yes where userID = %s",
+            userID));
+            return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
         }
     }
 }
