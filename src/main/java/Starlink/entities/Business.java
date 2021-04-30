@@ -4,6 +4,9 @@ import java.sql.*;
 import Starlink.SQLHelper;
 import javafx.application.Platform;
 
+import java.util.List; // import just the List interface
+import java.util.ArrayList; // import just the ArrayList class
+
 public class Business extends User{
     private String name;
     private String businessID;
@@ -64,6 +67,67 @@ public class Business extends User{
             businessID, name, address, userID));
 
             return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public List<Business> searchBusinessByName(String search_string) throws Exception
+    {
+
+        try{
+            List <Business> records = new ArrayList <Business>();
+
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on" + 
+            "user.userID = business.userID where name = %s", search_string));
+
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+
+                //initiate a HealthStaff object
+                Business Biz = new Business(id, _username, _password, _email);
+
+                //add object to list
+                records.add(Biz);
+            }
+
+            return records;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public List<Business> searchBusinessByStaffID(String search_string) throws Exception
+    {
+        try{
+            List <Business> records = new ArrayList <Business>();
+
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on" + 
+            "user.userID = business.userID where businessID = %s", search_string));
+
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+
+                //initiate a HealthStaff object
+                Business Biz = new Business(id, _username, _password, _email);
+
+                //add object to list
+                records.add(Biz);
+            }
+
+            return records;
         }
         catch(Exception e)
         {

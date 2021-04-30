@@ -4,6 +4,9 @@ import java.sql.*;
 import Starlink.SQLHelper;
 import javafx.application.Platform;
 
+import java.util.List; // import just the List interface
+import java.util.ArrayList; // import just the ArrayList class
+
 public class HealthStaff extends User{
     private String staffID;
     private String name;
@@ -28,7 +31,7 @@ public class HealthStaff extends User{
         this.name = name; 
     }
 
-    public boolean createHealthStaffAccount(String username, String password, String email, String staffID, String name)
+    public boolean createHealthStaffAccount(String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, HealthStaff, no)",
@@ -47,7 +50,7 @@ public class HealthStaff extends User{
         }
     }
 
-    public boolean updateHealthStaffAccount(int userID, String username, String password, String email, String staffID, String name)
+    public boolean updateHealthStaffAccount(int userID, String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
@@ -63,47 +66,60 @@ public class HealthStaff extends User{
         }
     }
 
-    // public boolean searchHealthStaffByName(String search_string)
-    // {
-    //     try{
-    //         ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-    //         "user.userID = healthStaff.userID where name = %s",
-    //         search_string));
+    public List<HealthStaff> searchHealthStaffByName(String search_string) throws Exception
+    {
 
-    //         return true;
-    //     }
-    //     catch(Exception e)
-    //     {
-    //         throw e;
-    //     }
-    // }
+        try{
+            List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-    // public boolean searchHealthStaffByStaffID(String search_string)
-    // {
-    //     try{
-    //         ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-    //         "user.userID = healthStaff.userID where staffID = %s",
-    //         search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
+            "user.userID = healthStaff.userID where name = %s", search_string));
 
-    //         return true;
-    //     }
-    //     catch(Exception e)
-    //     {
-    //         throw e;
-    //     }
-    // }
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
 
-    public boolean suspendHealthStaffAccount(String staffID)
+                //initiate a HealthStaff object
+                HealthStaff HS = new HealthStaff(id, _username, _password, _email);
+
+                //add object to list
+                records.add(HS);
+            }
+
+            return records;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public List<HealthStaff> searchHealthStaffByStaffID(String search_string) throws Exception
     {
         try{
-            //get userID
-            int userID = SQLHelper.selectStatement(String.format("select * from healthStaff where staffID = %s",
-            staffID)).getInt("userID");
+            List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-            //delete from healthStaff
-            SQLHelper.updateStatement(String.format("update user set suspended = yes where userID = %s",
-            userID));
-            return true;
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
+            "user.userID = healthStaff.userID where staffID = %s", search_string));
+
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+
+                //initiate a HealthStaff object
+                HealthStaff HS = new HealthStaff(id, _username, _password, _email);
+
+                //add object to list
+                records.add(HS);
+            }
+
+            return records;
         }
         catch(Exception e)
         {
