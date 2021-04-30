@@ -4,6 +4,9 @@ import java.sql.*;
 import Starlink.SQLHelper;
 import javafx.application.Platform;
 
+import java.util.List; // import just the List interface
+import java.util.ArrayList; // import just the ArrayList class
+
 public class PublicUser extends User{
     private String IDNum;
     private String name;
@@ -45,7 +48,7 @@ public class PublicUser extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
         }
     }
 
@@ -62,7 +65,68 @@ public class PublicUser extends User{
         }
         catch(Exception e)
         {
-            return false;
+            throw e;
+        }
+    }
+
+    public List<PublicUser> searchPublicUserByName(String search_string) throws Exception
+    {
+
+        try{
+            List <PublicUser> records = new ArrayList <PublicUser>();
+
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on" + 
+            "user.userID = publicUser.userID where name = %s", search_string));
+
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+
+                //initiate a HealthStaff object
+                PublicUser PU = new PublicUser(id, _username, _password, _email);
+
+                //add object to list
+                records.add(PU);
+            }
+
+            return records;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public List<PublicUser> searchPublicUserByStaffID(String search_string) throws Exception
+    {
+        try{
+            List <PublicUser> records = new ArrayList <PublicUser>();
+
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on" + 
+            "user.userID = publicUser.userID where IDNum = %s", search_string));
+
+            while(results.next()){
+                //get the user info from each row
+                int id = results.getInt("userID");
+                String _username = results.getString("username");
+                String _password = results.getString("password");
+                String _email = results.getString("email");
+
+                //initiate a HealthStaff object
+                PublicUser PU = new PublicUser(id, _username, _password, _email);
+
+                //add object to list
+                records.add(PU);
+            }
+
+            return records;
+        }
+        catch(Exception e)
+        {
+            throw e;
         }
     }
 }
