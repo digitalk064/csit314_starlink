@@ -1,4 +1,4 @@
-package main.java.Starlink.controllers;
+package Starlink.controllers;
 
 public class HSManagingController {
     

@@ -1,6 +1,7 @@
 package Starlink.views;
 
 import Starlink.controllers.LoginController;
+import Starlink.entities.HealthOrganization;
 import Starlink.entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -91,7 +92,12 @@ public class userLoginUI {
     //Switching scene template
     void goToHomePage(ActionEvent event, User user) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_test.fxml"));
+        String url = "";
+        if(user instanceof HealthOrganization)
+            url = "homepage_admin.fxml";
+        else //Other homepages later
+            url = "homepage_test.fxml"; 
+        Parent root = FXMLLoader.load(getClass().getResource(url));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

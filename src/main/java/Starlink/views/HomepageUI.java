@@ -28,6 +28,8 @@ public class HomepageUI {
     //Logged in user
     User user;
 
+    Stage stage;
+
     @FXML
     private StackPane rootPane;
     @FXML
@@ -47,7 +49,7 @@ public class HomepageUI {
     @FXML
     protected void initialize() //Called when the view is loaded
     {
-        Stage stage = Starlink.getStage();
+        stage = Starlink.getStage();
         //Get the logged in user
         user = (User)stage.getUserData();
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
@@ -79,11 +81,11 @@ void onManageBusinessAccountClicked(ActionEvent event) {
 @FXML
 void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
 {
-    Parent root = FXMLLoader.load(getClass().getResource("HSManagingUI.fxml"));
-    //Scene scene = new Scene(root);
+    Parent root = FXMLLoader.load(getClass().getResource("HSManagingPage.fxml"));
+    Scene scene = new Scene(root);
 
-    //stage.setScene(scene);
-    //stage.show();
+    stage.setScene(scene);
+    stage.show();
 }
 
 @FXML

@@ -1,7 +1,16 @@
 package Starlink.views;
 
 import com.jfoenix.controls.JFXButton;
+
+import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class HSManagingUI {
 
@@ -32,6 +41,7 @@ public class HSManagingUI {
 
     }
 
+    @FXML
     void onLogoutClicked(ActionEvent event) throws Exception
     {
         Logout(event);
