@@ -31,7 +31,7 @@ public class HealthStaff extends User{
         this.name = name; 
     }
 
-    public boolean createHealthStaffAccount(String username, String password, String email, String staffID, String name) throws Exception
+    public boolean createAccount(String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, HealthStaff, no)",
@@ -50,7 +50,7 @@ public class HealthStaff extends User{
         }
     }
 
-    public boolean updateHealthStaffAccount(int userID, String username, String password, String email, String staffID, String name) throws Exception
+    public boolean updateAccount(int userID, String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
@@ -66,7 +66,7 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchHealthStaffByName(String search_string) throws Exception
+    public List<HealthStaff> searchStaffByName(String search_string) throws Exception
     {
 
         try{
@@ -97,7 +97,7 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchHealthStaffByStaffID(String search_string) throws Exception
+    public List<HealthStaff> searchByStaffID(String search_string) throws Exception
     {
         try{
             List <HealthStaff> records = new ArrayList <HealthStaff>();
