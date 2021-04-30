@@ -70,7 +70,7 @@ public class HomepageUI {
         stage.show();
     }
 
-
+//Switching scene template
     @FXML
 void onManageBusinessAccountClicked(ActionEvent event) {
 
