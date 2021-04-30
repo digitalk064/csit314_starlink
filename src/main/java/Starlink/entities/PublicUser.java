@@ -129,34 +129,4 @@ public class PublicUser extends User{
             throw e;
         }
     }
-
-    public List<PublicUser> searchPublicUserByEmail(String search_string) throws Exception
-    {
-        try{
-            List <PublicUser> records = new ArrayList <PublicUser>();
-
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on" + 
-            "user.userID = publicUser.userID where email = %s", search_string));
-
-            while(results.next()){
-                //get the user info from each row
-                int id = results.getInt("userID");
-                String _username = results.getString("username");
-                String _password = results.getString("password");
-                String _email = results.getString("email");
-
-                //initiate a HealthStaff object
-                PublicUser PU = new PublicUser(id, _username, _password, _email);
-
-                //add object to list
-                records.add(PU);
-            }
-
-            return records;
-        }
-        catch(Exception e)
-        {
-            throw e;
-        }
-    }
 }
