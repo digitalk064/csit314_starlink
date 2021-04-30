@@ -74,7 +74,13 @@ public class HomepageUI {
 
 //Switching scene template
     @FXML
-void onManageBusinessAccountClicked(ActionEvent event) {
+void onManageBusinessAccountClicked(ActionEvent event) throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("BManagingPage.fxml"));
+    Scene scene = new Scene(root);
+
+    stage.setScene(scene);
+    stage.show();
 
 }
 
@@ -89,7 +95,13 @@ void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
 }
 
 @FXML
-void onManagePublicUserAccountClicked(ActionEvent event) {
+void onManagePublicUserAccountClicked(ActionEvent event) throws Exception {
+
+    Parent root = FXMLLoader.load(getClass().getResource("PUManagingPage.fxml"));
+    Scene scene = new Scene(root);
+
+    stage.setScene(scene);
+    stage.show();
 
 }
 }

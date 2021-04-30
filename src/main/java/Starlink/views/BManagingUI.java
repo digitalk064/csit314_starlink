@@ -1,41 +1,52 @@
 package Starlink.views;
 
-import com.jfoenix.controls.JFXButton;
-
-import javafx.event.ActionEvent;
+import Starlink.Starlink;
+import Starlink.controllers.LoginController;
+import Starlink.entities.User;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXSpinner;
+
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
-public class HSManagingUI {
+public class BManagingUI {
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton SuspendEditHealthStaffAccountButton;
+    private JFXButton SuspendEditBusinessButton;
 
     @FXML
-    private JFXButton CreateHealthStaffAccountButton;
+    private JFXButton CreateBusinessAccountButton;
 
     @FXML
     private JFXButton BacktoHomepageButton;
 
     @FXML
-    void SuspendEditHealthStaffAccountClicked(ActionEvent event) {
+    void SuspendEditBusinessAccountClicked(ActionEvent event) {
 
     }
+
 
     @FXML
-    void onCreateHealthStaffAccountClicked(ActionEvent event)  {
+    void onCreateBusinessAccountClicked(ActionEvent event) {
 
     }
-
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception
@@ -50,7 +61,8 @@ public class HSManagingUI {
 
     }
 
-  
+    
+
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception
     {
@@ -68,6 +80,5 @@ public class HSManagingUI {
         stage.show();
     }
 
-    
-
 }
+

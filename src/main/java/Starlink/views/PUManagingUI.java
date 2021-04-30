@@ -3,6 +3,7 @@ package Starlink.views;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,13 +13,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class HSManagingUI {
+public class PUManagingUI {
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton SuspendEditHealthStaffAccountButton;
+    private JFXButton SuspendEditPublicUserAccountButton;
 
     @FXML
     private JFXButton CreateHealthStaffAccountButton;
@@ -27,15 +28,14 @@ public class HSManagingUI {
     private JFXButton BacktoHomepageButton;
 
     @FXML
-    void SuspendEditHealthStaffAccountClicked(ActionEvent event) {
+    void SuspendEditPublicUserAccountClicked(ActionEvent event) {
 
     }
 
     @FXML
-    void onCreateHealthStaffAccountClicked(ActionEvent event)  {
+    void onCreatePublicUserAccountClicked(ActionEvent event) {
 
     }
-
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception
@@ -50,7 +50,7 @@ public class HSManagingUI {
 
     }
 
-  
+
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception
     {
@@ -67,7 +67,6 @@ public class HSManagingUI {
         stage.setScene(scene);
         stage.show();
     }
-
-    
-
 }
+
+
