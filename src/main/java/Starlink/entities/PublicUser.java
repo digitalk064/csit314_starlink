@@ -32,7 +32,7 @@ public class PublicUser extends User{
         this.name = name;
     }
 
-    public boolean createPublicUserAccount(String username, String password, String email, String IDNum, String name) throws Exception
+    public boolean createAccount(String username, String password, String email, String IDNum, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, PublicUser, no)",
@@ -52,7 +52,7 @@ public class PublicUser extends User{
         }
     }
 
-    public boolean updatePublicUserAccount(int userID, String username, String password, String email, String IDNum, String name) throws Exception
+    public boolean updateAccount(int userID, String username, String password, String email, String IDNum, String name) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
@@ -69,7 +69,7 @@ public class PublicUser extends User{
         }
     }
 
-    public List<PublicUser> searchPublicUserByName(String search_string) throws Exception
+    public List<PublicUser> searchByName(String search_string) throws Exception
     {
 
         try{
@@ -100,7 +100,7 @@ public class PublicUser extends User{
         }
     }
 
-    public List<PublicUser> searchPublicUserByStaffID(String search_string) throws Exception
+    public List<PublicUser> searchByStaffID(String search_string) throws Exception
     {
         try{
             List <PublicUser> records = new ArrayList <PublicUser>();

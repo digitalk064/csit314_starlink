@@ -37,7 +37,7 @@ public class Business extends User{
         this.address = address;
     }
 
-    public boolean createBusinessAccount(String username, String password, String email, String businessID, String name, String address) throws Exception
+    public boolean createAccount(String username, String password, String email, String businessID, String name, String address) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, Business, no)",
@@ -57,7 +57,7 @@ public class Business extends User{
         }
     }
 
-    public boolean updateBusinessAccount(int userID, String username, String password, String email, String businessID, String name, String address) throws Exception
+    public boolean updateAccount(int userID, String username, String password, String email, String businessID, String name, String address) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
@@ -74,7 +74,7 @@ public class Business extends User{
         }
     }
 
-    public List<Business> searchBusinessByName(String search_string) throws Exception
+    public List<Business> searchByName(String search_string) throws Exception
     {
 
         try{
@@ -105,7 +105,7 @@ public class Business extends User{
         }
     }
 
-    public List<Business> searchBusinessByStaffID(String search_string) throws Exception
+    public List<Business> searchByStaffID(String search_string) throws Exception
     {
         try{
             List <Business> records = new ArrayList <Business>();
