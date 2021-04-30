@@ -1,28 +1,27 @@
+
+
 package Starlink.views;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
+public class admin_createHealthStaff {
 
-public class HSSuspendUI {
 
-    Stage stage;
-    String staffid, staffname;
-    //HSSuspendController control;
-
+    Stage stage ;
+    String id, staffname,staffusername,staffemail,staffpassword;
     @FXML
     private AnchorPane anchorpane;
 
@@ -30,7 +29,7 @@ public class HSSuspendUI {
     private JFXButton logoutButton;
 
     @FXML
-    private JFXButton suspendButton;
+    private JFXButton CreateButton;
 
     @FXML
     private JFXButton HomeButton;
@@ -39,46 +38,35 @@ public class HSSuspendUI {
     private JFXButton BackButton;
 
     @FXML
+    private JFXPasswordField passowordField;
+
+    @FXML
     private JFXTextField staffnamefield;
 
     @FXML
     private JFXTextField staffidField;
 
     @FXML
-    private JFXButton EditButton;
-
-   
+    private JFXTextField usernameField;
 
     @FXML
-    void onEditBtnClicked(ActionEvent event) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("HSUpdatepage.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-
-
-    }
+    private JFXTextField emailField;
 
     @FXML
-    void onBackClicked(ActionEvent event) throws Exception {
+    private Label staffid;
 
-        Parent root = FXMLLoader.load(getClass().getResource("HSSuspendEditUI.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
- 
     @FXML
-    void onHomeClicked(ActionEvent event) throws Exception {
+    private Label username;
+
+    @FXML
+    private Label email;
+
+    @FXML
+    private Label password;
+
+    @FXML
+    void onBackClicked(ActionEvent event) throws Exception{
+
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);
         
@@ -86,6 +74,37 @@ public class HSSuspendUI {
         
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    @FXML
+    void onCreateBtnClicked(ActionEvent event) throws Exception {
+
+        stage = Starlink.getStage();
+        System.out.println("Create button pressed");
+        //Get the user's text input from the fields
+        id = staffidField.getText();
+        staffname = staffnamefield.getText();
+        staffusername = usernameField.getText();
+        staffemail = emailField.getText();
+        staffpassword= passowordField.getText();
+
+
+    }
+
+    @FXML
+    void onHomeClicked(ActionEvent event) throws Exception{
+
+    
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
+        Scene scene = new Scene(root);
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        stage.setScene(scene);
+        stage.show();
+
+    
 
     }
 
@@ -104,18 +123,6 @@ public class HSSuspendUI {
         
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    void onSuspendBtnClicked(ActionEvent event) {
-
-        staffname = staffnamefield.getText();
-        staffid = staffidField.getText();
-
-        //validate to suspend
-
-        // to do the confirmation prompt after suspend
-
     }
 
 }

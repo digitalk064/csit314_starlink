@@ -76,7 +76,7 @@ public class HomepageUI {
     @FXML
 void onManageBusinessAccountClicked(ActionEvent event) throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("BManagingPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("admin_BusinessManaging.fxml"));
     Scene scene = new Scene(root);
 
     stage.setScene(scene);
@@ -87,7 +87,7 @@ void onManageBusinessAccountClicked(ActionEvent event) throws Exception {
 @FXML
 void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
 {
-    Parent root = FXMLLoader.load(getClass().getResource("HSManagingPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("adminHealthStaffManage.fxml"));
     Scene scene = new Scene(root);
 
     stage.setScene(scene);
@@ -97,7 +97,7 @@ void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
 @FXML
 void onManagePublicUserAccountClicked(ActionEvent event) throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("PUManagingPage.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("admin_PublicManaging.fxml"));
     Scene scene = new Scene(root);
 
     stage.setScene(scene);

@@ -12,7 +12,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class HSManagingUI {
+public class admin_HealthStaffManage {
+
+    //admin_healthStaffManageController
 
     @FXML
     private JFXButton logoutButton;
@@ -28,7 +30,7 @@ public class HSManagingUI {
 
     @FXML
     void SuspendEditHealthStaffAccountClicked(ActionEvent event) throws Exception {
-
+        // need to change the file name
         Parent root = FXMLLoader.load(getClass().getResource("HSSuspendEditUI.fxml"));
         Scene scene = new Scene(root);
         
@@ -43,7 +45,7 @@ public class HSManagingUI {
     @FXML
     void onCreateHealthStaffAccountClicked(ActionEvent event)  throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("HSCreatePage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("admin_createhealthstaff.fxml"));
         Scene scene = new Scene(root);
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
