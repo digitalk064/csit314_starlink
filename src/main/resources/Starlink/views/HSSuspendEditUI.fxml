@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.HSSuspendEditUI">
+   <children>
+      <JFXTextField fx:id="inputSearchText" layoutX="160.0" layoutY="323.0" prefHeight="43.0" prefWidth="283.0" promptText=" input search text" style="-fx-background-color: #ffffff;" />
+      <ComboBox fx:id="dropMenu" layoutX="502.0" layoutY="332.0" onAction="#selectEmailName" prefHeight="29.0" prefWidth="227.0" promptText="Staff_ID" />
+      <JFXButton fx:id="BackButton" buttonType="RAISED" defaultButton="true" layoutX="50.0" layoutY="25.0" onAction="#onBackClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Back " />
+      <JFXButton fx:id="HomeButton" buttonType="RAISED" defaultButton="true" layoutX="568.0" layoutY="31.0" onAction="#onHomeClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Home " />
+      <JFXButton fx:id="logoutButton" buttonType="RAISED" defaultButton="true" layoutX="1076.0" layoutY="31.0" onAction="#onLogoutClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Logout">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="SearchButton" buttonType="RAISED" defaultButton="true" layoutX="857.0" layoutY="313.0" onAction="#onSearchClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Search" />
+   </children>
+</AnchorPane>
