@@ -19,7 +19,7 @@
       <JFXButton fx:id="HomeButton" buttonType="RAISED" defaultButton="true" layoutX="558.0" layoutY="21.0" onAction="#onHomeClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Home " />
       <JFXButton fx:id="BackButton" buttonType="RAISED" defaultButton="true" layoutX="40.0" layoutY="15.0" onAction="#onBackClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Back " />
       <JFXPasswordField fx:id="passowordField" layoutX="640.0" layoutY="404.0" prefHeight="40.0" prefWidth="245.0" promptText="Password" />
-      <JFXTextField fx:id="staffnamefield" layoutX="636.0" layoutY="303.0" prefHeight="40.0" prefWidth="239.0" promptText="Staff_ID" />
+      <JFXTextField fx:id="staffnamefield" layoutX="636.0" layoutY="303.0" prefHeight="40.0" prefWidth="239.0" promptText="Staff Name" />
       <JFXTextField fx:id="staffidField" layoutX="217.0" layoutY="303.0" prefHeight="40.0" prefWidth="239.0" promptText="Staff_ID" />
       <JFXTextField fx:id="usernameField" layoutX="217.0" layoutY="404.0" prefHeight="40.0" prefWidth="239.0" promptText="username" />
       <JFXTextField fx:id="emailField" layoutX="217.0" layoutY="487.0" prefHeight="40.0" prefWidth="239.0" promptText="email" />

@@ -61,6 +61,9 @@ public class updateStaffAccountUI {
     private Label email;
 
     @FXML
+    private Label name;
+
+    @FXML
     private Label password;
 
     @FXML
