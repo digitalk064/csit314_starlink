@@ -65,6 +65,9 @@ public class createStaffAccountUI {
     private Label password;
 
     @FXML
+    private Label name;
+
+    @FXML
     void onBackClicked(ActionEvent event) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("adminHealthStaffManage.fxml"));

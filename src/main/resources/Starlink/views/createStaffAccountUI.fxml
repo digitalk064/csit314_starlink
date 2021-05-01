@@ -39,7 +39,7 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="staffid" layoutX="636.0" layoutY="274.0" prefHeight="25.0" prefWidth="78.0" text="Staff_id" textAlignment="RIGHT">
+      <Label fx:id="name" layoutX="636.0" layoutY="274.0" prefHeight="25.0" prefWidth="105.0" text="Staff Name" textAlignment="RIGHT">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font>
