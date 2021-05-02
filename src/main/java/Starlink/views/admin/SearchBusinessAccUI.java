@@ -91,7 +91,7 @@ public class SearchBusinessAccUI extends CommonUI {
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
         resultDisplayList.getItems().clear(); 
-        if(searchByDropdown.getValue().equals("Staff ID"))
+        if(searchByDropdown.getValue().equals("Business ID"))
             results = searchController.validateByID(inputtextfield.getText());
         else
             results = searchController.validateByName(inputtextfield.getText());
@@ -107,7 +107,7 @@ public class SearchBusinessAccUI extends CommonUI {
             ((SearchBusinessAccUI)loader.getController()).setIsRowItem();
             Pane resultRow =  loader.load();
             Label label = (Label)resultRow.lookup("#resultRowLabel");
-            label.setText(String.format("%-10s%-30s%-30s", results.get(i).getBusinessID(), results.get(i).getName(), results.get(i).getAddress()));
+            label.setText(String.format("%-20s%-40s%30s", results.get(i).getBusinessID(), results.get(i).getName(), results.get(i).getAddress()));
             resultDisplayList.getItems().add(resultRow);
         }
     }

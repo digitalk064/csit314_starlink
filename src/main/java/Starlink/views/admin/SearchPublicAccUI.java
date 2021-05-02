@@ -106,7 +106,7 @@ public class SearchPublicAccUI extends CommonUI {
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
         resultDisplayList.getItems().clear(); 
-        if(searchByDropdown.getValue().equals("Staff ID"))
+        if(searchByDropdown.getValue().equals("ID number"))
             results = searchController.validateByID(inputtextfield.getText());
         else
             results = searchController.validateByName(inputtextfield.getText());
