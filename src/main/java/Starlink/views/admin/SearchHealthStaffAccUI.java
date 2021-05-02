@@ -47,9 +47,6 @@ public class SearchHealthStaffAccUI extends CommonUI {
     private JFXTextField inputtextfield;
 
     @FXML
-    private Pane resultRowTemplate;
-
-    @FXML
     private JFXListView<Pane> resultDisplayList;
 
     //Because each result row is a FXML file with the controller being set to this
@@ -99,16 +96,22 @@ public class SearchHealthStaffAccUI extends CommonUI {
     void onLogoutClicked(ActionEvent event) throws Exception {
         Logout();
     }
-    
+
+    List<HealthStaff> results;
+
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
-        resultDisplayList.getItems().clear();
-        List<HealthStaff> results;
+        resultDisplayList.getItems().clear(); 
         if(searchByDropdown.getValue().equals("Staff ID"))
             results = searchController.validateByID(inputtextfield.getText());
         else
             results = searchController.validateByName(inputtextfield.getText());
         System.out.println("Results count: " + results.size());
+        DisplayResult();
+    }
+    
+    void DisplayResult() throws Exception
+    {
         for(int i = 0; i < results.size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
             loader.setController(this);
@@ -118,11 +121,6 @@ public class SearchHealthStaffAccUI extends CommonUI {
             label.setText(String.format("%-10s%-30s", results.get(i).getStaffID(), results.get(i).getName()));
             resultDisplayList.getItems().add(resultRow);
         }
-        
-    }
-    void DisplayResult()
-    {
-
     }
 
     @FXML

@@ -12,6 +12,19 @@ public class Business extends User{
     private String businessID;
     private String address;
 
+    public String getBusinessID()
+    {
+        return businessID;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public String getAddress()
+    {
+        return address;
+    }
+
     //Constructors
     public Business() {};
     public Business(int userid, String username, String password, String email) throws Exception {
@@ -112,7 +125,7 @@ public class Business extends User{
         }
     }
 
-    public List<Business> searchByStaffID(String search_string) throws Exception
+    public List<Business> searchByID(String search_string) throws Exception
     {
         try{
             List <Business> records = new ArrayList <Business>();

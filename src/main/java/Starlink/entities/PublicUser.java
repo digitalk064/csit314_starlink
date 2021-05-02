@@ -10,7 +10,14 @@ import java.util.ArrayList; // import just the ArrayList class
 public class PublicUser extends User{
     private String IDNum;
     private String name;
-
+    public String getIDNum()
+    {
+        return IDNum;
+    }
+    public String getName()
+    {
+        return name;
+    }
     //Constructors
     public PublicUser() {};
     public PublicUser(int userid, String username, String password, String email) throws Exception{
@@ -107,7 +114,7 @@ public class PublicUser extends User{
         }
     }
 
-    public List<PublicUser> searchByStaffID(String search_string) throws Exception
+    public List<PublicUser> searchByID(String search_string) throws Exception
     {
         try{
             List <PublicUser> records = new ArrayList <PublicUser>();
