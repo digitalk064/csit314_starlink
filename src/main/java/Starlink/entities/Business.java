@@ -40,13 +40,20 @@ public class Business extends User{
     public boolean createAccount(String username, String password, String email, String businessID, String name, String address) throws Exception
     {
         try{
-            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, Business, no)",
+            //Check if username already exists
+            if(SQLHelper.selectStatement(String.format("select username from user where username = '%s'", username)).next())
+                throw new Exception("Username is already taken.");
+            //Check if businessID already exists
+            if(SQLHelper.selectStatement(String.format("select businessID from business where businessID = '%s'", businessID)).next())
+                throw new Exception("A business with this business ID already exists.");
+
+            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values ('%s', '%s', '%s', 'Business', 'no')",
             username, password, email));
 
             //get the userID
-            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username)).getInt("userID");
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
 
-            SQLHelper.updateStatement(String.format("insert into business (businessID, name, address, userID) values (%s, %s, %s, %d)",
+            SQLHelper.updateStatement(String.format("insert into business (businessID, name, address, userID) values ('%s', '%s', '%s', %d)",
             businessID, name, address, userID));
 
             return true;

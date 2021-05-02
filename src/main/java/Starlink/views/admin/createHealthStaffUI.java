@@ -46,7 +46,7 @@ public class createHealthStaffUI extends CommonUI {
     private JFXButton BackButton;
 
     @FXML
-    private JFXPasswordField passowordField;
+    private JFXPasswordField passwordField;
 
     @FXML
     private JFXTextField staffnamefield;
@@ -70,7 +70,7 @@ public class createHealthStaffUI extends CommonUI {
             if (node instanceof JFXTextField)
                 ((JFXTextField) node).getValidators().add(new RequiredFieldValidator("This field is required"));
         }
-        passowordField.getValidators().add(new RequiredFieldValidator("This field is required"));
+        passwordField.getValidators().add(new RequiredFieldValidator("This field is required"));
     }
 
     @FXML
@@ -91,12 +91,12 @@ public class createHealthStaffUI extends CommonUI {
                 if (node instanceof JFXTextField)
                     ((JFXTextField) node).validate();
             }
-            passowordField.validate();
+            passwordField.validate();
 
             System.out.println("Create button pressed");
             // Get the user's text input from the fields
             String username = usernameField.getText();
-            String password = passowordField.getText();
+            String password = passwordField.getText();
             String email = emailField.getText();
             String staffID = staffidField.getText();
             String name = staffnamefield.getText();

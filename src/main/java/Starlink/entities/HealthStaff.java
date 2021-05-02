@@ -47,7 +47,7 @@ public class HealthStaff extends User{
             //Get the userID of the newly created account
             int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
             //Insert into the healthStaff table
-            SQLHelper.updateStatement(String.format("insert into healthStaff (staffID, name, userID) values ('%s', '%s', '%d')",
+            SQLHelper.updateStatement(String.format("insert into healthStaff (staffID, name, userID) values ('%s', '%s', %d)",
             staffID, name, userID));
             return true;
         }

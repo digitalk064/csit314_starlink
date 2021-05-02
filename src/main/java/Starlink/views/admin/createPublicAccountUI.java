@@ -3,8 +3,10 @@ package Starlink.views.admin;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.createPublicAccountController;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.Node;
 public class createPublicAccountUI extends CommonUI {
 
     String id, name, publicusername, useremail, userpassword;
+    createPublicAccountController controller;
 
     @FXML
     private AnchorPane anchorpane;
@@ -42,7 +45,7 @@ public class createPublicAccountUI extends CommonUI {
     private JFXTextField userfullnamefield;
 
     @FXML
-    private JFXTextField staffidField;
+    private JFXTextField IDNumField;
 
     @FXML
     private JFXTextField usernameField;
@@ -51,19 +54,16 @@ public class createPublicAccountUI extends CommonUI {
     private JFXTextField emailField;
 
     @FXML
-    private Label staffid;
-
-    @FXML
-    private Label username;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label Name;
-
-    @FXML
-    private Label password;
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        controller = new createPublicAccountController();
+        for (Node node : anchorpane.getChildren()) {
+            if (node instanceof JFXTextField)
+                ((JFXTextField) node).getValidators().add(new RequiredFieldValidator("This field is required"));
+        }
+        passwordField.getValidators().add(new RequiredFieldValidator("This field is required"));
+    }
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
@@ -78,18 +78,33 @@ public class createPublicAccountUI extends CommonUI {
 
     @FXML
     void onCreateBtnClicked(ActionEvent event) throws Exception {
+        try {
+            for (Node node : anchorpane.getChildren()) {
+                if (node instanceof JFXTextField)
+                    ((JFXTextField) node).validate();
+            }
+            passwordField.validate();
 
-        System.out.println("Create button pressed");
-        // Get the user's text input from the fields
-        id = staffidField.getText();
-        name = userfullnamefield.getText();
-        publicusername = usernameField.getText();
-        useremail = emailField.getText();
-        userpassword = passwordField.getText();
+            System.out.println("Create button pressed");
+            // Get the user's text input from the fields
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            String email = emailField.getText();
+            String IDNum = IDNumField.getText();
+            String name = userfullnamefield.getText();
+            if (controller.verifyInput(username, password, email, IDNum, name))
+                showSuccess();
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
 
-        // validate
-        // dialog box
+    void showSuccess() {
+        CreateDialog(anchorpane, "Success", "Public User account successfully created.");
+    }
 
+    void showError(String errorMsg) {
+        CreateDialog(anchorpane, "Error", "Failed to create account. Error message: \n" + errorMsg);
     }
 
     @FXML

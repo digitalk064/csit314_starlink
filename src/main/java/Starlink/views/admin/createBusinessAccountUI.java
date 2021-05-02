@@ -3,8 +3,10 @@ package Starlink.views.admin;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.createBusinessController;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ import javafx.scene.Node;
 
 public class createBusinessAccountUI extends CommonUI {
     String id, businessname, businessusername, businessemail, businesspassword;
-
+    createBusinessController controller;
     @FXML
     private AnchorPane anchorpane;
 
@@ -51,37 +53,50 @@ public class createBusinessAccountUI extends CommonUI {
     private JFXTextField emailField;
 
     @FXML
-    private Label businessid;
-
-    @FXML
-    private Label username;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label Name;
-
-    @FXML
-    private Label password;
-
-    @FXML
-    private Label addresslabel;
-
-    @FXML
     private JFXTextField addressField;
 
     @FXML
-    void onCreateBtnClicked(ActionEvent event) {
-        
-        System.out.println("Create button pressed");
-        // Get the user's text input from the fields
-        id = idField.getText();
-        businessname = userfullnamefield.getText();
-        businessusername = usernameField.getText();
-        businessemail = emailField.getText();
-        businesspassword = passwordField.getText();
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        controller = new createBusinessController();
+        for (Node node : anchorpane.getChildren()) {
+            if (node instanceof JFXTextField)
+                ((JFXTextField) node).getValidators().add(new RequiredFieldValidator("This field is required"));
+        }
+        passwordField.getValidators().add(new RequiredFieldValidator("This field is required"));
+    }
 
+    @FXML
+    void onCreateBtnClicked(ActionEvent event) throws Exception {
+        try {
+            for (Node node : anchorpane.getChildren()) {
+                if (node instanceof JFXTextField)
+                    ((JFXTextField) node).validate();
+            }
+            passwordField.validate();
+
+            System.out.println("Create button pressed");
+            // Get the user's text input from the fields
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            String email = emailField.getText();
+            String businessID = idField.getText();
+            String name = userfullnamefield.getText();
+            String address = addressField.getText();
+            if (controller.verifyInput(username, password, email, businessID, name, address))
+                showSuccess();
+        } catch (Exception e) {
+            showError(e.getMessage());
+        }
+    }
+
+    void showSuccess() {
+        CreateDialog(anchorpane, "Success", "Business account successfully created.");
+    }
+
+    void showError(String errorMsg) {
+        CreateDialog(anchorpane, "Error", "Failed to create account. Error message: \n" + errorMsg);
     }
 
     @FXML
