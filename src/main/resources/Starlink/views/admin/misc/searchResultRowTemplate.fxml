@@ -6,8 +6,8 @@
 
 <Pane fx:id="resultRowTemplate" prefHeight="38.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton layoutX="626.0" layoutY="7.0" onAction="#onSuspendClicked" text="Suspend" />
-      <JFXButton layoutX="709.0" layoutY="7.0" onAction="#onUpdateBtnClicked" text="Edit" />
-      <Label fx:id="resultRowLabel" layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="637.0" text="Label" />
+      <JFXButton fx:id="suspendBtn" layoutX="626.0" layoutY="7.0" onAction="#onSuspendClicked" text="Suspend" />
+      <JFXButton fx:id="editBtn" layoutX="709.0" layoutY="7.0" onAction="#onUpdateBtnClicked" text="Edit" />
+      <Label fx:id="resultRowLabel" layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="615.0" text="Label" />
    </children>
 </Pane>

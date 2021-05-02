@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.HealthStaffAccSuspendController;
 import Starlink.controllers.admin.SearchHealthStaffAccController;
 import Starlink.entities.HealthStaff;
 import Starlink.views.CommonUI;
@@ -28,6 +29,7 @@ import javafx.scene.Node;
 public class SearchHealthStaffAccUI extends CommonUI {
     //Controllers
     SearchHealthStaffAccController searchController;
+    HealthStaffAccSuspendController suspendController;
     @FXML
     private AnchorPane pane;
 
@@ -68,6 +70,7 @@ public class SearchHealthStaffAccUI extends CommonUI {
             return;
         super.initialize();
         searchController = new SearchHealthStaffAccController();
+        suspendController = new HealthStaffAccSuspendController();
         searchByDropdown.getItems().add("Staff ID");
         searchByDropdown.getItems().add("Staff name");
         searchByDropdown.setValue("Staff ID");
@@ -101,7 +104,6 @@ public class SearchHealthStaffAccUI extends CommonUI {
 
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
-        resultDisplayList.getItems().clear(); 
         if(searchByDropdown.getValue().equals("Staff ID"))
             results = searchController.validateByID(inputtextfield.getText());
         else
@@ -112,11 +114,22 @@ public class SearchHealthStaffAccUI extends CommonUI {
     
     void DisplayResult() throws Exception
     {
+        resultDisplayList.getItems().clear(); 
         for(int i = 0; i < results.size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
             loader.setController(this);
             ((SearchHealthStaffAccUI)loader.getController()).setIsRowItem();
             Pane resultRow =  loader.load();
+            JFXButton suspendBtn = (JFXButton)resultRow.lookup("#suspendBtn");
+            if(results.get(i).getSuspended().equals("yes"))
+            {
+                suspendBtn.setDisable(true);
+                suspendBtn.setText("Suspended");
+            }
+            else{
+                suspendBtn.setId(String.valueOf(i));
+            }
+            ((JFXButton)resultRow.lookup("#editBtn")).setId(String.valueOf(i));
             Label label = (Label)resultRow.lookup("#resultRowLabel");
             label.setText(String.format("%-10s%-30s", results.get(i).getStaffID(), results.get(i).getName()));
             resultDisplayList.getItems().add(resultRow);
@@ -124,8 +137,14 @@ public class SearchHealthStaffAccUI extends CommonUI {
     }
 
     @FXML
-    void onSuspendClicked(ActionEvent event) {
-
+    void onSuspendClicked(ActionEvent event) throws Exception{
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On suspend clicked for ID " + index);
+        if(suspendController.suspend(results.get(index))){
+            CreateDialog(pane, "Success", "The account has been suspended.");
+            ((JFXButton) event.getSource()).setText("Suspended");
+            ((JFXButton) event.getSource()).setDisable(true);
+        }
     }
 
     @FXML

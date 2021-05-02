@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.PublicAccSuspendController;
 import Starlink.controllers.admin.SearchPublicAccController;
 import Starlink.entities.PublicUser;
 import Starlink.views.CommonUI;
@@ -27,6 +28,7 @@ import javafx.scene.Node;
 
 public class SearchPublicAccUI extends CommonUI {
     SearchPublicAccController searchController;
+    PublicAccSuspendController suspendController;
     @FXML
     private AnchorPane pane;
 
@@ -70,6 +72,7 @@ public class SearchPublicAccUI extends CommonUI {
             return;
         super.initialize();
         searchController = new SearchPublicAccController();
+        suspendController = new PublicAccSuspendController();
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
@@ -105,7 +108,6 @@ public class SearchPublicAccUI extends CommonUI {
 
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
-        resultDisplayList.getItems().clear(); 
         if(searchByDropdown.getValue().equals("ID number"))
             results = searchController.validateByID(inputtextfield.getText());
         else
@@ -116,20 +118,37 @@ public class SearchPublicAccUI extends CommonUI {
     
     void DisplayResult() throws Exception
     {
+        resultDisplayList.getItems().clear(); 
         for(int i = 0; i < results.size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
             loader.setController(this);
             ((SearchPublicAccUI)loader.getController()).setIsRowItem();
             Pane resultRow =  loader.load();
+            JFXButton suspendBtn = (JFXButton)resultRow.lookup("#suspendBtn");
+            if(results.get(i).getSuspended().equals("yes"))
+            {
+                suspendBtn.setDisable(true);
+                suspendBtn.setText("Suspended");
+            }
+            else{
+                suspendBtn.setId(String.valueOf(i));
+            }
             Label label = (Label)resultRow.lookup("#resultRowLabel");
+            ((JFXButton)resultRow.lookup("#editBtn")).setId(String.valueOf(i));
             label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
             resultDisplayList.getItems().add(resultRow);
         }
     }
 
     @FXML
-    void onSuspendClicked(ActionEvent event) {
-
+    void onSuspendClicked(ActionEvent event) throws Exception{
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On suspend clicked for ID " + index);
+        if(suspendController.suspend(results.get(index))){
+            CreateDialog(pane, "Success", "The account has been suspended.");
+            ((JFXButton) event.getSource()).setText("Suspended");
+            ((JFXButton) event.getSource()).setDisable(true);
+        }
     }
 
     @FXML

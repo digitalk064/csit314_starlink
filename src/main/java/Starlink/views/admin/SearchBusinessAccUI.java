@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.BusinessAccSuspendController;
 import Starlink.controllers.admin.SearchBusinessAccController;
 import Starlink.entities.Business;
 import Starlink.views.CommonUI;
@@ -27,6 +28,7 @@ import javafx.scene.Node;
 
 public class SearchBusinessAccUI extends CommonUI {
     SearchBusinessAccController searchController;
+    BusinessAccSuspendController suspendController;
     @FXML
     private AnchorPane pane;
 
@@ -70,6 +72,7 @@ public class SearchBusinessAccUI extends CommonUI {
             return;
         super.initialize();
         searchController = new SearchBusinessAccController();
+        suspendController = new BusinessAccSuspendController();
         searchByDropdown.getItems().add("Business ID");
         searchByDropdown.getItems().add("Business name");
         searchByDropdown.setValue("Business ID");
@@ -90,7 +93,6 @@ public class SearchBusinessAccUI extends CommonUI {
 
     @FXML
     void onSearchClicked(ActionEvent event) throws Exception {
-        resultDisplayList.getItems().clear(); 
         if(searchByDropdown.getValue().equals("Business ID"))
             results = searchController.validateByID(inputtextfield.getText());
         else
@@ -101,11 +103,22 @@ public class SearchBusinessAccUI extends CommonUI {
     
     void DisplayResult() throws Exception
     {
+        resultDisplayList.getItems().clear(); 
         for(int i = 0; i < results.size(); i++){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
             loader.setController(this);
             ((SearchBusinessAccUI)loader.getController()).setIsRowItem();
             Pane resultRow =  loader.load();
+            JFXButton suspendBtn = (JFXButton)resultRow.lookup("#suspendBtn");
+            if(results.get(i).getSuspended().equals("yes"))
+            {
+                suspendBtn.setDisable(true);
+                suspendBtn.setText("Suspended");
+            }
+            else{
+                suspendBtn.setId(String.valueOf(i));
+            }
+            ((JFXButton)resultRow.lookup("#editBtn")).setId(String.valueOf(i));
             Label label = (Label)resultRow.lookup("#resultRowLabel");
             label.setText(String.format("%-20s%-40s%30s", results.get(i).getBusinessID(), results.get(i).getName(), results.get(i).getAddress()));
             resultDisplayList.getItems().add(resultRow);
@@ -123,9 +136,14 @@ public class SearchBusinessAccUI extends CommonUI {
     }
 
     @FXML
-    void onSuspendClicked(ActionEvent event) {
-
-        // dialog box
+    void onSuspendClicked(ActionEvent event) throws Exception{
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On suspend clicked for ID " + index);
+        if(suspendController.suspend(results.get(index))){
+            CreateDialog(pane, "Success", "The account has been suspended.");
+            ((JFXButton) event.getSource()).setText("Suspended");
+            ((JFXButton) event.getSource()).setDisable(true);
+        }
     }
 
     @FXML

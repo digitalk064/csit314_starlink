@@ -13,7 +13,7 @@ public class User {
     private String password;
     private String email;
     private UserType userType;
-    private String suspended;
+    protected String suspended;
 
     public UserType getUserType() {
         return userType;
@@ -33,6 +33,12 @@ public class User {
 
     public int getID() {
         return userid;
+    }
+
+    public String getSuspended() throws Exception{
+        if(suspended == null)
+            this.suspended = SQLHelper.selectStatement(String.format("select suspended from user where userid = %d", userid)).getString("suspended");
+        return suspended;
     }
 
     public User()
@@ -87,8 +93,9 @@ public class User {
 
     public boolean setSuspended(String suspended) throws Exception{
         try{
+            System.out.println("Suspend " + userid);
             this.suspended = suspended;
-            SQLHelper.updateStatement(String.format("update user set suspended = %s where userID = %s",
+            SQLHelper.updateStatement(String.format("update user set suspended = '%s' where userID = '%s'",
             suspended, userid));
             return true;
         }
