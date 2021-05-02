@@ -24,78 +24,74 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class userLoginUI {
+public class userLoginUI extends CommonUI {
 
     String username, password;
     userLoginController control;
-    Stage stage;
 
-    //FXML elements
+    // FXML elements
     @FXML
     private Button loginButton;
 
     @FXML
     private StackPane rootPane;
-    
+
     @FXML
     private JFXTextField usernameField;
-    
+
     @FXML
     private JFXPasswordField passwordField;
 
-    //FXML callbacks
+    // FXML callbacks
     @FXML
-    protected void initialize() //Called when the view is loaded
+    protected void initialize() // Called when the view is loaded
     {
+        super.initialize();
         System.out.println("Login FXML loaded");
-        //JFXSpinner spin = new JFXSpinner();
-        //rootPane.getChildren().add(spin);
-        //Create the controller
+        // JFXSpinner spin = new JFXSpinner();
+        // rootPane.getChildren().add(spin);
+        // Create the controller
         control = new userLoginController();
-    }    
+    }
 
     @FXML
-    void onSubmit(ActionEvent event) throws Exception
-    {
-        stage = (Stage)rootPane.getScene().getWindow();
+    void onSubmit(ActionEvent event) throws Exception {
+        stage = (Stage) rootPane.getScene().getWindow();
         System.out.println("Login button pressed");
-        //Get the user's text input from the fields
+        // Get the user's text input from the fields
         username = usernameField.getText();
         password = passwordField.getText();
 
-        //Check with controller here
-        try{
+        // Check with controller here
+        try {
             User user = control.validate(username, password);
-            //If we reach this code, login successful
-            //Save the logged in User into the stage
+            // If we reach this code, login successful
+            // Save the logged in User into the stage
             stage.setUserData(user);
             goToHomePage(user);
-        }
-        catch(Exception e)
-        {
-            //Show error dialog
+        } catch (Exception e) {
+            // Show error dialog
             e.printStackTrace();
             showInvalid(e.getMessage());
         }
     }
-    void showInvalid(String errorMsg)
-    {
-        CommonUI.CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + errorMsg);
+
+    void showInvalid(String errorMsg) {
+        CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + errorMsg);
     }
-    //Misc functions
-    boolean validateFields()
-    {
+
+    // Misc functions
+    boolean validateFields() {
         return true;
     }
 
-    //Switching scene template
-    void goToHomePage(User user) throws Exception
-    {
+    // Switching scene template
+    void goToHomePage(User user) throws Exception {
         String url = "";
-        if(user instanceof HealthOrganization)
+        if (user instanceof HealthOrganization)
             url = "admin/homepage_admin.fxml";
-        else //Other homepages later
-            url = "homepage_test.fxml"; 
+        else // Other homepages later
+            url = "homepage_test.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(url));
         Scene scene = new Scene(root);
 

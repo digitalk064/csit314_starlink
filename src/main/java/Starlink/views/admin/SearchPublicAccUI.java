@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -18,8 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class SearchPublicAccUI {
+public class SearchPublicAccUI extends CommonUI {
 
     @FXML
     private AnchorPane pane;
@@ -43,45 +43,26 @@ public class SearchPublicAccUI {
     private JFXTextField inputtextfield;
 
     @FXML
-    void onBacktoHomepageClicked(ActionEvent event) throws Exception
-    {
+    void onBacktoHomepageClicked(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
     }
 
-  
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
-
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     @FXML
     void onCreatePublicUserAccountClicked(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("createPublicAccountUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
@@ -89,13 +70,11 @@ public class SearchPublicAccUI {
 
     @FXML
     void onSearchClicked(ActionEvent event) throws IOException {
-        
+
     }
 
     @FXML
     void onSuspendClicked(ActionEvent event) {
-
-        Stage stage = Starlink.getStage();
 
     }
 
@@ -104,9 +83,7 @@ public class SearchPublicAccUI {
 
         Parent root = FXMLLoader.load(getClass().getResource("updatePublicAccountUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 

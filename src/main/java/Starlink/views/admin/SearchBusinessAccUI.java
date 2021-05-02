@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -18,8 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class SearchBusinessAccUI {
+public class SearchBusinessAccUI extends CommonUI {
 
     @FXML
     private AnchorPane pane;
@@ -47,9 +47,7 @@ public class SearchBusinessAccUI {
 
         Parent root = FXMLLoader.load(getClass().getResource("createBusinessAccountUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
@@ -57,18 +55,14 @@ public class SearchBusinessAccUI {
 
     @FXML
     void onSearchClicked(ActionEvent event) throws IOException {
-        
+
     }
 
-
     @FXML
-    void onBacktoHomepageClicked(ActionEvent event) throws Exception
-    {
+    void onBacktoHomepageClicked(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
@@ -77,40 +71,23 @@ public class SearchBusinessAccUI {
     @FXML
     void onSuspendClicked(ActionEvent event) {
 
-        Stage stage = Starlink.getStage();
-         //dialog box
+        // dialog box
     }
 
     @FXML
-    void onUpdateBtnClicked(ActionEvent event) throws Exception{
+    void onUpdateBtnClicked(ActionEvent event) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("updateBusinessAccountUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
     }
 
-  
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
-
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
 }

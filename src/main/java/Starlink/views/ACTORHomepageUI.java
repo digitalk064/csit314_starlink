@@ -24,11 +24,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class ACTORHomepageUI {
-    //Logged in user
+public class ACTORHomepageUI extends CommonUI {
+    // Logged in user
     User user;
-
-    Stage stage;
 
     @FXML
     private StackPane rootPane;
@@ -41,39 +39,22 @@ public class ACTORHomepageUI {
     @FXML
     private JFXButton manageBusinessButton;
 
-
     @FXML
     private Text header;
 
-    //FXML callbacks
+    // FXML callbacks
     @FXML
-    protected void initialize() //Called when the view is loaded
+    protected void initialize() // Called when the view is loaded
     {
-        stage = Starlink.getStage();
-        //Get the logged in user
-        user = (User)stage.getUserData();
+        super.initialize();
+        // Get the logged in user
+        user = (User) stage.getUserData();
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
     }
 
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
 
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-    }
 }
-
-
-
-
-

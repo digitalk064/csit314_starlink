@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class SearchHealthStaffAccUI2 {
+public class SearchHealthStaffAccUI2 extends CommonUI {
 
     String staffid, staffname;
     @FXML
@@ -51,68 +51,47 @@ public class SearchHealthStaffAccUI2 {
     private JFXTextField namefield;
 
     @FXML
-    void onHomeClicked(ActionEvent event) throws Exception{
+    void onHomeClicked(ActionEvent event) throws Exception {
 
-    
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
-
-    
 
     }
 
     @FXML
-    void onBackClicked(ActionEvent event) throws Exception{
+    void onBackClicked(ActionEvent event) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
     }
 
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
 
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
-    }
     @FXML
     void onSuspendClicked(ActionEvent event) {
-        
-        Stage stage = Starlink.getStage();
+
         System.out.println("Create button pressed");
-        //Get the user's text input from the fields
+        // Get the user's text input from the fields
         staffid = idfield.getText();
         staffname = namefield.getText();
-         //dialog box
+        // dialog box
     }
 
     @FXML
     void onUpdateBtnClicked(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("updateStaffAccountUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 

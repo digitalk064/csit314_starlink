@@ -26,26 +26,34 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class CommonUI {
-    Stage stage;
+    protected Stage stage; //The current stage (window)
     
-    public static void CreateDialog(Pane pane, String header, String body){
+    //FXML callbacks
+    @FXML
+    protected void initialize() //Called when the view is loaded
+    {
+        System.out.println("Current boundary: " + getClass().getName());
+        stage = Starlink.getStage();
+    }
+    
+    public void CreateDialog(Pane pane, String header, String body){
         StackPane stack = new StackPane();
-            stack.setPrefSize(1280, 800);
-            pane.getChildren().add(stack);
-            JFXDialogLayout content = new JFXDialogLayout();
-            content.setHeading(new Text(header));
-            content.setBody(new Text(body));
-            JFXDialog dialog = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
-            JFXButton button=new JFXButton("OKAY");
-            button.setOnAction(ev -> {
-                dialog.close();
-            });
-            content.setActions(button);
-            dialog.show(stack);
-            dialog.setOnDialogClosed(handler -> pane.getChildren().remove(stack));
+        stack.setPrefSize(1280, 800);
+        pane.getChildren().add(stack);
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(header));
+        content.setBody(new Text(body));
+        JFXDialog dialog = new JFXDialog(stack, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button=new JFXButton("OKAY");
+        button.setOnAction(ev -> {
+            dialog.close();
+        });
+        content.setActions(button);
+        dialog.show(stack);
+        dialog.setOnDialogClosed(handler -> pane.getChildren().remove(stack));
     }
 
-    public void Logout() throws Exception
+    protected void Logout() throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
         Scene scene = new Scene(root);

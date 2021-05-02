@@ -1,5 +1,3 @@
-
-
 package Starlink.views.admin;
 
 import java.net.PasswordAuthentication;
@@ -26,13 +24,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class createHealthStaffUI {
+public class createHealthStaffUI extends CommonUI {
 
-    //Controllers
+    // Controllers
     createHealthStaffController controller;
 
-    Stage stage ;
-    //String id, staffname,staffusername,staffemail,staffpassword;
+    // String id, staffname,staffusername,staffemail,staffpassword;
     @FXML
     private AnchorPane anchorpane;
 
@@ -63,26 +60,25 @@ public class createHealthStaffUI {
     @FXML
     private JFXTextField emailField;
 
-    //FXML callbacks
+    // FXML callbacks
     @FXML
-    protected void initialize() //Called when the view is loaded
+    protected void initialize() // Called when the view is loaded
     {
+        super.initialize();
         controller = new createHealthStaffController();
         for (Node node : anchorpane.getChildren()) {
-            if(node instanceof JFXTextField)
-                ((JFXTextField)node).getValidators().add(new RequiredFieldValidator("This field is required"));
+            if (node instanceof JFXTextField)
+                ((JFXTextField) node).getValidators().add(new RequiredFieldValidator("This field is required"));
         }
         passowordField.getValidators().add(new RequiredFieldValidator("This field is required"));
     }
 
     @FXML
-    void onBackClicked(ActionEvent event) throws Exception{
+    void onBackClicked(ActionEvent event) throws Exception {
 
         Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
 
@@ -90,70 +86,49 @@ public class createHealthStaffUI {
 
     @FXML
     void onCreateBtnClicked(ActionEvent event) throws Exception {
-        try{
+        try {
             for (Node node : anchorpane.getChildren()) {
-                if(node instanceof JFXTextField)
-                    ((JFXTextField)node).validate();
+                if (node instanceof JFXTextField)
+                    ((JFXTextField) node).validate();
             }
             passowordField.validate();
-            stage = Starlink.getStage();
+
             System.out.println("Create button pressed");
-            //Get the user's text input from the fields
+            // Get the user's text input from the fields
             String username = usernameField.getText();
-            String password= passowordField.getText();
+            String password = passowordField.getText();
             String email = emailField.getText();
             String staffID = staffidField.getText();
             String name = staffnamefield.getText();
-            if(controller.verifyInput(username, password, email, staffID, name))
+            if (controller.verifyInput(username, password, email, staffID, name))
                 showSuccess();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             showError(e.getMessage());
         }
     }
-    
-    void showSuccess()
-    {
-        CommonUI.CreateDialog(anchorpane, "Success", "Health Staff account successfully created.");
+
+    void showSuccess() {
+        CreateDialog(anchorpane, "Success", "Health Staff account successfully created.");
     }
 
-    void showError(String errorMsg)
-    {
-        CommonUI.CreateDialog(anchorpane, "Error", "Failed to create account. Error message: \n" + errorMsg);
+    void showError(String errorMsg) {
+        CreateDialog(anchorpane, "Error", "Failed to create account. Error message: \n" + errorMsg);
     }
 
     @FXML
-    void onHomeClicked(ActionEvent event) throws Exception{
+    void onHomeClicked(ActionEvent event) throws Exception {
 
-    
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
         stage.setScene(scene);
         stage.show();
-
-    
 
     }
 
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
-    }
-
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
-        Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        stage.setScene(scene);
-        stage.show();
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
 
 }

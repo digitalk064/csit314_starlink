@@ -3,7 +3,7 @@ package Starlink.views.admin;
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;
 import Starlink.entities.User;
-
+import Starlink.views.CommonUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -24,11 +24,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class AdminHomepageUI {
-    //Logged in user
+public class AdminHomepageUI extends CommonUI {
+    // Logged in user
     User user;
-
-    Stage stage;
 
     @FXML
     private StackPane rootPane;
@@ -41,72 +39,52 @@ public class AdminHomepageUI {
     @FXML
     private JFXButton manageBusinessButton;
 
-
     @FXML
     private Text header;
 
-    //FXML callbacks
+    // FXML callbacks
     @FXML
-    protected void initialize() //Called when the view is loaded
+    protected void initialize() // Called when the view is loaded
     {
-        stage = Starlink.getStage();
-        //Get the logged in user
-        user = (User)stage.getUserData();
+        super.initialize();
+        // Get the logged in user
+        user = (User) stage.getUserData();
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
     }
 
     @FXML
-    void onLogoutClicked(ActionEvent event) throws Exception
-    {
-        Logout(event);
+    void onLogoutClicked(ActionEvent event) throws Exception {
+        Logout();
     }
 
-    void Logout(ActionEvent event) throws Exception
-    {
-        Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
+    // Switching scene template
+    @FXML
+    void onManageBusinessAccountClicked(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("SearchBusinessAccUI.fxml"));
         Scene scene = new Scene(root);
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
+        Scene scene = new Scene(root);
+
         stage.setScene(scene);
         stage.show();
     }
 
-//Switching scene template
     @FXML
-void onManageBusinessAccountClicked(ActionEvent event) throws Exception {
+    void onManagePublicUserAccountClicked(ActionEvent event) throws Exception {
 
-    Parent root = FXMLLoader.load(getClass().getResource("SearchBusinessAccUI.fxml"));
-    Scene scene = new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("SearchPublicAccUI.fxml"));
+        Scene scene = new Scene(root);
 
-    stage.setScene(scene);
-    stage.show();
+        stage.setScene(scene);
+        stage.show();
 
+    }
 }
-
-@FXML
-void onManageHealthStaffAccountClicked(ActionEvent event) throws Exception
-{
-    Parent root = FXMLLoader.load(getClass().getResource("SearchHealthStaffAccUI.fxml"));
-    Scene scene = new Scene(root);
-
-    stage.setScene(scene);
-    stage.show();
-}
-
-@FXML
-void onManagePublicUserAccountClicked(ActionEvent event) throws Exception {
-
-    Parent root = FXMLLoader.load(getClass().getResource("SearchPublicAccUI.fxml"));
-    Scene scene = new Scene(root);
-
-    stage.setScene(scene);
-    stage.show();
-
-}
-}
-
-
-
-
-
