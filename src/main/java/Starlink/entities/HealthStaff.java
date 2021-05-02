@@ -11,6 +11,13 @@ public class HealthStaff extends User{
     private String staffID;
     private String name;
 
+    public String getStaffID() {
+        return staffID;
+    }
+    public String getName() {
+        return name;
+    }
+
     //Constructors
     public HealthStaff() {};
     public HealthStaff(int userid, String username, String password, String email) throws Exception {
@@ -34,13 +41,20 @@ public class HealthStaff extends User{
     public boolean createAccount(String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
-            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values (%s, %s, %s, HealthStaff, no)",
+            //Check if username already exists
+            if(SQLHelper.selectStatement(String.format("select username from user where username = '%s'", username)).next())
+                throw new Exception("Username is already taken.");
+            //Check if staffID already exists
+            if(SQLHelper.selectStatement(String.format("select staffID from healthStaff where staffID = '%s'", staffID)).next())
+                throw new Exception("A staff with this staff ID already exists.");
+
+            SQLHelper.updateStatement(String.format("insert into user (username, password, email, userType, suspended) values ('%s', '%s', '%s', 'HealthStaff', 'no')",
             username, password, email));
 
-            //get the userID
-            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = %s", username)).getInt("userID");;
-
-            SQLHelper.updateStatement(String.format("insert into healthStaff (staffID, name, userID) values (%s, %s, %d)",
+            //Get the userID of the newly created account
+            int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
+            //Insert into the healthStaff table
+            SQLHelper.updateStatement(String.format("insert into healthStaff (staffID, name, userID) values ('%s', '%s', %d)",
             staffID, name, userID));
             return true;
         }
@@ -66,14 +80,14 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchStaffByName(String search_string) throws Exception
+    public List<HealthStaff> searchByName(String search_string) throws Exception
     {
 
         try{
             List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-            "user.userID = healthStaff.userID where name = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on " + 
+            "user.userID = healthStaff.userID where name like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row
@@ -97,13 +111,13 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchByStaffID(String search_string) throws Exception
+    public List<HealthStaff> searchByID(String search_string) throws Exception
     {
         try{
             List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-            "user.userID = healthStaff.userID where staffID = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on " + 
+            "user.userID = healthStaff.userID where staffID like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row

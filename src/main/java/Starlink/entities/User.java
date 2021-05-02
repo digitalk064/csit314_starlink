@@ -35,10 +35,6 @@ public class User {
         return userid;
     }
 
-    public void setSuspended(String suspended) {
-        this.suspended = suspended;
-    }
-
     public User()
     {}
 
@@ -88,6 +84,20 @@ public class User {
         //If we reach this part then there is no row found, return false
         throw new Exception("Your username or password might be incorrect.");
     }
+
+    public boolean setSuspended(String suspended) throws Exception{
+        try{
+            this.suspended = suspended;
+            SQLHelper.updateStatement(String.format("update user set suspended = %s where userID = %s",
+            suspended, userid));
+            return true;
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
 }
 
 enum UserType{

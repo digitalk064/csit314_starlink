@@ -15,6 +15,9 @@ public class Starlink extends Application {
     //Technically the main class is a boundary so this should be allowed
     public static Stage stage;
     
+    //Save the login page root so we can quickly logout from any page
+    public static Parent loginRoot;
+
     @Override
     public void init() throws Exception {
         super.init();
@@ -24,9 +27,9 @@ public class Starlink extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("views/login.fxml"));
+        loginRoot = FXMLLoader.load(getClass().getResource("views/login.fxml"));
 
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(loginRoot));
         primaryStage.show();
     }
 
