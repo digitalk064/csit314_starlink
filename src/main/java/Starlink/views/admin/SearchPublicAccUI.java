@@ -42,6 +42,18 @@ public class SearchPublicAccUI extends CommonUI {
     @FXML
     private JFXTextField inputtextfield;
 
+    @FXML 
+    private JFXComboBox<String> searchByDropdown;
+
+    @FXML
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        searchByDropdown.getItems().add("ID number");
+        searchByDropdown.getItems().add("Name");
+        searchByDropdown.setValue("ID number");
+    }
+
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
@@ -69,8 +81,8 @@ public class SearchPublicAccUI extends CommonUI {
     }
 
     @FXML
-    void onSearchClicked(ActionEvent event) throws IOException {
-
+    void onSearchClicked(ActionEvent event) throws Exception {
+        
     }
 
     @FXML

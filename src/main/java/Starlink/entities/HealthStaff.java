@@ -11,6 +11,13 @@ public class HealthStaff extends User{
     private String staffID;
     private String name;
 
+    public String getStaffID() {
+        return staffID;
+    }
+    public String getName() {
+        return name;
+    }
+
     //Constructors
     public HealthStaff() {};
     public HealthStaff(int userid, String username, String password, String email) throws Exception {
@@ -73,14 +80,14 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchStaffByName(String search_string) throws Exception
+    public List<HealthStaff> searchByName(String search_string) throws Exception
     {
 
         try{
             List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-            "user.userID = healthStaff.userID where name = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on " + 
+            "user.userID = healthStaff.userID where name like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row
@@ -104,13 +111,13 @@ public class HealthStaff extends User{
         }
     }
 
-    public List<HealthStaff> searchByStaffID(String search_string) throws Exception
+    public List<HealthStaff> searchByID(String search_string) throws Exception
     {
         try{
             List <HealthStaff> records = new ArrayList <HealthStaff>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on" + 
-            "user.userID = healthStaff.userID where staffID = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join healthStaff on " + 
+            "user.userID = healthStaff.userID where staffID like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row

@@ -42,6 +42,18 @@ public class SearchBusinessAccUI extends CommonUI {
     @FXML
     private JFXTextField inputtextfield;
 
+    @FXML 
+    private JFXComboBox<String> searchByDropdown;
+
+    @FXML
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        searchByDropdown.getItems().add("Business ID");
+        searchByDropdown.getItems().add("Business name");
+        searchByDropdown.setValue("Business ID");
+    }
+
     @FXML
     void onCreateBusinessAccountClicked(ActionEvent event) throws Exception {
 
