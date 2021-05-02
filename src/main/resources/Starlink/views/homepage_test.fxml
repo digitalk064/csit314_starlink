@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.HomepageUI">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.ACTORHomepageUI">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -15,7 +15,7 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <JFXButton fx:id="logoutButton" buttonType="RAISED" defaultButton="true" layoutX="1066.0" layoutY="21.0" onAction="#onLogoutClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Logout">
+            <JFXButton fx:id="logoutButton" buttonType="RAISED" defaultButton="false" layoutX="1066.0" layoutY="21.0" onAction="#onLogoutClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Logout">
                <font>
                   <Font size="25.0" />
                </font>

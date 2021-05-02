@@ -1,6 +1,6 @@
 package Starlink.views;
 
-import Starlink.controllers.LoginController;
+import Starlink.controllers.general.userLoginController;
 import Starlink.entities.HealthOrganization;
 import Starlink.entities.User;
 import javafx.fxml.FXML;
@@ -27,7 +27,7 @@ import javafx.scene.Node;
 public class userLoginUI {
 
     String username, password;
-    LoginController control;
+    userLoginController control;
     Stage stage;
 
     //FXML elements
@@ -51,7 +51,7 @@ public class userLoginUI {
         //JFXSpinner spin = new JFXSpinner();
         //rootPane.getChildren().add(spin);
         //Create the controller
-        control = new LoginController();
+        control = new userLoginController();
     }    
 
     @FXML
@@ -65,24 +65,23 @@ public class userLoginUI {
 
         //Check with controller here
         try{
-            User user = control.validateLogin(username, password);
+            User user = control.validate(username, password);
             //If we reach this code, login successful
             //Save the logged in User into the stage
             stage.setUserData(user);
-            goToHomePage(event, user);
+            goToHomePage(user);
         }
         catch(Exception e)
         {
             //Show error dialog
-            //e.printStackTrace();
-            JFXDialogLayout content = new JFXDialogLayout();
-            content.setHeading(new Text("Error"));
-            content.setBody(new Text(e.getMessage()));
-            JFXDialog dialog = new JFXDialog(rootPane, content, JFXDialog.DialogTransition.CENTER);
-            dialog.show(rootPane);
+            e.printStackTrace();
+            showInvalid(e.getMessage());
         }
     }
-
+    void showInvalid(String errorMsg)
+    {
+        CommonUI.CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + errorMsg);
+    }
     //Misc functions
     boolean validateFields()
     {
@@ -90,11 +89,11 @@ public class userLoginUI {
     }
 
     //Switching scene template
-    void goToHomePage(ActionEvent event, User user) throws Exception
+    void goToHomePage(User user) throws Exception
     {
         String url = "";
         if(user instanceof HealthOrganization)
-            url = "homepage_admin.fxml";
+            url = "admin/homepage_admin.fxml";
         else //Other homepages later
             url = "homepage_test.fxml"; 
         Parent root = FXMLLoader.load(getClass().getResource(url));
