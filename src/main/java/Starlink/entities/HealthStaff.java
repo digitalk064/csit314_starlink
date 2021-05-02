@@ -67,10 +67,10 @@ public class HealthStaff extends User{
     public boolean updateAccount(int userID, String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
-            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
-            SQLHelper.updateStatement(String.format("update healthStaff set staffID = %s, name = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update healthStaff set staffID = '%s', name = '%s' where userID = %d",
             staffID, name, userID));
             return true;
         }

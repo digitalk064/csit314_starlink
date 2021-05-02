@@ -62,10 +62,10 @@ public class PublicUser extends User{
     public boolean updateAccount(int userID, String username, String password, String email, String IDNum, String name) throws Exception
     {
         try{
-            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
-            SQLHelper.updateStatement(String.format("update publicUser set IDNum = %s, name = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update publicUser set IDNum = '%s', name = '%s' where userID = %d",
             IDNum, name, userID));
 
             return true;
@@ -82,8 +82,8 @@ public class PublicUser extends User{
         try{
             List <PublicUser> records = new ArrayList <PublicUser>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on" + 
-            "user.userID = publicUser.userID where name = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on " + 
+            "user.userID = publicUser.userID where name like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row
@@ -112,8 +112,8 @@ public class PublicUser extends User{
         try{
             List <PublicUser> records = new ArrayList <PublicUser>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on" + 
-            "user.userID = publicUser.userID where IDNum = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on " + 
+            "user.userID = publicUser.userID where IDNum like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row

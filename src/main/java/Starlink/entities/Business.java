@@ -67,10 +67,10 @@ public class Business extends User{
     public boolean updateAccount(int userID, String username, String password, String email, String businessID, String name, String address) throws Exception
     {
         try{
-            SQLHelper.updateStatement(String.format("update user set username = %s, password = %s, email = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
-            SQLHelper.updateStatement(String.format("update business set businessID = %s, name = %s, address = %s where userID = %d",
+            SQLHelper.updateStatement(String.format("update business set businessID = '%s', name = '%s', address = '%s' where userID = %d",
             businessID, name, address, userID));
 
             return true;
@@ -87,8 +87,8 @@ public class Business extends User{
         try{
             List <Business> records = new ArrayList <Business>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on" + 
-            "user.userID = business.userID where name = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on " + 
+            "user.userID = business.userID where name like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row
@@ -117,8 +117,8 @@ public class Business extends User{
         try{
             List <Business> records = new ArrayList <Business>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on" + 
-            "user.userID = business.userID where businessID = %s", search_string));
+            ResultSet results = SQLHelper.selectStatement(String.format("select * from user join business on " + 
+            "user.userID = business.userID where businessID like '%%%s%%'", search_string));
 
             while(results.next()){
                 //get the user info from each row
