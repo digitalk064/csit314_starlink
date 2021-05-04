@@ -1,4 +1,3 @@
-
 package Starlink.views.admin;
 
 import com.jfoenix.controls.JFXButton;
@@ -6,6 +5,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.updateHealthStaffController;
+import Starlink.entities.HealthStaff;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ import javafx.scene.Node;
 public class updateStaffAccountUI extends CommonUI {
 
     String id, staffname, staffusername, staffemail, staffpassword;
+    updateHealthStaffController controller;
+    int targetUserID;
     @FXML
     private AnchorPane anchorpane;
 
@@ -36,7 +39,7 @@ public class updateStaffAccountUI extends CommonUI {
     private JFXButton BackButton;
 
     @FXML
-    private JFXPasswordField passowordField;
+    private JFXPasswordField passwordField;
 
     @FXML
     private JFXTextField staffnamefield;
@@ -51,19 +54,22 @@ public class updateStaffAccountUI extends CommonUI {
     private JFXTextField emailField;
 
     @FXML
-    private Label staffid;
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        controller = new updateHealthStaffController();
+    }
 
-    @FXML
-    private Label username;
+    public void initFields(HealthStaff healthStaff)
+    {
+        staffidField.setText(healthStaff.getStaffID());
+        staffnamefield.setText(healthStaff.getName());
+        usernameField.setText(healthStaff.getUsername());
+        emailField.setText(healthStaff.getEmail());
+        passwordField.setText(healthStaff.getPassword());
+        targetUserID = healthStaff.getID();
+    }
 
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label name;
-
-    @FXML
-    private Label password;
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
@@ -93,19 +99,33 @@ public class updateStaffAccountUI extends CommonUI {
     }
 
     @FXML
-    void onUpdateBtnClicked(ActionEvent event) {
+    void onSubmit(ActionEvent event) {
 
         System.out.println("Update button pressed");
         // Get the user's text input from the fields
-        id = staffidField.getText();
-        staffname = staffnamefield.getText();
-        staffusername = usernameField.getText();
-        staffemail = emailField.getText();
-        staffpassword = passowordField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String email = emailField.getText();
+        String staffID = staffidField.getText();
+        String name = staffnamefield.getText();
+        try{
+            if(controller.verifyInput(targetUserID, username, password, email, staffID, name))
+                showSuccess();
+        }
+        catch(Exception e)
+        {
+            showError(e.getMessage());
+        }
+    }
 
-        // validate
-        // dialog box
+    void showSuccess()
+    {
+        CreateDialog(anchorpane, "Success", "The account information has been updated");
+    }
 
+    void showError(String errorMsg)
+    {
+        CreateDialog(anchorpane, "Error", "Could not update the account information. Error message:\n" + errorMsg);
     }
 
 }

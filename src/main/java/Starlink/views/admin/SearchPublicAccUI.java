@@ -66,7 +66,7 @@ public class SearchPublicAccUI extends CommonUI {
     private JFXComboBox<String> searchByDropdown;
 
     @FXML
-    protected void initialize() // Called when the view is loaded
+    protected void initialize()// Called when the view is loaded
     {
         if(isRowItem)
             return;
@@ -76,6 +76,13 @@ public class SearchPublicAccUI extends CommonUI {
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
+        try{
+            onSearchClicked(null);
+        }catch(Exception e)
+        {
+            System.out.println("Error in onSearchClicked:");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -153,9 +160,11 @@ public class SearchPublicAccUI extends CommonUI {
 
     @FXML
     void onUpdateBtnClicked(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("updatePublicAccountUI.fxml"));
-        Scene scene = new Scene(root);
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On update clicked for ID " + index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("updatePublicAccountUI.fxml"));
+        Scene scene = new Scene(loader.load());
+        ((updatePublicAccountUI)loader.getController()).initFields(results.get(index));
 
         stage.setScene(scene);
         stage.show();

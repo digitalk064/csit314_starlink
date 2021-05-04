@@ -67,6 +67,22 @@ public class HealthStaff extends User{
     public boolean updateAccount(int userID, String username, String password, String email, String staffID, String name) throws Exception
     {
         try{
+            //Check if userID actually exists
+            if(!SQLHelper.selectStatement(String.format("select userID from user where userID = %d", userID)).next())
+                throw new Exception("Trying to update a non-existent account! (ID: " + userID + ")");
+            //Check if new username is already taken
+            ResultSet results = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username));
+            while(results.next()){
+                if(results.getInt("userID") != userID) //Make sure we're not against the account being updated
+                    throw new Exception("Another account already uses this username!");
+            }
+            //Check if new IDNum is already taken
+            results = SQLHelper.selectStatement(String.format("select userID from healthStaff where staffid = '%s'", staffID));
+            while(results.next()){
+                if(results.getInt("userID") != userID) //Make sure we're not checking against the account being updated
+                    throw new Exception("Another account already uses this staff ID!");
+            }
+
             SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
