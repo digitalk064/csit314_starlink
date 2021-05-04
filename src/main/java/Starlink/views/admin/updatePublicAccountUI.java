@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.updatePublicAccountController;
+import Starlink.entities.PublicUser;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,8 +19,10 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class updatePublicAccountUI extends CommonUI {
-
     String id, name, publicusername, useremail, userpassword;
+    int targetUserID; //User ID of the account being updated
+
+    updatePublicAccountController controller;
     @FXML
     private AnchorPane anchorpane;
 
@@ -41,7 +45,7 @@ public class updatePublicAccountUI extends CommonUI {
     private JFXTextField userfullnamefield;
 
     @FXML
-    private JFXTextField staffidField;
+    private JFXTextField IDNumField;
 
     @FXML
     private JFXTextField usernameField;
@@ -50,19 +54,21 @@ public class updatePublicAccountUI extends CommonUI {
     private JFXTextField emailField;
 
     @FXML
-    private Label staffid;
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        controller = new updatePublicAccountController();
+    }
 
-    @FXML
-    private Label username;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label Name;
-
-    @FXML
-    private Label password;
+    public void initFields(PublicUser publicUser)
+    {
+        IDNumField.setText(publicUser.getIDNum());
+        userfullnamefield.setText(publicUser.getName());
+        usernameField.setText(publicUser.getUsername());
+        emailField.setText(publicUser.getEmail());
+        passwordField.setText(publicUser.getPassword());
+        targetUserID = publicUser.getID();
+    }
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
@@ -92,19 +98,33 @@ public class updatePublicAccountUI extends CommonUI {
     }
 
     @FXML
-    void onUpdateBtnClicked(ActionEvent event) {
+    void onSubmit(ActionEvent event) throws Exception{
 
         System.out.println("Update button pressed");
         // Get the user's text input from the fields
-        id = staffidField.getText();
-        name = userfullnamefield.getText();
-        publicusername = usernameField.getText();
-        useremail = emailField.getText();
-        userpassword = passwordField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String email = emailField.getText();
+        String IDNum = IDNumField.getText();
+        String name = userfullnamefield.getText();
+        try{
+            if(controller.verifyInput(targetUserID, username, password, email, IDNum, name))
+                showSuccess();
+        }
+        catch(Exception e)
+        {
+            showError(e.getMessage());
+        }
+    }
 
-        // validate
-        // dialog box
+    void showSuccess()
+    {
+        CreateDialog(anchorpane, "Success", "The account information has been updated");
+    }
 
+    void showError(String errorMsg)
+    {
+        CreateDialog(anchorpane, "Error", "Could not update the account information. Error message:\n" + errorMsg);
     }
 
 }

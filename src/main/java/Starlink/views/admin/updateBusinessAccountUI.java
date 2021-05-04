@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import Starlink.Starlink;
+import Starlink.controllers.admin.updateBusinessAccountController;
+import Starlink.entities.Business;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,9 @@ import javafx.scene.Node;
 public class updateBusinessAccountUI extends CommonUI {
 
     String id, businessname, businessusername, businessemail, businesspassword;
+    int targetUserID; //User ID of the account being updated
+
+    updateBusinessAccountController controller;
 
     @FXML
     private AnchorPane anchorpane;
@@ -43,7 +48,7 @@ public class updateBusinessAccountUI extends CommonUI {
     private JFXTextField userfullnamefield;
 
     @FXML
-    private JFXTextField idField;
+    private JFXTextField businessIDField;
 
     @FXML
     private JFXTextField usernameField;
@@ -52,25 +57,25 @@ public class updateBusinessAccountUI extends CommonUI {
     private JFXTextField emailField;
 
     @FXML
-    private Label businessid;
-
-    @FXML
-    private Label username;
-
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label Name;
-
-    @FXML
-    private Label password;
-
-    @FXML
-    private Label addresslabel;
-
-    @FXML
     private JFXTextField addressField;
+
+    @FXML
+    protected void initialize() // Called when the view is loaded
+    {
+        super.initialize();
+        controller = new updateBusinessAccountController();
+    }
+
+    public void initFields(Business business)
+    {
+        addressField.setText(business.getAddress());
+        businessIDField.setText(business.getBusinessID());
+        userfullnamefield.setText(business.getName());
+        usernameField.setText(business.getUsername());
+        emailField.setText(business.getEmail());
+        passwordField.setText(business.getPassword());
+        targetUserID = business.getID();
+    }
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
@@ -100,18 +105,32 @@ public class updateBusinessAccountUI extends CommonUI {
     }
 
     @FXML
-    void onUpdateBtnClicked(ActionEvent event) {
-
-        System.out.println("Create button pressed");
+    void onSubmit(ActionEvent event) {
         // Get the user's text input from the fields
-        id = idField.getText();
-        businessname = userfullnamefield.getText();
-        businessusername = usernameField.getText();
-        businessemail = emailField.getText();
-        businesspassword = passwordField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String email = emailField.getText();
+        String businessID = businessIDField.getText();
+        String name = userfullnamefield.getText();
+        String address = addressField.getText();
+        try{
+            if(controller.verifyInput(targetUserID, username, password, email, businessID, name, address))
+                showSuccess();
+        }
+        catch(Exception e)
+        {
+            showError(e.getMessage());
+        }
+    }
 
-        // validate
-        // dialog box
+    void showSuccess()
+    {
+        CreateDialog(anchorpane, "Success", "The account information has been updated");
+    }
+
+    void showError(String errorMsg)
+    {
+        CreateDialog(anchorpane, "Error", "Could not update the account information. Error message:\n" + errorMsg);
     }
 
 }

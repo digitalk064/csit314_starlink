@@ -74,6 +74,13 @@ public class SearchHealthStaffAccUI extends CommonUI {
         searchByDropdown.getItems().add("Staff ID");
         searchByDropdown.getItems().add("Staff name");
         searchByDropdown.setValue("Staff ID");
+        try{
+            onSearchClicked(null);
+        }catch(Exception e)
+        {
+            System.out.println("Error in onSearchClicked:");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -149,11 +156,15 @@ public class SearchHealthStaffAccUI extends CommonUI {
 
     @FXML
     void onUpdateBtnClicked(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("updateStaffAccountUI.fxml"));
-        Scene scene = new Scene(root);
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On update clicked for ID " + index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("updateStaffAccountUI.fxml"));
+        Scene scene = new Scene(loader.load());
+        updateStaffAccountUI updateBoundary = loader.getController();
+        updateBoundary.initFields(results.get(index));
+        
 
         stage.setScene(scene);
         stage.show();
-
     }
 }

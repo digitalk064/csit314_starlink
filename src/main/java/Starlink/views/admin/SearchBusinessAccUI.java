@@ -76,6 +76,13 @@ public class SearchBusinessAccUI extends CommonUI {
         searchByDropdown.getItems().add("Business ID");
         searchByDropdown.getItems().add("Business name");
         searchByDropdown.setValue("Business ID");
+        try{
+            onSearchClicked(null);
+        }catch(Exception e)
+        {
+            System.out.println("Error in onSearchClicked:");
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -149,8 +156,11 @@ public class SearchBusinessAccUI extends CommonUI {
     @FXML
     void onUpdateBtnClicked(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("updateBusinessAccountUI.fxml"));
-        Scene scene = new Scene(root);
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On update clicked for ID " + index);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("updateBusinessAccountUI.fxml"));
+        Scene scene = new Scene(loader.load());
+        ((updateBusinessAccountUI)loader.getController()).initFields(results.get(index));
 
         stage.setScene(scene);
         stage.show();

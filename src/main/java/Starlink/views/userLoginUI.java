@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.RequiredFieldValidator;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
@@ -49,6 +50,8 @@ public class userLoginUI extends CommonUI {
     {
         super.initialize();
         System.out.println("Login FXML loaded");
+        usernameField.getValidators().add(new RequiredFieldValidator("This field is required"));
+        passwordField.getValidators().add(new RequiredFieldValidator("This field is required"));
         // JFXSpinner spin = new JFXSpinner();
         // rootPane.getChildren().add(spin);
         // Create the controller
@@ -57,6 +60,10 @@ public class userLoginUI extends CommonUI {
 
     @FXML
     void onSubmit(ActionEvent event) throws Exception {
+        usernameField.validate();
+        passwordField.validate();
+        if(!usernameField.validate() || !passwordField.validate())
+            return;
         stage = (Stage) rootPane.getScene().getWindow();
         System.out.println("Login button pressed");
         // Get the user's text input from the fields
@@ -79,11 +86,6 @@ public class userLoginUI extends CommonUI {
 
     void showInvalid(String errorMsg) {
         CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + errorMsg);
-    }
-
-    // Misc functions
-    boolean validateFields() {
-        return true;
     }
 
     // Switching scene template
