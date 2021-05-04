@@ -94,8 +94,10 @@ public class userLoginUI extends CommonUI {
         if (user instanceof HealthOrganization)
             url = "admin/homepage_admin.fxml";
 
+
+        //public user homepage
         else if (user instanceof PublicUser)
-        url = "admin/homepage_publicUser.fxml";
+            url = "admin/homepage_publicUser.fxml";
 
         else // Other homepages later
             url = "homepage_test.fxml";
