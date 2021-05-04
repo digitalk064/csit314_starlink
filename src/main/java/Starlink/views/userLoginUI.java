@@ -2,6 +2,7 @@ package Starlink.views;
 
 import Starlink.controllers.general.userLoginController;
 import Starlink.entities.HealthOrganization;
+import Starlink.entities.PublicUser;
 import Starlink.entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,6 +91,10 @@ public class userLoginUI extends CommonUI {
         String url = "";
         if (user instanceof HealthOrganization)
             url = "admin/homepage_admin.fxml";
+
+        else if (user instanceof PublicUser)
+        url = "admin/homepage_publicUser.fxml";
+
         else // Other homepages later
             url = "homepage_test.fxml";
         Parent root = FXMLLoader.load(getClass().getResource(url));

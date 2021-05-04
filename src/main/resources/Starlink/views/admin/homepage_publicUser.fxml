@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.admin.PublicUserHomepageUI">
+   <children>
+      <JFXButton fx:id="viewCertButton" buttonType="RAISED" layoutX="250.0" layoutY="319.0" onAction="#onViewCertClicked" prefHeight="53.0" prefWidth="228.0" style="-fx-background-color: #ffff;" text="View Vaccination Certificate" />
+      <JFXButton fx:id="logoutButton" buttonType="RAISED" layoutX="1068.0" layoutY="17.0" onAction="#onLogoutClicked" prefHeight="53.0" prefWidth="172.0" style="-fx-background-color: #ffff;" text="Log out">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </JFXButton>
+      <Text fx:id="header" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, &quot;name&quot;" textAlignment="CENTER" wrappingWidth="1281.0">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
