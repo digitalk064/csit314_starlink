@@ -68,7 +68,7 @@
             <Font size="24.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="generateButton" buttonType="RAISED" layoutX="960.0" layoutY="733.0" onAction="#onGenerateClicked" prefHeight="53.0" prefWidth="154.0" style="-fx-background-color: #ffff;" text="Generate">
+      <JFXButton fx:id="generateButton" buttonType="RAISED" defaultButton="true" layoutX="960.0" layoutY="733.0" onAction="#onGenerateClicked" prefHeight="53.0" prefWidth="154.0" style="-fx-background-color: #ffff;" text="Generate">
          <font>
             <Font size="24.0" />
          </font>

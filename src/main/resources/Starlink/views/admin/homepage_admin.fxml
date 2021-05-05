@@ -20,9 +20,9 @@
                   <Font size="25.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="manageHealthButton" buttonType="RAISED" defaultButton="true" layoutX="500.0" layoutY="352.0" onAction="#onManageHealthStaffAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Health Staff Account" />
-            <JFXButton fx:id="managePublicButton" buttonType="RAISED" defaultButton="true" layoutX="278.0" layoutY="352.0" onAction="#onManagePublicUserAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Public User Account" />
-            <JFXButton fx:id="manageBusinessButton" buttonType="RAISED" defaultButton="true" layoutX="728.0" layoutY="352.0" onAction="#onManageBusinessAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Business Account" />
+            <JFXButton fx:id="manageHealthButton" buttonType="RAISED" layoutX="500.0" layoutY="352.0" onAction="#onManageHealthStaffAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Health Staff Account" />
+            <JFXButton fx:id="managePublicButton" buttonType="RAISED" layoutX="278.0" layoutY="352.0" onAction="#onManagePublicUserAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Public User Account" />
+            <JFXButton fx:id="manageBusinessButton" buttonType="RAISED" layoutX="728.0" layoutY="352.0" onAction="#onManageBusinessAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Business Account" />
          </children>
       </AnchorPane>
    </children>
