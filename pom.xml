@@ -13,26 +13,26 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>13</version>
+            <version>16</version>
             <classifier>win</classifier>
         </dependency>
         <!-- Enable when we need to build for MacOS
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>13</version>
+            <version>16</version>
             <classifier>mac</classifier>
         </dependency>
         -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>13</version>
+            <version>16</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>13</version>
+            <version>16</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>

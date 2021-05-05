@@ -1,4 +1,4 @@
-package Starlink.views.admin;
+package Starlink.views.publicUser;
 
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;
@@ -27,23 +27,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class generateCertHealthStaffUI extends CommonUI  {
-
-    @FXML
-    private JFXTextField nameField;
+public class viewCertPublicUserUI extends CommonUI {
 
     @FXML
-    private JFXTextField ICField;
+    private Label nameField;
 
     @FXML
-    private JFXTextField vaccNameField;
+    private Label ICField;
 
     @FXML
-    private JFXTextField batchnoField;
+    private Label vaccNameField;
 
     @FXML
-    private JFXTextField dateField;
+    private Label batchnoField;
+
+    @FXML
+    private Label dateField;
 
     @FXML
     private JFXButton backButton;
@@ -53,29 +52,11 @@ public class generateCertHealthStaffUI extends CommonUI  {
 
     @FXML
     private JFXButton logoutButton;
-
-    @FXML
-    private JFXButton generateButton;
-
-
-    @FXML
-    void onGenerateClicked(ActionEvent event) {
-
-
-        //get the health staff input
-        String name = nameField.getText(); 
-        String identificationNo = ICField.getText(); 
-        String batchNo = batchnoField.getText(); 
-        String vaccineName = vaccNameField.getText(); 
-        String date = dateField.getText(); 
-
-
-    }
-
+   
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_HealthStaff.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_publicUser.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -86,7 +67,7 @@ public class generateCertHealthStaffUI extends CommonUI  {
     void onHomeClicked(ActionEvent event) throws IOException {
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_HealthStaff.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_publicUser.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -102,3 +83,5 @@ public class generateCertHealthStaffUI extends CommonUI  {
     }
 
 }
+
+

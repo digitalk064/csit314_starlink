@@ -1,4 +1,4 @@
-package Starlink.views.admin;
+package Starlink.views.healthStaff;
 
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;

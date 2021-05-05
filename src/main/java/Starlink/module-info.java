@@ -6,6 +6,9 @@ module Starlink {
     requires sqlite.jdbc;
     opens Starlink to javafx.fxml;
     opens Starlink.views to javafx.fxml;
-    opens Starlink.views.admin to javafx.fxml;
+    opens Starlink.views.admin to javafx.fxml;   
+    opens Starlink.views.healthStaff to javafx.fxml;
+    opens Starlink.views.publicUser to javafx.fxml;
     exports Starlink;
 }
+//opens Starlink.views.business to javafx.fxml;

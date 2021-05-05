@@ -1,4 +1,4 @@
-package Starlink.views.admin;
+package Starlink.views.healthStaff;
 
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;
@@ -27,22 +27,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class viewCertPublicUserUI extends CommonUI {
+
+public class generateCertHealthStaffUI extends CommonUI  {
 
     @FXML
-    private Label nameField;
+    private JFXTextField nameField;
 
     @FXML
-    private Label ICField;
+    private JFXTextField ICField;
 
     @FXML
-    private Label vaccNameField;
+    private JFXTextField vaccNameField;
 
     @FXML
-    private Label batchnoField;
+    private JFXTextField batchnoField;
 
     @FXML
-    private Label dateField;
+    private JFXTextField dateField;
 
     @FXML
     private JFXButton backButton;
@@ -52,11 +53,29 @@ public class viewCertPublicUserUI extends CommonUI {
 
     @FXML
     private JFXButton logoutButton;
-   
+
+    @FXML
+    private JFXButton generateButton;
+
+
+    @FXML
+    void onGenerateClicked(ActionEvent event) {
+
+
+        //get the health staff input
+        String name = nameField.getText(); 
+        String identificationNo = ICField.getText(); 
+        String batchNo = batchnoField.getText(); 
+        String vaccineName = vaccNameField.getText(); 
+        String date = dateField.getText(); 
+
+
+    }
+
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_publicUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_HealthStaff.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -67,7 +86,7 @@ public class viewCertPublicUserUI extends CommonUI {
     void onHomeClicked(ActionEvent event) throws IOException {
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_publicUser.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_HealthStaff.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -83,5 +102,3 @@ public class viewCertPublicUserUI extends CommonUI {
     }
 
 }
-
-
