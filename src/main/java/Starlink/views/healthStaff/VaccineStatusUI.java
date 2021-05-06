@@ -1,6 +1,3 @@
-
-
-
 package Starlink.views.healthStaff;
 
 import com.jfoenix.controls.JFXButton;
@@ -16,7 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
-public class generateVaccineStatusUI extends CommonUI {
+public class VaccineStatusUI extends CommonUI{
 
     @FXML
     private AnchorPane pane;
@@ -38,7 +35,6 @@ public class generateVaccineStatusUI extends CommonUI {
 
     @FXML
     private JFXListView<?> resultDisplayList;
-
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("homepage_HealthStaff.fxml"));
@@ -59,14 +55,6 @@ public class generateVaccineStatusUI extends CommonUI {
         
 
     }
-
-
-
- 
-
-    
-
-    
 
 
 }

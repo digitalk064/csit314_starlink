@@ -31,13 +31,13 @@ public class PublicUserHomepageUI extends CommonUI {
     User user;
 
     @FXML
-    private AnchorPane vaccineStatus;
+    private Text header;
 
     @FXML
     private JFXButton logoutButton;
 
     @FXML
-    private Text header;
+    private Label vaccineStatus;
 
 
     @FXML
