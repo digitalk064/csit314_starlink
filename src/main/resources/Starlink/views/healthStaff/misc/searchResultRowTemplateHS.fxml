@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
 <Pane fx:id="resultRowTemplate" prefHeight="38.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton fx:id="vaccinateBtn" layoutX="572.0" layoutY="7.0" onAction="#onVaccinateClicked" text="Vaccinated" />
-      <JFXButton fx:id="notVaccinateBtn" layoutX="659.0" layoutY="7.0" onAction="#onNotVaccBtnClicked" text="Not Vaccination" />
-      <Label fx:id="resultRowLabel" layoutX="14.0" layoutY="11.0" prefHeight="9.0" prefWidth="559.0" text="Label" />
+      <Label fx:id="resultRowLabel" layoutX="14.0" layoutY="11.0" prefHeight="10.0" prefWidth="633.0" text="Label" />
+      <JFXToggleButton fx:id="vaccinated" layoutX="618.0" layoutY="-9.0" onAction="#onVaccinated" selected="true" text="Vaccinated" />
    </children>
 </Pane>
