@@ -27,22 +27,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class viewCertPublicUserUI extends CommonUI {
+
+public class viewCertPublicUserUI extends CommonUI  {
 
     @FXML
-    private Label nameField;
-
-    @FXML
-    private Label ICField;
-
-    @FXML
-    private Label vaccNameField;
-
-    @FXML
-    private Label batchnoField;
-
-    @FXML
-    private Label dateField;
+    private Label vaccineResult;
 
     @FXML
     private JFXButton backButton;
@@ -52,7 +41,7 @@ public class viewCertPublicUserUI extends CommonUI {
 
     @FXML
     private JFXButton logoutButton;
-   
+
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
 
@@ -81,7 +70,5 @@ public class viewCertPublicUserUI extends CommonUI {
         Logout();
 
     }
-
 }
-
 

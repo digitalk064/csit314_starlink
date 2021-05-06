@@ -12,6 +12,7 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 
@@ -27,23 +28,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-
-public class generateCertHealthStaffUI extends CommonUI  {
-
-    @FXML
-    private JFXTextField nameField;
+public class generateCertHealthStaffUI extends CommonUI {
 
     @FXML
     private JFXTextField ICField;
-
-    @FXML
-    private JFXTextField vaccNameField;
-
-    @FXML
-    private JFXTextField batchnoField;
-
-    @FXML
-    private JFXTextField dateField;
 
     @FXML
     private JFXButton backButton;
@@ -57,20 +45,11 @@ public class generateCertHealthStaffUI extends CommonUI  {
     @FXML
     private JFXButton generateButton;
 
+    @FXML
+    private JFXRadioButton vaccinatedBtn;
 
     @FXML
-    void onGenerateClicked(ActionEvent event) {
-
-
-        //get the health staff input
-        String name = nameField.getText(); 
-        String identificationNo = ICField.getText(); 
-        String batchNo = batchnoField.getText(); 
-        String vaccineName = vaccNameField.getText(); 
-        String date = dateField.getText(); 
-
-
-    }
+    private JFXRadioButton notVaccinated;
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
@@ -100,5 +79,21 @@ public class generateCertHealthStaffUI extends CommonUI  {
         Logout();
 
     }
+
+    @FXML
+    void onGenerateClicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onNotVacciBtn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onVaccinatedBtn(ActionEvent event) {
+
+    }
+
 
 }
