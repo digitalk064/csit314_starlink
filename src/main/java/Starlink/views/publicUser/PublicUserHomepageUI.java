@@ -31,7 +31,7 @@ public class PublicUserHomepageUI extends CommonUI {
     User user;
 
     @FXML
-    private JFXButton viewCertButton;
+    private AnchorPane vaccineStatus;
 
     @FXML
     private JFXButton logoutButton;
@@ -55,17 +55,7 @@ public class PublicUserHomepageUI extends CommonUI {
     }
 
 
-    @FXML
-    void onViewCertClicked(ActionEvent event) throws IOException {
-
-       
-        Parent root = FXMLLoader.load(getClass().getResource("viewCertPublicUserUI.fxml"));
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-
-    }
+    
 
     
 
