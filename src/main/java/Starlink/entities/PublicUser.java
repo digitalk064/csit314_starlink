@@ -10,6 +10,8 @@ import java.util.ArrayList; // import just the ArrayList class
 public class PublicUser extends User{
     private String IDNum;
     private String name;
+    private boolean vaxStatus;
+
     public String getIDNum()
     {
         return IDNum;
@@ -18,6 +20,17 @@ public class PublicUser extends User{
     {
         return name;
     }
+
+    public boolean getVaxStatus()
+    {
+        return vaxStatus;
+    }
+
+    public void setVaxStatus(boolean vaxStatus)
+    {
+        this.vaxStatus = vaxStatus;
+    }
+
     //Constructors
     public PublicUser() {};
     public PublicUser(int userid, String username, String password, String email) throws Exception{
@@ -28,15 +41,17 @@ public class PublicUser extends User{
             //Save the userType and userid from the logged in account to the persistent variables
             name = results.getString("name");
             IDNum = results.getString("IDNum");
+            vaxStatus = results.getBoolean("vaxStatus");
             return;
         }
         throw new Exception("Cannot find public user account with userid " + userid + " in publicUser table!");
     }
 
-    public PublicUser(int userid, String username, String password, String email, String IDNum, String name) {
+    public PublicUser(int userid, String username, String password, String email, String IDNum, String name, Boolean vaxStatus) {
         super(userid, username, password, email, UserType.PublicUser);
         this.IDNum = IDNum;
         this.name = name;
+        this.vaxStatus = vaxStatus;
     }
 
     public boolean createAccount(String username, String password, String email, String IDNum, String name) throws Exception
@@ -55,7 +70,7 @@ public class PublicUser extends User{
             //get the userID
             int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
 
-            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID) values ('%s', '%s', %d)",
+            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID, vaxStatus) values ('%s', '%s', %d, 'no')",
             IDNum, name, userID));
 
             return true;
@@ -88,7 +103,7 @@ public class PublicUser extends User{
             SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
-            SQLHelper.updateStatement(String.format("update publicUser set IDNum = '%s', name = '%s' where userID = %d",
+            SQLHelper.updateStatement(String.format("update publicUser set IDNum = '%s', name = '%s', where userID = %d",
             IDNum, name, userID));
 
             return true;
