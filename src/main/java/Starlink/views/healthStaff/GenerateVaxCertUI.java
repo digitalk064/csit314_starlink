@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import Starlink.Starlink;
 import Starlink.controllers.admin.PublicAccSuspendController;
 import Starlink.controllers.admin.SearchPublicAccController;
+import Starlink.controllers.healthStaff.GenerateVaxCertController;
 import Starlink.entities.PublicUser;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
@@ -27,10 +28,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-public class VaccineStatusUI extends CommonUI {
+public class GenerateVaxCertUI extends CommonUI {
 
     SearchPublicAccController searchController;
-    PublicAccSuspendController suspendController;
+    GenerateVaxCertController vaxController;
+
     @FXML
     private AnchorPane pane;
 
@@ -74,7 +76,7 @@ public class VaccineStatusUI extends CommonUI {
             return;
         super.initialize();
         searchController = new SearchPublicAccController();
-        suspendController = new PublicAccSuspendController();
+        vaxController = new GenerateVaxCertController();
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
@@ -94,16 +96,12 @@ public class VaccineStatusUI extends CommonUI {
 
     stage.setScene(scene);
     stage.show();
-
-}
-
+    }
 
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception {
         Logout();
     }
-
-
 
     List<PublicUser> results;
 
@@ -119,7 +117,29 @@ public class VaccineStatusUI extends CommonUI {
     
     void DisplayResult() throws Exception
     {
-       
+        resultDisplayList.getItems().clear(); 
+        for(int i = 0; i < results.size(); i++){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/healthStaff/misc/searchResultRowTemplateHS.fxml"));
+            loader.setController(this);
+            ((GenerateVaxCertUI)loader.getController()).setIsRowItem();
+            Pane resultRow =  loader.load();
+            Label label = (Label)resultRow.lookup("#resultRowLabel");
+            label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
+            ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setSelected(results.get(i).getVaxStatus());
+            ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setId(String.valueOf(i));
+            resultDisplayList.getItems().add(resultRow);
+        }
+    }
+
+    @FXML
+    void onChangeVaccinationStatus(ActionEvent event) throws Exception{
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        boolean newStatus = ((JFXToggleButton)event.getSource()).isSelected();
+        System.out.println("On vaccination clicked for ID " + index + " to " + newStatus);
+        if(vaxController.setVaccinationStatus(results.get(index), newStatus))
+        {
+            CreateDialog(pane, "Success", "The user's vaccination status has been set to " + newStatus + ".");
+        }
     }
 
   

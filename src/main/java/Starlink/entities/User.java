@@ -8,7 +8,7 @@ import javafx.application.Platform;
 //This is the superclass for all the user types
 public class User {
     //Fields
-    private int userid;
+    protected int userid;
     private String username;
     private String password;
     private String email;

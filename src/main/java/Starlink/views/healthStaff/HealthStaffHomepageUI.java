@@ -43,7 +43,7 @@ public class HealthStaffHomepageUI extends CommonUI{
     @FXML
     void onGenerateCertClicked(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("VaccineStatusUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GenerateVaxCertUI.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

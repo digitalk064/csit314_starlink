@@ -2,6 +2,8 @@ package Starlink.views.publicUser;
 
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;
+import Starlink.controllers.publicUser.viewVaccinationController;
+import Starlink.entities.PublicUser;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
 import javafx.fxml.FXML;
@@ -30,6 +32,8 @@ public class PublicUserHomepageUI extends CommonUI {
 
     User user;
 
+    viewVaccinationController vaxController;
+
     @FXML
     private Text header;
 
@@ -45,13 +49,32 @@ public class PublicUserHomepageUI extends CommonUI {
         Logout();
     }
     
+    boolean isVaccinated = false;
+
     @FXML
     protected void initialize() // Called when the view is loaded
     {
         super.initialize();
+        vaxController = new viewVaccinationController();
         // Get the logged in user
         user = (User) stage.getUserData();
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
+        try{
+            isVaccinated = vaxController.getVaxStatus((PublicUser)user);
+            displayVaxStatus();
+        }catch(Exception e)
+        {
+            System.out.println("Error while retrieving vaccination status");
+            e.printStackTrace();
+        }
+    }
+
+    void displayVaxStatus()
+    {
+        if(isVaccinated)
+            vaccineStatus.setText("Vaccinated");
+        else
+            vaccineStatus.setText("Not Vaccinated");
     }
 
 

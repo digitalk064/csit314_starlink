@@ -26,9 +26,12 @@ public class PublicUser extends User{
         return vaxStatus;
     }
 
-    public void setVaxStatus(boolean vaxStatus)
-    {
+    public boolean setVaxStatus(boolean vaxStatus) throws Exception{
         this.vaxStatus = vaxStatus;
+        SQLHelper.updateStatement(String.format("update publicUser set vaxStatus = %s where userID = '%s'",
+            vaxStatus, userid));
+        return true;
+        
     }
 
     //Constructors
