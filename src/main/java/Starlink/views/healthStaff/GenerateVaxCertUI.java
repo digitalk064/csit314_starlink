@@ -15,6 +15,7 @@ import Starlink.controllers.admin.SearchPublicAccController;
 import Starlink.controllers.healthStaff.GenerateVaxCertController;
 import Starlink.entities.PublicUser;
 import Starlink.views.CommonUI;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+
+import java.util.*;
 
 public class GenerateVaxCertUI extends CommonUI {
 
@@ -118,17 +121,41 @@ public class GenerateVaxCertUI extends CommonUI {
     void DisplayResult() throws Exception
     {
         resultDisplayList.getItems().clear(); 
-        for(int i = 0; i < results.size(); i++){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/healthStaff/misc/searchResultRowTemplateHS.fxml"));
-            loader.setController(this);
-            ((GenerateVaxCertUI)loader.getController()).setIsRowItem();
-            Pane resultRow =  loader.load();
-            Label label = (Label)resultRow.lookup("#resultRowLabel");
-            label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
-            ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setSelected(results.get(i).getVaxStatus());
-            ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setId(String.valueOf(i));
-            resultDisplayList.getItems().add(resultRow);
-        }
+        resultDisplayList.getItems().add(new Pane(new Label("Loading results...")));
+        
+        //Load result asynchronously
+        Task listLoader = new Task<List<Pane>>() {
+            {
+                setOnSucceeded(workerStateEvent -> {
+                    resultDisplayList.getItems().setAll(getValue());
+                    System.out.println("Finished async loading");
+                });
+
+                setOnFailed(workerStateEvent -> getException().printStackTrace());
+            }
+
+            @Override
+            protected List<Pane> call() throws Exception {
+                final List<Pane> resultRows = new LinkedList<>();
+                for(int i = 0; i < results.size(); i++){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/healthStaff/misc/searchResultRowTemplateHS.fxml"));
+                    loader.setController(GenerateVaxCertUI.this);
+                    ((GenerateVaxCertUI)loader.getController()).setIsRowItem();
+                    Pane resultRow =  loader.load();
+                    Label label = (Label)resultRow.lookup("#resultRowLabel");
+                    label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
+                    ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setSelected(results.get(i).getVaxStatus());
+                    ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setId(String.valueOf(i));
+                    resultRows.add(resultRow);
+                    
+                }
+                return resultRows;
+            }
+        };
+
+        Thread loadingThread = new Thread(listLoader, "list-loader");
+        loadingThread.setDaemon(true);
+        loadingThread.start();
     }
 
     @FXML
