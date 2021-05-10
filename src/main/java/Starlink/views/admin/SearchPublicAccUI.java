@@ -1,6 +1,7 @@
 package Starlink.views.admin;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
@@ -13,6 +14,7 @@ import Starlink.controllers.admin.PublicAccSuspendController;
 import Starlink.controllers.admin.SearchPublicAccController;
 import Starlink.entities.PublicUser;
 import Starlink.views.CommonUI;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -76,6 +78,7 @@ public class SearchPublicAccUI extends CommonUI {
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
+        /*
         try{
             onSearchClicked(null);
         }catch(Exception e)
@@ -83,6 +86,7 @@ public class SearchPublicAccUI extends CommonUI {
             System.out.println("Error in onSearchClicked:");
             e.printStackTrace();
         }
+        */
     }
 
     @FXML
@@ -126,25 +130,49 @@ public class SearchPublicAccUI extends CommonUI {
     void DisplayResult() throws Exception
     {
         resultDisplayList.getItems().clear(); 
-        for(int i = 0; i < results.size(); i++){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
-            loader.setController(this);
-            ((SearchPublicAccUI)loader.getController()).setIsRowItem();
-            Pane resultRow =  loader.load();
-            JFXButton suspendBtn = (JFXButton)resultRow.lookup("#suspendBtn");
-            if(results.get(i).getSuspended().equals("yes"))
+        resultDisplayList.getItems().add(new Pane(new Label("Loading results...")));
+        
+        //Load result asynchronously
+        Task listLoader = new Task<List<Pane>>() {
             {
-                suspendBtn.setDisable(true);
-                suspendBtn.setText("Suspended");
+                setOnSucceeded(workerStateEvent -> {
+                    resultDisplayList.getItems().setAll(getValue());
+                    System.out.println("Finished async loading");
+                });
+
+                setOnFailed(workerStateEvent -> getException().printStackTrace());
             }
-            else{
-                suspendBtn.setId(String.valueOf(i));
+
+            @Override
+            protected List<Pane> call() throws Exception {
+                final List<Pane> resultRows = new LinkedList<>();
+                for(int i = 0; i < results.size(); i++){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Starlink/views/admin/misc/searchResultRowTemplate.fxml"));
+                    loader.setController(SearchPublicAccUI.this);
+                    ((SearchPublicAccUI)loader.getController()).setIsRowItem();
+                    Pane resultRow =  loader.load();
+                    JFXButton suspendBtn = (JFXButton)resultRow.lookup("#suspendBtn");
+                    if(results.get(i).getSuspended().equals("yes"))
+                    {
+                        suspendBtn.setDisable(true);
+                        suspendBtn.setText("Suspended");
+                    }
+                    else{
+                        suspendBtn.setId(String.valueOf(i));
+                    }
+                    Label label = (Label)resultRow.lookup("#resultRowLabel");
+                    ((JFXButton)resultRow.lookup("#editBtn")).setId(String.valueOf(i));
+                    label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
+                    resultRows.add(resultRow);
+                }
+                return resultRows;
             }
-            Label label = (Label)resultRow.lookup("#resultRowLabel");
-            ((JFXButton)resultRow.lookup("#editBtn")).setId(String.valueOf(i));
-            label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
-            resultDisplayList.getItems().add(resultRow);
-        }
+        };
+
+        Thread loadingThread = new Thread(listLoader, "list-loader");
+        loadingThread.setDaemon(true);
+        loadingThread.start();
+        
     }
 
     @FXML

@@ -106,7 +106,7 @@ public class PublicUser extends User{
             SQLHelper.updateStatement(String.format("update user set username = '%s', password = '%s', email = '%s' where userID = %d",
             username, password, email, userID));
 
-            SQLHelper.updateStatement(String.format("update publicUser set IDNum = '%s', name = '%s', where userID = %d",
+            SQLHelper.updateStatement(String.format("update publicUser set IDNum = '%s', name = '%s' where userID = %d",
             IDNum, name, userID));
 
             return true;
