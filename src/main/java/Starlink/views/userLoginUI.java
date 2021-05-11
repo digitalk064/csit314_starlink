@@ -103,7 +103,7 @@ public class userLoginUI extends CommonUI {
 
         //health staff homepage
         else if (user instanceof HealthStaff)
-             url = "healthStaff/homepage_HealthStaff2.fxml";
+             url = "healthStaff/homepage_HealthStaff.fxml";
 
         else // Other homepages later
             url = "homepage_test.fxml";
