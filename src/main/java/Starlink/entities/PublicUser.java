@@ -12,6 +12,9 @@ public class PublicUser extends User{
     private String name;
     private boolean vaxStatus;
 
+    //Due to huge amount of records, we are limiting the number of rows returned to avoid slow down when searching
+    final int limit = 200;
+
     public String getIDNum()
     {
         return IDNum;
@@ -124,7 +127,7 @@ public class PublicUser extends User{
             List <PublicUser> records = new ArrayList <PublicUser>();
 
             ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on " + 
-            "user.userID = publicUser.userID where name like '%%%s%%'", search_string));
+            "user.userID = publicUser.userID where name like '%%%s%%' limit %d", search_string, limit));
 
             while(results.next()){
                 //get the user info from each row
@@ -154,7 +157,7 @@ public class PublicUser extends User{
             List <PublicUser> records = new ArrayList <PublicUser>();
 
             ResultSet results = SQLHelper.selectStatement(String.format("select * from user join publicUser on " + 
-            "user.userID = publicUser.userID where IDNum like '%%%s%%'", search_string));
+            "user.userID = publicUser.userID where IDNum like '%%%s%%' limit %d", search_string, limit));
 
             while(results.next()){
                 //get the user info from each row
