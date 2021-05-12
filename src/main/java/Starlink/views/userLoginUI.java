@@ -1,6 +1,7 @@
 package Starlink.views;
 
 import Starlink.controllers.general.userLoginController;
+import Starlink.entities.Business;
 import Starlink.entities.HealthOrganization;
 import Starlink.entities.HealthStaff;
 import Starlink.entities.PublicUser;
@@ -104,6 +105,10 @@ public class userLoginUI extends CommonUI {
         //health staff homepage
         else if (user instanceof HealthStaff)
              url = "healthStaff/homepage_HealthStaff.fxml";
+
+        //business homepage
+        else if (user instanceof Business)
+        url = "business/homepage_Business.fxml";
 
         else // Other homepages later
             url = "homepage_test.fxml";
