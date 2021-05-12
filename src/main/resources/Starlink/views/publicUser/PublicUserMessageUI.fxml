@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.business.BusinessMessageUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.publicUser.PublicUserMessageUI">
    <children>
-      <JFXTextArea editable="false" layoutX="262.0" layoutY="279.0" prefHeight="197.0" prefWidth="693.0" text="Dear Business                &#10;&#10;A potential case has been identified on your premise&#10;&#10;on date &#10;&#10;It is highly advisable that pre-caution measurement to be implement at your&#10;soonest.  ">
+      <JFXTextArea editable="false" layoutX="262.0" layoutY="279.0" prefHeight="197.0" prefWidth="693.0" text="Dear                &#10;&#10;You have been deemed infected.&#10;It is highly advisable that you take pre-caution measurement at your&#10;soonest.">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial Rounded MT Bold" size="18.0" />
          </font>
       </JFXTextArea>
       <JFXButton fx:id="acknowledgeButton" buttonType="RAISED" layoutX="775.0" layoutY="509.0" onAction="#onAcknowledgeClicked" prefHeight="56.0" prefWidth="174.0" style="-fx-background-color: #ffff;" text="Acknowledge" />
@@ -21,17 +21,7 @@
             <Font size="25.0" />
          </font>
       </JFXButton>
-      <Label fx:id="businessNameLabel" layoutX="405.0" layoutY="279.0" prefHeight="28.0" prefWidth="157.0">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="BusinessLocationLabel" layoutX="696.0" layoutY="325.0" prefHeight="28.0" prefWidth="157.0">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="BusinessDateLabel" layoutX="336.0" layoutY="372.0" prefHeight="28.0" prefWidth="157.0">
+      <Label fx:id="UserNameLabel" layoutX="315.0" layoutY="282.0" prefHeight="28.0" prefWidth="157.0">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

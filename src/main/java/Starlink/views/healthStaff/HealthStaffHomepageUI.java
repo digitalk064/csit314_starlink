@@ -205,7 +205,15 @@ public class HealthStaffHomepageUI extends CommonUI{
     }
 
     @FXML
-    void onChangeInfectiontatus(ActionEvent event) {
+    void onChangeInfectiontatus(ActionEvent event) throws Exception {
+
+
+        //when the infected toggle is pressed it redirects to display the list
+        Parent root = FXMLLoader.load(getClass().getResource("PotentialInfectedHSUI.fxml"));
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
 
     }
 

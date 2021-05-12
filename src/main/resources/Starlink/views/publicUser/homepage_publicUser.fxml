@@ -8,16 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.publicUser.PublicUserHomepageUI">
    <children>
+      <JFXButton fx:id="viewLocationHistory" buttonType="RAISED" layoutX="224.0" layoutY="387.0" onAction="#onViewLocationClicked" prefHeight="56.0" prefWidth="164.0" style="-fx-background-color: #ffff;" text="View Location History" />
+      <JFXButton fx:id="notificationbutton" buttonType="RAISED" layoutX="506.0" layoutY="387.0" onAction="#onNotificationClicked" prefHeight="56.0" prefWidth="164.0" style="-fx-background-color: #ffff;" text="Notifications" />
       <Text fx:id="header" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, &quot;name&quot;" textAlignment="CENTER" wrappingWidth="1281.0" AnchorPane.topAnchor="29.7060546875">
          <font>
             <Font size="29.0" />
          </font>
       </Text>
-      <JFXButton fx:id="logoutButton" buttonType="RAISED" layoutX="1066.0" layoutY="42.0" onAction="#onLogoutClicked" prefHeight="53.0" prefWidth="172.0" style="-fx-background-color: #ffff;" text="Log out" AnchorPane.topAnchor="42.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </JFXButton>
       <Label layoutX="102.0" layoutY="222.0" prefHeight="39.0" prefWidth="222.0" text="Vaccination Status :">
          <font>
             <Font size="24.0" />
@@ -28,5 +25,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <JFXButton fx:id="logoutButton" buttonType="RAISED" layoutX="1066.0" layoutY="42.0" onAction="#onLogoutClicked" prefHeight="53.0" prefWidth="172.0" style="-fx-background-color: #ffff;" text="Log out" AnchorPane.topAnchor="42.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -1,6 +1,4 @@
-package Starlink.views.business;
-
-import java.io.IOException;
+package Starlink.views.publicUser;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -9,16 +7,16 @@ import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.fxml.FXML;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
-public class BusinessMessageUI extends CommonUI {
+public class PublicUserMessageUI extends CommonUI{
 
     User user;
-
+    
     @FXML
     private JFXButton acknowledgeButton;
 
@@ -32,13 +30,7 @@ public class BusinessMessageUI extends CommonUI {
     private JFXButton logoutButton;
 
     @FXML
-    private Label businessNameLabel;
-
-    @FXML
-    private Label BusinessLocationLabel;
-
-    @FXML
-    private Label BusinessDateLabel;
+    private Label UserNameLabel;
 
     @FXML
     protected void initialize() // Called when the view is loaded
@@ -46,14 +38,14 @@ public class BusinessMessageUI extends CommonUI {
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        businessNameLabel.setText(String.format("%s ,", user.getID()));
+        UserNameLabel.setText(String.format("%s ,", user.getID()));
         
     }
 
     @FXML
     void onAcknowledgeClicked(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("NotificationBusinessUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("NotificationPublicUserUI.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -63,7 +55,7 @@ public class BusinessMessageUI extends CommonUI {
 
     @FXML
     void onBackClicked(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("NotificationBusinessUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("NotificationPublicUserUI.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -75,7 +67,7 @@ public class BusinessMessageUI extends CommonUI {
     @FXML
     void onHomeClicked(ActionEvent event) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("homepage_Business.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homepage_publicUser.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -87,6 +79,5 @@ public class BusinessMessageUI extends CommonUI {
     void onLogoutClicked(ActionEvent event) throws Exception {
         Logout();
     }
-
 
 }
