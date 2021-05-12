@@ -11,6 +11,7 @@ public class PublicUser extends User{
     private String IDNum;
     private String name;
     private boolean vaxStatus;
+    private boolean infectionStatus;
 
     //Due to huge amount of records, we are limiting the number of rows returned to avoid slow down when searching
     final int limit = 200;
@@ -29,10 +30,23 @@ public class PublicUser extends User{
         return vaxStatus;
     }
 
+    public boolean getInfectionStatus()
+    {
+        return infectionStatus;
+    }
+
     public boolean setVaxStatus(boolean vaxStatus) throws Exception{
         this.vaxStatus = vaxStatus;
         SQLHelper.updateStatement(String.format("update publicUser set vaxStatus = %s where userID = '%s'",
             vaxStatus, userid));
+        return true;
+        
+    }
+
+    public boolean setInfectionStatus(boolean infectionStatus) throws Exception{
+        this.infectionStatus = infectionStatus;
+        SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %s where userID = '%s'",
+            infectionStatus, userid));
         return true;
         
     }
@@ -48,6 +62,7 @@ public class PublicUser extends User{
             name = results.getString("name");
             IDNum = results.getString("IDNum");
             vaxStatus = results.getBoolean("vaxStatus");
+            infectionStatus = results.getBoolean("infectionStatus");
             return;
         }
         throw new Exception("Cannot find public user account with userid " + userid + " in publicUser table!");
@@ -76,8 +91,8 @@ public class PublicUser extends User{
             //get the userID
             int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
 
-            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID, vaxStatus) values ('%s', '%s', %d, 'no')",
-            IDNum, name, userID));
+            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID, vaxStatus, infectionStatus) values ('%s', '%s', %d, %d, $d)",
+            IDNum, name, userID, 0, 0));
 
             return true;
         }

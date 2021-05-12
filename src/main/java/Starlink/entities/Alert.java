@@ -8,8 +8,8 @@ import java.util.List; // import just the List interface
 import java.util.ArrayList; // import just the ArrayList class
 
 public class Alert {
-    int userID;
-    String message;
+    private int userID;
+    private String message;
 
     public int getUserID()
     {

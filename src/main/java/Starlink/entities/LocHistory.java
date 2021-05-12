@@ -8,10 +8,10 @@ import java.util.List; // import just the List interface
 import java.util.ArrayList; // import just the ArrayList class
 
 public class LocHistory {
-    String IDNum;
-    String businessID;
-    String checkIn;
-    String checkOut;
+    private String IDNum;
+    private String businessID;
+    private String checkIn;
+    private String checkOut;
 
     public String getIDNum()
     {
