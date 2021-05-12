@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Starlink.views.healthStaff.PotentialInfectedHSUI">
+   <children>
+      <JFXButton fx:id="BackButton" buttonType="RAISED" layoutX="46.0" layoutY="34.0" onAction="#onBackClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Back " />
+      <JFXButton fx:id="HomeButton" buttonType="RAISED" layoutX="542.0" layoutY="34.0" onAction="#onHomeClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Home " />
+      <JFXButton fx:id="logoutButton" buttonType="RAISED" layoutX="1085.0" layoutY="24.0" onAction="#onLogoutClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Logout">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </JFXButton>
+      <JFXListView fx:id="resultDisplayList" layoutX="191.0" layoutY="264.0" prefHeight="400.0" prefWidth="930.0" />
+      <JFXButton fx:id="alertUser" buttonType="RAISED" layoutX="521.0" layoutY="685.0" onAction="#onAlertUserClicked" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #ffffff;" text="Alert Users" />
+      <JFXButton fx:id="AlertBusiness" buttonType="RAISED" layoutX="710.0" layoutY="685.0" onAction="#onAlertBusinessClicked" prefHeight="50.0" prefWidth="145.0" style="-fx-background-color: #ffffff;" text="Alert Business" />
+      <Label layoutX="198.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="USER ID" />
+      <Label layoutX="374.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="USERNAME" />
+      <Label layoutX="762.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="BUSINESS ID" />
+      <Label layoutX="983.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="BUSINESS NAME" />
+      <Label layoutX="557.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="DATE OF VISIT" />
+   </children>
+</AnchorPane>

@@ -78,7 +78,6 @@ public class SearchPublicAccUI extends CommonUI {
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
-        /*
         try{
             onSearchClicked(null);
         }catch(Exception e)
@@ -86,7 +85,6 @@ public class SearchPublicAccUI extends CommonUI {
             System.out.println("Error in onSearchClicked:");
             e.printStackTrace();
         }
-        */
     }
 
     @FXML

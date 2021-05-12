@@ -31,6 +31,8 @@ import javafx.scene.Node;
 
 import java.util.*;
 
+// Merged with homepage
+// Unused but kept for references
 public class GenerateVaxCertUI extends CommonUI {
 
     SearchPublicAccController searchController;
