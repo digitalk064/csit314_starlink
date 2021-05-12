@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.List; // import just the List interface
 import java.util.ArrayList; // import just the ArrayList class
 
-public class Alerts {
+public class Alert {
     int userID;
     String message;
 
@@ -29,8 +29,8 @@ public class Alerts {
     }
 
     //Constructor
-    public Alerts(){};
-    public Alerts(int userID, String message)
+    public Alert(){};
+    public Alert(int userID, String message)
     {
         this.userID = userID;
         this.message = message;
@@ -49,11 +49,11 @@ public class Alerts {
         }
     }
 
-    public List<Alerts> searchByUserID(int userID) throws Exception
+    public List<Alert> getAlerts(int userID) throws Exception
     {
 
         try{
-            List <Alerts> records = new ArrayList <Alerts>();
+            List <Alert> records = new ArrayList <Alert>();
 
             ResultSet results = SQLHelper.selectStatement(String.format("select message from alerts where userID = %d", userID));
 
@@ -62,7 +62,7 @@ public class Alerts {
                 String msg = results.getString("message");
 
                 //initiate an Alert object
-                Alerts AL = new Alerts(userID, msg);
+                Alert AL = new Alert(userID, msg);
 
                 //add object to list
                 records.add(AL);

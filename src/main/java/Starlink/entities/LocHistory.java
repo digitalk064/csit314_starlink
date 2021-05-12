@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import java.util.List; // import just the List interface
 import java.util.ArrayList; // import just the ArrayList class
 
-public class LocationHistory {
+public class LocHistory {
     String IDNum;
     String businessID;
     String checkIn;
@@ -47,8 +47,8 @@ public class LocationHistory {
     }
 
     //Constructor
-    public LocationHistory(){}
-    public LocationHistory(String IDNum, String businessID, String checkIn, String checkOut)
+    public LocHistory(){}
+    public LocHistory(String IDNum, String businessID, String checkIn, String checkOut)
     {
         this.IDNum = IDNum;
         this.businessID = businessID;
@@ -56,10 +56,10 @@ public class LocationHistory {
         this.checkOut = checkOut;
     }
 
-    public List<LocationHistory> retrieveRecords(int userID) throws Exception
+    public List<LocHistory> retrieveRecords(int userID) throws Exception
     {
         try{
-            List <LocationHistory> records = new ArrayList <LocationHistory>();
+            List <LocHistory> records = new ArrayList <LocHistory>();
 
             String IDNum = SQLHelper.selectStatement(String.format("select IDNum from publicUser where userID = %d", userID)).getString("IDNum");
 
@@ -72,7 +72,7 @@ public class LocationHistory {
                 String checkOut = results.getString("checkOut");
                 
                 //initiate a LocationHistory object
-                LocationHistory LH = new LocationHistory(IDNum, businessID, checkIn, checkOut);
+                LocHistory LH = new LocHistory(IDNum, businessID, checkIn, checkOut);
 
                 //add object to list
                 records.add(LH);
@@ -86,10 +86,10 @@ public class LocationHistory {
         }
     }
 
-    public List<LocationHistory> traceContact(String IDNum) throws Exception
+    public List<LocHistory> traceContact(String IDNum) throws Exception
     {
         try{
-            List <LocationHistory> records = new ArrayList <LocationHistory>();
+            List <LocHistory> records = new ArrayList <LocHistory>();
 
             ResultSet results = SQLHelper.selectStatement(String.format("select * from locationHistory where IDNum = '%s'", IDNum));
 
@@ -111,7 +111,7 @@ public class LocationHistory {
                     String _checkOut = results.getString("checkOut");
 
                     //initiate a LocationHistory object
-                    LocationHistory LH = new LocationHistory(_id, _businessID, _checkIn, _checkOut);
+                    LocHistory LH = new LocHistory(_id, _businessID, _checkIn, _checkOut);
 
                     //add object to list
                     records.add(LH);
