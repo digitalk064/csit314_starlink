@@ -8,9 +8,14 @@ import java.util.List; // import just the List interface
 import java.util.ArrayList; // import just the ArrayList class
 
 public class Alert {
+    private int alertID;
     private int userID;
     private String message;
 
+    public int getAlertID()
+    {
+        return alertID;
+    }
     public int getUserID()
     {
         return userID;
@@ -30,13 +35,14 @@ public class Alert {
 
     //Constructor
     public Alert(){};
-    public Alert(int userID, String message)
+    public Alert(int alertID, int userID, String message)
     {
+        this.alertID = alertID;
         this.userID = userID;
         this.message = message;
     }
 
-    public boolean generateAlerts(int userID, String message) throws Exception
+    public boolean generateAlert(int userID, String message) throws Exception
     {
         try{
             SQLHelper.updateStatement(String.format("insert into alerts (userID, message) values (%d, '%s')",
@@ -55,14 +61,15 @@ public class Alert {
         try{
             List <Alert> records = new ArrayList <Alert>();
 
-            ResultSet results = SQLHelper.selectStatement(String.format("select message from alerts where userID = %d", userID));
+            ResultSet results = SQLHelper.selectStatement(String.format("select alertID, message from alerts where userID = %d", userID));
 
             while(results.next()){
                 //get the message from each row
+                int alertID = results.getInt("alertID"); 
                 String msg = results.getString("message");
 
                 //initiate an Alert object
-                Alert AL = new Alert(userID, msg);
+                Alert AL = new Alert(alertID, userID, msg);
 
                 //add object to list
                 records.add(AL);
@@ -71,6 +78,18 @@ public class Alert {
             return records;
         }
         catch(Exception e)
+        {
+            throw e;
+        }
+    }
+
+    //After the user has seen the alert, delete it
+    public boolean deleteAlert() throws Exception
+    {
+        try{
+            SQLHelper.updateStatement(String.format("delete from alerts where alertID = %d", alertID));
+            return true;
+        }catch(Exception e)
         {
             throw e;
         }

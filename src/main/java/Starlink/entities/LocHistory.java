@@ -13,6 +13,9 @@ public class LocHistory {
     private String checkIn;
     private String checkOut;
 
+    //Might not be allowed
+    private String address;
+
     public String getIDNum()
     {
         return IDNum;
@@ -21,13 +24,17 @@ public class LocHistory {
     {
         return businessID;
     }
-    public String geCheckIn()
+    public String getCheckIn()
     {
         return checkIn;
     }
     public String getCheckOut()
     {
         return checkOut;
+    }
+    public String getAddress()
+    {
+        return address;
     }
     public void setIDNum(String IDNum)
     {
@@ -45,34 +52,38 @@ public class LocHistory {
     {
         this.checkOut = checkOut;
     }
-
+    public void setAddress(String address)
+    {
+        this.address = address;
+    }
     //Constructor
     public LocHistory(){}
-    public LocHistory(String IDNum, String businessID, String checkIn, String checkOut)
+    public LocHistory(String IDNum, String businessID, String checkIn, String checkOut, String address)
     {
         this.IDNum = IDNum;
         this.businessID = businessID;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
+        this.address = address;
     }
 
-    public List<LocHistory> retrieveRecords(int userID) throws Exception
+    public List<LocHistory> retrieveRecords(String IDNum) throws Exception
     {
         try{
             List <LocHistory> records = new ArrayList <LocHistory>();
 
-            String IDNum = SQLHelper.selectStatement(String.format("select IDNum from publicUser where userID = %d", userID)).getString("IDNum");
-
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from locationHistory where IDNum = '%s'", IDNum));
+            ResultSet results = SQLHelper.selectStatement(String.format(
+                "select * from locationHistory join business on locationHistory.businessID = business.businessID where IDNum = '%s' order by checkIn desc", IDNum));
 
             while(results.next()){
                 //get the location details from each row
                 String businessID = results.getString("businessID");
                 String checkIn = results.getString("checkIn");
                 String checkOut = results.getString("checkOut");
+                String address = results.getString("address");
                 
                 //initiate a LocationHistory object
-                LocHistory LH = new LocHistory(IDNum, businessID, checkIn, checkOut);
+                LocHistory LH = new LocHistory(IDNum, businessID, checkIn, checkOut, address);
 
                 //add object to list
                 records.add(LH);
@@ -109,9 +120,10 @@ public class LocHistory {
                     String _businessID = results.getString("businessID");
                     String _checkIn = results.getString("checkIn");
                     String _checkOut = results.getString("checkOut");
+                    String address = results.getString("address");
 
                     //initiate a LocationHistory object
-                    LocHistory LH = new LocHistory(_id, _businessID, _checkIn, _checkOut);
+                    LocHistory LH = new LocHistory(_id, _businessID, _checkIn, _checkOut, address);
 
                     //add object to list
                     records.add(LH);

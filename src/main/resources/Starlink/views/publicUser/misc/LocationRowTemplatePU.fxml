@@ -5,6 +5,7 @@
 
 <Pane fx:id="resultRowTemplate" prefHeight="38.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="resultRowLabel" layoutX="14.0" layoutY="11.0" prefHeight="10.0" prefWidth="633.0" text="Label" />
+      <Label fx:id="resultRowLocLabel" layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="293.0" text="Location" />
+      <Label fx:id="resultRowTimeLabel" layoutX="364.0" layoutY="11.0" prefHeight="17.0" prefWidth="293.0" text="Date" />
    </children>
 </Pane>
