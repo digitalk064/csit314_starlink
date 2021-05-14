@@ -45,8 +45,8 @@ public class PublicUser extends User{
 
     public boolean setInfectionStatus(boolean infectionStatus) throws Exception{
         this.infectionStatus = infectionStatus;
-        SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %s where userID = '%s'",
-            infectionStatus, userid));
+        SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %d where userID = '%s'",
+            (infectionStatus ? 1 : 0), userid));
         return true;
         
     }

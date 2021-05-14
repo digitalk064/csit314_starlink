@@ -1,9 +1,10 @@
 package Starlink.views.healthStaff;
 
 import Starlink.Starlink;
-import Starlink.controllers.admin.PublicAccSuspendController;
+
 import Starlink.controllers.admin.SearchPublicAccController;
 import Starlink.controllers.healthStaff.GenerateVaxCertController;
+import Starlink.controllers.healthStaff.InfectionStatusController;
 import Starlink.entities.PublicUser;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
@@ -29,35 +30,12 @@ import javafx.scene.Node;
 import java.io.IOException;
 import java.util.List;
 
-import java.io.IOException;
-import java.util.List;
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.scene.control.Label;
-import Starlink.Starlink;
-import Starlink.controllers.admin.PublicAccSuspendController;
-import Starlink.controllers.admin.SearchPublicAccController;
-import Starlink.controllers.healthStaff.GenerateVaxCertController;
-import Starlink.entities.PublicUser;
-import Starlink.views.CommonUI;
-import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 
 import java.util.*;
 
@@ -68,6 +46,7 @@ public class HealthStaffHomepageUI extends CommonUI{
 
     SearchPublicAccController searchController;
     GenerateVaxCertController vaxController;
+    InfectionStatusController infectionController;
 
     @FXML
     private AnchorPane pane;
@@ -117,6 +96,7 @@ public class HealthStaffHomepageUI extends CommonUI{
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
         searchController = new SearchPublicAccController();
         vaxController = new GenerateVaxCertController();
+        infectionController = new InfectionStatusController();
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
@@ -174,12 +154,19 @@ public class HealthStaffHomepageUI extends CommonUI{
                     Label label = (Label)resultRow.lookup("#resultRowLabel");
                     label.setText(String.format("%-10s%-30s", results.get(i).getIDNum(), results.get(i).getName()));
                     JFXToggleButton vaxToggle = (JFXToggleButton)resultRow.lookup("#vaccinatedButton");
+                    JFXToggleButton infectionToggle = (JFXToggleButton)resultRow.lookup("#infectionButton");
                     if(results.get(i).getVaxStatus())
                     {
                         vaxToggle.setSelected(true);
                         vaxToggle.setDisable(true);
                     }
-                    ((JFXToggleButton)resultRow.lookup("#vaccinatedButton")).setId(String.valueOf(i));
+                    if(results.get(i).getInfectionStatus())
+                        infectionToggle.setSelected(true);
+
+                    vaxToggle.setId(String.valueOf(i));
+                    infectionToggle.setId(String.valueOf(i));
+                    ((JFXButton)resultRow.lookup("#traceButton")).setId(String.valueOf(i));
+
                     resultRows.add(resultRow);
                     
                 }
@@ -205,18 +192,27 @@ public class HealthStaffHomepageUI extends CommonUI{
     }
 
     @FXML
-    void onChangeInfectiontatus(ActionEvent event) throws Exception {
+    void onChangeInfectionStatus(ActionEvent event) throws Exception {
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        boolean newStatus = ((JFXToggleButton)event.getSource()).isSelected();
+        System.out.println("On infection clicked for ID " + index + " to " + newStatus);
+        if(infectionController.setInfectionStatus(results.get(index), newStatus))
+        {
+            CreateDialog(pane, "Success", "Successfully set the user's status as infected. Please conduct contact tracing.");
+        }
+    }
 
-
-        //when the infected toggle is pressed it redirects to display the list
-        Parent root = FXMLLoader.load(getClass().getResource("PotentialInfectedHSUI.fxml"));
-        Scene scene = new Scene(root);
+    @FXML
+    void onTraceClicked(ActionEvent event) throws Exception {
+        int index = Integer.parseInt(((Node) event.getSource()).getId());
+        System.out.println("On trace clicked for ID " + index);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ContactTracingUI.fxml"));
+        Scene scene = new Scene(loader.load());
+        ((ContactTracingUI)loader.getController()).initFields(results.get(index));
 
         stage.setScene(scene);
         stage.show();
-
     }
-
-
 
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="resultRowTemplate" prefHeight="38.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="rowIDNum" layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="56.0" text="IDNum" />
+      <Label fx:id="rowName" layoutX="143.0" layoutY="11.0" prefHeight="17.0" prefWidth="239.0" text="Name" />
+      <Label fx:id="rowAddress" layoutX="387.0" layoutY="11.0" prefHeight="17.0" prefWidth="222.0" text="Location" />
+      <Label fx:id="rowCheckIn" layoutX="608.0" layoutY="11.0" prefHeight="17.0" prefWidth="215.0" text="Time" />
+   </children>
+</Pane>

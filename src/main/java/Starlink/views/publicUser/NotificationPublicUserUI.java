@@ -89,9 +89,10 @@ public class NotificationPublicUserUI extends CommonUI{
         resultDisplayList.getItems().clear(); 
         
         for(int i = 0; i < alerts.size(); i++){
-            Label btn = new Label(alerts.get(i).getMessage());
-            btn.setId(String.valueOf(i));
-            resultDisplayList.getItems().add(btn);
+            Label label = new Label(alerts.get(i).getMessage());
+            label.setMaxWidth(420);
+            label.setId(String.valueOf(i));
+            resultDisplayList.getItems().add(label);
         }
     }
 

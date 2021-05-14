@@ -21,7 +21,6 @@ import javafx.scene.Node;
 
 public class updateBusinessAccountUI extends CommonUI {
 
-    String id, businessname, businessusername, businessemail, businesspassword;
     int targetUserID; //User ID of the account being updated
 
     updateBusinessAccountController controller;
