@@ -45,6 +45,8 @@ public class Alert {
     public boolean generateAlert(int userID, String message) throws Exception
     {
         try{
+            this.userID = userID;
+            this.message = message;
             SQLHelper.updateStatement(String.format("insert into alerts (userID, message) values (%d, '%s')",
             userID, message));
             return true;

@@ -119,12 +119,36 @@ public class ContactTracingUI extends CommonUI {
 
     @FXML
     void onAlertBusinessClicked(ActionEvent event) {
-
+        try{
+            if(alertBusinessController.generateAlert(results_businessesID))
+                showSuccess();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            showError(e.getMessage());
+        }
     }
 
     @FXML
     void onAlertUserClicked(ActionEvent event) {
+        try{
+            if(alertPublicController.generateAlert(results_publicusersID))
+                showSuccess();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            showError(e.getMessage());
+        }
+    }
 
+    void showSuccess()
+    {
+        CreateDialog(rootPane, "Success", "Successfully sent alerts to users.");
+    }
+
+    void showError(String errorMsg)
+    {
+        CreateDialog(rootPane, "Error", "Failed to send alerts to users. Error message:\n" + errorMsg);
     }
 
     @FXML

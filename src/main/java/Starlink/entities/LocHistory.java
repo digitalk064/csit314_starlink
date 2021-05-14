@@ -158,11 +158,11 @@ public class LocHistory {
                 System.out.println(String.format(
                     "SQL Statement: \n"+
                     "select locationHistory.IDNum, locationHistory.businessID, business.address, business.userID as businessuserid, publicUser.name as username, publicUser.userID as publicuserid, checkIn, checkOut " +
-                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s'", 
+                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s' order by publicUser.userID", 
                     IDNum, businessID, checkOut, checkIn));
                 ResultSet PURecords = SQLHelper.selectStatement(String.format(
                     "select locationHistory.IDNum, locationHistory.businessID, business.address, business.userID as businessuserid, publicUser.name as username, publicUser.userID as publicuserid, checkIn, checkOut " +
-                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s'", 
+                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s' order by publicUser.userID", 
                     IDNum, businessID, checkOut, checkIn));
 
                 while(PURecords.next()){
