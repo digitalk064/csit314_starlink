@@ -5,15 +5,15 @@ import java.util.List;
 import Starlink.entities.Alert;
 
 public class AlertBusinessController {
-    public boolean generateAlert(List<Integer> ids) throws Exception
+    public boolean generateAlert(List<Integer> businesses) throws Exception
     {
         try{
-            for(int i = 0; i < ids.size(); i++)
+            for(int i = 0; i < businesses.size(); i++)
             {
                 Alert alert = new Alert();
                 String message = "Dear business owner,\nOur system has recently determined that a person infected with Covid-19 has been inside your location.";
                 message += "\nPlease take necessary measures.\nThank you.";
-                alert.generateAlert(ids.get(i), message);
+                alert.generateAlert(businesses.get(i), message);
             }
             return true;
         }catch(Exception e)

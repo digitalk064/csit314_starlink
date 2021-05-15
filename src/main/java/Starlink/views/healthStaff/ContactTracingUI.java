@@ -54,8 +54,8 @@ public class ContactTracingUI extends CommonUI {
     private JFXButton AlertBusiness;
 
     List<LocHistory> results_locations; // The location history of other users who were present
-    List<Integer> results_publicusersID = new ArrayList<>(); // The list of unique public users' userID who were in contact
-    List<Integer> results_businessesID = new ArrayList<>(); // The list of unique businesses' userID who the person went to
+    List<Integer> users = new ArrayList<>(); // The list of unique public users' userID who were in contact
+    List<Integer> businesses = new ArrayList<>(); // The list of unique businesses' userID who the person went to
 
     //Because each result row is a FXML file with the controller being set to this
     //When we load the results they will call the initialize method again which is wrong
@@ -103,12 +103,12 @@ public class ContactTracingUI extends CommonUI {
             Pane resultRow =  loader.load();
             //Get the public user's IDNum and add it to the list if it's not already in
             int publicUserID = results_locations.get(i).getPublicUserID();
-            if(!results_publicusersID.contains(publicUserID))
-                results_publicusersID.add(publicUserID);
+            if(!users.contains(publicUserID))
+                users.add(publicUserID);
             //Get the business's ID and add it to the list if it's not already in
             int businessUserID = results_locations.get(i).getBusinessUserID();
-            if(!results_businessesID.contains(businessUserID))
-                results_businessesID.add(businessUserID);
+            if(!businesses.contains(businessUserID))
+                businesses.add(businessUserID);
             ((Label)resultRow.lookup("#rowIDNum")).setText(results_locations.get(i).getIDNum());
             ((Label)resultRow.lookup("#rowName")).setText(results_locations.get(i).getUserName());
             ((Label)resultRow.lookup("#rowAddress")).setText(results_locations.get(i).getAddress());
@@ -118,9 +118,9 @@ public class ContactTracingUI extends CommonUI {
     }
 
     @FXML
-    void onAlertBusinessClicked(ActionEvent event) {
+    void onAlertBusinessesClicked(ActionEvent event) {
         try{
-            if(alertBusinessController.generateAlert(results_businessesID))
+            if(alertBusinessController.generateAlert(businesses))
                 showSuccess();
         }catch(Exception e)
         {
@@ -130,9 +130,9 @@ public class ContactTracingUI extends CommonUI {
     }
 
     @FXML
-    void onAlertUserClicked(ActionEvent event) {
+    void onAlertUsersClicked(ActionEvent event) {
         try{
-            if(alertPublicController.generateAlert(results_publicusersID))
+            if(alertPublicController.generateAlerts(users))
                 showSuccess();
         }catch(Exception e)
         {
