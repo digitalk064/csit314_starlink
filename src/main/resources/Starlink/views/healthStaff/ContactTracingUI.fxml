@@ -23,7 +23,8 @@
       <Label layoutX="368.0" layoutY="236.0" prefHeight="24.0" prefWidth="129.0" text="Name" />
       <Label layoutX="836.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="Time" />
       <Label layoutX="612.0" layoutY="236.0" prefHeight="24.0" prefWidth="138.0" text="Location" />
-      <Text fx:id="header" layoutX="26.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tracing contacts for &quot;name&quot;" textAlignment="CENTER" wrappingWidth="1281.0">
+      <Label fx:id="legendLabel" layoutX="213.0" layoutY="189.0" prefHeight="18.0" prefWidth="850.0" text="Black outline = locations visited by the target user. No outline = locations visited by other users who came into contact with ." />
+      <Text fx:id="header" layoutX="24.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tracing contacts for &quot;name&quot;" textAlignment="CENTER" wrappingWidth="1281.0">
          <font>
             <Font size="29.0" />
          </font>
