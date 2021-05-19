@@ -35,6 +35,13 @@ public class WeeklyReportUI extends CommonUI {
     private Label vaxWeeklyRepLabel;
 
     @FXML
+    private Label avgCaseLabel;
+
+    @FXML
+    private Label avgVaxLabel;
+
+
+    @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("homepage_admin.fxml"));
         Scene scene = new Scene(root);

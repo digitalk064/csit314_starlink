@@ -27,17 +27,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="8.0" layoutY="185.0" prefHeight="47.0" prefWidth="191.0" text="No of COVID-19 cases">
+            <Label layoutX="8.0" layoutY="185.0" prefHeight="41.0" prefWidth="245.0" text="Total no of COVID-19 cases">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="10.0" layoutY="238.0" prefHeight="64.0" prefWidth="245.0" text="No of vaccinations completed">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="349.0" prefHeight="34.0" prefWidth="236.0" text="Possible Exposures Locations">
+            <Label layoutX="13.0" layoutY="363.0" prefHeight="34.0" prefWidth="236.0" text="Possible Exposures Locations">
                <font>
                   <Font size="18.0" />
                </font>
@@ -52,12 +47,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="casesWeeklyRepLabel" layoutX="213.0" layoutY="195.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="casesWeeklyRepLabel" layoutX="266.0" layoutY="192.0" prefHeight="21.0" prefWidth="86.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="vaxWeeklyRepLabel" layoutX="267.0" layoutY="257.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="vaxWeeklyRepLabel" layoutX="279.0" layoutY="273.0" prefHeight="21.0" prefWidth="86.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -69,6 +64,31 @@
                </font>
             </Label>
             <Label layoutX="213.0" layoutY="138.0" prefHeight="27.0" prefWidth="26.0" text="TO">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="228.0" prefHeight="27.0" prefWidth="261.0" text="Average COVID-19 case per day">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="305.0" prefHeight="27.0" prefWidth="261.0" text="Average vaccination per day">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="avgCaseLabel" layoutX="291.0" layoutY="228.0" prefHeight="15.0" prefWidth="74.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="avgVaxLabel" layoutX="266.0" layoutY="305.0" prefHeight="15.0" prefWidth="74.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="254.0" prefHeight="64.0" prefWidth="245.0" text="Total vaccinations completed">
                <font>
                   <Font size="18.0" />
                </font>
