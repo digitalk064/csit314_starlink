@@ -73,6 +73,11 @@ public class HealthStaffHomepageUI extends CommonUI{
     @FXML
     private Text header;
 
+
+    //infected  count sprint 5
+    @FXML
+    private Label infectedCount;
+
     //Because each result row is a FXML file with the controller being set to this
     //When we load the results they will call the initialize method again which is wrong
     //So we set a flag to prevent them from calling the initialize method

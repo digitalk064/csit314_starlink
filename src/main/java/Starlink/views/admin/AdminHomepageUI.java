@@ -7,6 +7,8 @@ import Starlink.views.CommonUI;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import java.io.IOException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -40,6 +42,12 @@ public class AdminHomepageUI extends CommonUI {
     private JFXButton manageBusinessButton;
 
     @FXML
+    private JFXButton dailyreportBtn;
+
+    @FXML
+    private JFXButton weeklyreportBtn;
+
+    @FXML
     private Text header;
 
     // FXML callbacks
@@ -50,6 +58,30 @@ public class AdminHomepageUI extends CommonUI {
         // Get the logged in user
         user = (User) stage.getUserData();
         header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
+    }
+
+    @FXML
+    void onWeeklyRepClicked(ActionEvent event) throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("WeeklyReportUI.fxml"));
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+
+    @FXML
+    void onDailyRepClicked(ActionEvent event) throws Exception {
+
+        Parent root = FXMLLoader.load(getClass().getResource("DailyReportUI.fxml"));
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+
+
     }
 
     @FXML
