@@ -17,7 +17,7 @@ public class LocHistory {
     // Attributes that are not in the schema but will be
     // available from using SQL join operation
     private String businessAddress;
-    private String userName;
+    private String userFullName;
     private int businessUserID; //(UserID from User superclass) Needed for alerting
     private int publicUserID; //(UserID from User superclass) Needed for alerting
 
@@ -43,7 +43,7 @@ public class LocHistory {
     }
     public String getUserName()
     {
-        return userName;
+        return userFullName;
     }
     public int getPublicUserID()
     {
@@ -94,14 +94,14 @@ public class LocHistory {
         this.businessAddress = address;
     }
 
-    public LocHistory(String IDNum, String businessID, String checkIn, String checkOut, String address, String userName, int publicUserID, int businessUserID)
+    public LocHistory(String IDNum, String businessID, String checkIn, String checkOut, String address, String userFullName, int publicUserID, int businessUserID)
     {
         this.IDNum = IDNum;
         this.businessID = businessID;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.businessAddress = address;
-        this.userName = userName;
+        this.userFullName = userFullName;
         this.publicUserID = publicUserID;
         this.businessUserID = businessUserID;
     }
@@ -143,45 +143,58 @@ public class LocHistory {
             List <LocHistory> records = new ArrayList <LocHistory>();
             
             // First, get all the locations the target person has visited
-            ResultSet results = SQLHelper.selectStatement(String.format("select * from locationHistory where IDNum = '%s'", IDNum));
+            // We also get the business address, business user ID (for alerting later)
+            ResultSet results = SQLHelper.selectStatement(String.format(
+                "select locationHistory.IDNum, locationHistory.businessID, business.address, business.userID as businessuserid, checkIn, checkOut " +
+                "from locationHistory join business on locationHistory.businessID = business.businessID where IDNum = '%s' order by checkIn desc, businessuserid", IDNum));
 
             while(results.next()){
                 //get the location details from each row
                 String businessID = results.getString("businessID");
+                int businessUserID = results.getInt("businessuserid");
+                String address = results.getString("address");
+
+                //get checkin and checkout time of target public user
                 String checkIn = results.getString("checkIn");
                 String checkOut = results.getString("checkOut");
                 
-                // Now find all other people who have been in the same business place and were in contact
+                // In the final list, each unique location will start with LocHistory of the target user (we do not need to store many details here)
+                // put the publicUserID as -1 to mark it as such 
+                // and subsequent records will contain the LocHistory of users who were in contact with the target user
+                // at the location
+                records.add(new LocHistory(IDNum, null, checkIn, null, address, null, -1, businessUserID));
+
+                // Now find all other people (different IDNum) who have been in the same business place and were in contact
                 // We do NOT select the cases where person B was not in contact (checked in later than person A's checkout or checked out earlier than person A's checkin)
                 // The remaining cases will be when the two overlap (meaning there's contact)
                 // We also need to join the publicUser and business tables to get the actual location name and the user's name. And the user ID of the user and business.
+                /*
                 System.out.println(String.format(
                     "SQL Statement: \n"+
-                    "select locationHistory.IDNum, locationHistory.businessID, business.address, business.userID as businessuserid, publicUser.name as username, publicUser.userID as publicuserid, checkIn, checkOut " +
+                    "select locationHistory.IDNum, publicUser.name as userFullName, publicUser.userID as publicuserid, checkIn, checkOut " +
                     "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s' order by publicUser.userID", 
                     IDNum, businessID, checkOut, checkIn));
+                */
                 ResultSet PURecords = SQLHelper.selectStatement(String.format(
-                    "select locationHistory.IDNum, locationHistory.businessID, business.address, business.userID as businessuserid, publicUser.name as username, publicUser.userID as publicuserid, checkIn, checkOut " +
-                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s' order by publicUser.userID", 
+                    "select locationHistory.IDNum, publicUser.name as userFullName, publicUser.userID as publicuserid, checkIn, checkOut " +
+                    "from locationHistory join business on locationHistory.businessID = business.businessID join publicUser on locationHistory.IDNum = publicUser.IDNum where locationHistory.IDNum != '%s' and locationHistory.businessID = '%s' and not checkIn >= '%s' and not checkOut <= '%s' order by checkIn desc", 
                     IDNum, businessID, checkOut, checkIn));
 
                 while(PURecords.next()){
-                    //get public user info
+                    // get traced public user info
                     String _id = PURecords.getString("IDNum");
-                    String userName = PURecords.getString("username");
+                    String userFullName = PURecords.getString("userFullName");
 
-                    //get user ID of businesss and public user
+                    //get user ID of traced public user
                     int publicUserID = PURecords.getInt("publicuserid");
-                    int businessUserID = PURecords.getInt("businessuserid");
 
-                    //get the location details from each row
-                    String _businessID = PURecords.getString("businessID");
+                    //get the checkin and checkout time of the traced public user
                     String _checkIn = PURecords.getString("checkIn");
                     String _checkOut = PURecords.getString("checkOut");
-                    String address = PURecords.getString("address");
+                    
 
                     //initiate a LocationHistory object
-                    LocHistory LH = new LocHistory(_id, _businessID, _checkIn, _checkOut, address, userName, publicUserID, businessUserID);
+                    LocHistory LH = new LocHistory(_id, businessID, _checkIn, _checkOut, address, userFullName, publicUserID, businessUserID);
 
                     //add object to list
                     records.add(LH);

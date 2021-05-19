@@ -3,6 +3,7 @@ package Starlink.views.healthStaff;
 import Starlink.Starlink;
 
 import Starlink.controllers.admin.SearchPublicAccController;
+import Starlink.controllers.healthStaff.AlertPublicUserController;
 import Starlink.controllers.healthStaff.GenerateVaxCertController;
 import Starlink.controllers.healthStaff.InfectionStatusController;
 import Starlink.entities.PublicUser;
@@ -47,6 +48,8 @@ public class HealthStaffHomepageUI extends CommonUI{
     SearchPublicAccController searchController;
     GenerateVaxCertController vaxController;
     InfectionStatusController infectionController;
+    AlertPublicUserController alertPublicController;
+
 
     @FXML
     private AnchorPane pane;
@@ -102,6 +105,7 @@ public class HealthStaffHomepageUI extends CommonUI{
         searchController = new SearchPublicAccController();
         vaxController = new GenerateVaxCertController();
         infectionController = new InfectionStatusController();
+        alertPublicController = new AlertPublicUserController();
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
@@ -165,8 +169,10 @@ public class HealthStaffHomepageUI extends CommonUI{
                         vaxToggle.setSelected(true);
                         vaxToggle.setDisable(true);
                     }
-                    if(results.get(i).getInfectionStatus())
+                    if(results.get(i).getInfectionStatus()){
                         infectionToggle.setSelected(true);
+                        infectionToggle.setDisable(true);
+                    }
 
                     vaxToggle.setId(String.valueOf(i));
                     infectionToggle.setId(String.valueOf(i));
@@ -201,10 +207,11 @@ public class HealthStaffHomepageUI extends CommonUI{
         int index = Integer.parseInt(((Node) event.getSource()).getId());
         boolean newStatus = ((JFXToggleButton)event.getSource()).isSelected();
         System.out.println("On infection clicked for ID " + index + " to " + newStatus);
-        if(infectionController.setInfectionStatus(results.get(index), newStatus))
+        if(infectionController.setInfectionStatus(results.get(index), newStatus) && alertPublicController.generateInfectedAlert(results.get(index).getID()))
         {
-            CreateDialog(pane, "Success", "Successfully set the user's status as infected. Please conduct contact tracing.");
+            CreateDialog(pane, "Success", "Successfully set the user's status as infected and alerted the user. Please conduct contact tracing.");
         }
+        ((JFXToggleButton)event.getSource()).setDisable(true);
     }
 
     @FXML

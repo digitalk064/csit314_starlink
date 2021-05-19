@@ -55,6 +55,11 @@ public class CommonUI {
 
     protected void Logout() throws Exception
     {
+        DisplayLoginPage();
+    }
+
+    void DisplayLoginPage() throws Exception
+    {
         Parent root = FXMLLoader.load(getClass().getResource("/Starlink/views/login.fxml"));
         Scene scene = new Scene(root);
         
