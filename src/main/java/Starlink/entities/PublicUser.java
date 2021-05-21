@@ -11,7 +11,9 @@ public class PublicUser extends User{
     private String IDNum;
     private String name;
     private boolean vaxStatus;
+    private String vaxTime;
     private boolean infectionStatus;
+    private String infectionTime;
 
     //Due to huge amount of records, we are limiting the number of rows returned to avoid slow down when searching
     final int limit = 200;
@@ -30,9 +32,19 @@ public class PublicUser extends User{
         return vaxStatus;
     }
 
+    public String getVaxTime()
+    {
+        return vaxTime;
+    }
+
     public boolean getInfectionStatus()
     {
         return infectionStatus;
+    }
+
+    public String getInfectionTime()
+    {
+        return infectionTime;
     }
 
     public boolean setVaxStatus(boolean vaxStatus) throws Exception{
@@ -62,17 +74,22 @@ public class PublicUser extends User{
             name = results.getString("name");
             IDNum = results.getString("IDNum");
             vaxStatus = results.getBoolean("vaxStatus");
+            vaxTime = results.getString("vaxTime");
             infectionStatus = results.getBoolean("infectionStatus");
+            infectionTime = results.getString("infectionTime");
             return;
         }
         throw new Exception("Cannot find public user account with userid " + userid + " in publicUser table!");
     }
 
-    public PublicUser(int userid, String username, String password, String email, String IDNum, String name, Boolean vaxStatus) {
+    public PublicUser(int userid, String username, String password, String email, String IDNum, String name, Boolean vaxStatus, String vaxTime, Boolean infectionStatus, String infectionTime) {
         super(userid, username, password, email, UserType.PublicUser);
         this.IDNum = IDNum;
         this.name = name;
         this.vaxStatus = vaxStatus;
+        this.vaxTime = vaxTime;
+        this.infectionStatus = infectionStatus;
+        this.infectionTime = infectionTime;
     }
 
     public boolean createAccount(String username, String password, String email, String IDNum, String name) throws Exception
@@ -91,7 +108,7 @@ public class PublicUser extends User{
             //get the userID
             int userID = SQLHelper.selectStatement(String.format("select userID from user where username = '%s'", username)).getInt("userID");
 
-            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID, vaxStatus, infectionStatus) values ('%s', '%s', %d, %d, $d)",
+            SQLHelper.updateStatement(String.format("insert into publicUser (IDNum, name, userID, vaxStatus, vaxTime, infectionStatus, infectionTime) values ('%s', '%s', %d, %d, NULL, %d, NULL)",
             IDNum, name, userID, 0, 0));
 
             return true;
