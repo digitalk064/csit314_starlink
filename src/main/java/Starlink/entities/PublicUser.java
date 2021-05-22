@@ -1,6 +1,9 @@
 package Starlink.entities;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import Starlink.SQLHelper;
 import javafx.application.Platform;
 
@@ -49,16 +52,18 @@ public class PublicUser extends User{
 
     public boolean setVaxStatus(boolean vaxStatus) throws Exception{
         this.vaxStatus = vaxStatus;
-        SQLHelper.updateStatement(String.format("update publicUser set vaxStatus = %s where userID = '%s'",
-            vaxStatus, userid));
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+        SQLHelper.updateStatement(String.format("update publicUser set vaxStatus = %d, vaxTime = '%s' where userID = '%s'",
+            (vaxStatus ? 1 : 0), LocalDateTime.now().format(format), userid));
         return true;
         
     }
 
     public boolean setInfectionStatus(boolean infectionStatus) throws Exception{
         this.infectionStatus = infectionStatus;
-        SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %d where userID = '%s'",
-            (infectionStatus ? 1 : 0), userid));
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+        SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %d, infectionTime = '%s' where userID = '%s'",
+            (infectionStatus ? 1 : 0), LocalDateTime.now().format(format), userid));
         return true;
         
     }

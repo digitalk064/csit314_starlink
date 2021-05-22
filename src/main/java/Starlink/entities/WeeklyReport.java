@@ -15,6 +15,36 @@ public class WeeklyReport {
     private int totalVaccinations;
     private double avgVaccinations;
 
+    public String getStartDate()
+    {
+        return startDate;
+    }
+
+    public String getEndDate()
+    {
+        return endDate;
+    }
+
+    public int getTotalInfections()
+    {
+        return totalInfections;
+    }
+
+    public int getTotalVaccinations()
+    {
+        return totalVaccinations;
+    }
+
+    public double getAvgInfections()
+    {
+        return avgInfections;
+    }
+
+    public double getavgVaccinations()
+    {
+        return avgVaccinations;
+    }
+    
     public WeeklyReport(){};
 
     public WeeklyReport(String endDate)
@@ -29,12 +59,12 @@ public class WeeklyReport {
     {
         try
         {
-            totalInfections = SQLHelper.selectStatement(String.format("select count(*) from publiUser where infectionStatus = %d and infectionTime >= '%s' " +
+            totalInfections = SQLHelper.selectStatement(String.format("select count(*) as count from publicUser where infectionStatus = %d and infectionTime >= '%s' " +
             "and infectionTime < '%s'",1, startDate, endDate)).getInt("count");
 
             avgInfections = totalInfections/7;
 
-            totalVaccinations = SQLHelper.selectStatement(String.format("select count(*) from publiUser where vaxStatus = %d and vaxTime >= '%s' and vaxTime < '%s'", 
+            totalVaccinations = SQLHelper.selectStatement(String.format("select count(*) as count from publicUser where vaxStatus = %d and vaxTime >= '%s' and vaxTime < '%s'", 
             1, startDate, endDate)).getInt("count");
 
             avgVaccinations = totalVaccinations/7;            

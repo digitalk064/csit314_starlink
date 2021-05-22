@@ -22,14 +22,14 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="11.0" layoutY="131.0" prefHeight="41.0" prefWidth="99.0" text="Date Range ">
+            <Label layoutX="11.0" layoutY="131.0" prefHeight="41.0" prefWidth="45.0" text="From">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="8.0" layoutY="185.0" prefHeight="41.0" prefWidth="245.0" text="Total no of COVID-19 cases">
+            <Label layoutX="8.0" layoutY="185.0" prefHeight="41.0" prefWidth="236.0" text="Total number of new cases">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <Label layoutX="13.0" layoutY="363.0" prefHeight="34.0" prefWidth="236.0" text="Possible Exposures Locations">
@@ -37,22 +37,22 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="fromDateWeekRepLabel" layoutX="115.0" layoutY="138.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="fromDateLabel" layoutX="65.0" layoutY="138.0" prefHeight="27.0" prefWidth="141.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="toDateWeekRepLabel" layoutX="279.0" layoutY="138.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="toDateLabel" layoutX="244.0" layoutY="138.0" prefHeight="27.0" prefWidth="155.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="casesWeeklyRepLabel" layoutX="266.0" layoutY="192.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="totalCasesLabel" layoutX="248.0" layoutY="192.0" prefHeight="27.0" prefWidth="64.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="vaxWeeklyRepLabel" layoutX="279.0" layoutY="273.0" prefHeight="21.0" prefWidth="86.0">
+            <Label fx:id="totalVaxLabel" layoutX="269.0" layoutY="273.0" prefHeight="21.0" prefWidth="86.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -63,34 +63,34 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="213.0" layoutY="138.0" prefHeight="27.0" prefWidth="26.0" text="TO">
+            <Label layoutX="213.0" layoutY="138.0" prefHeight="27.0" prefWidth="19.0" text="to">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="8.0" layoutY="228.0" prefHeight="27.0" prefWidth="261.0" text="Average COVID-19 case per day">
+            <Label layoutX="8.0" layoutY="228.0" prefHeight="27.0" prefWidth="330.0" text="Average number of new cases per day">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <Label layoutX="8.0" layoutY="305.0" prefHeight="27.0" prefWidth="261.0" text="Average vaccination per day">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="avgCaseLabel" layoutX="291.0" layoutY="228.0" prefHeight="15.0" prefWidth="74.0">
+            <Label fx:id="avgCasesLabel" layoutX="340.0" layoutY="228.0" prefHeight="15.0" prefWidth="74.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="avgVaxLabel" layoutX="266.0" layoutY="305.0" prefHeight="15.0" prefWidth="74.0">
+            <Label fx:id="avgVaxLabel" layoutX="258.0" layoutY="305.0" prefHeight="15.0" prefWidth="74.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="8.0" layoutY="254.0" prefHeight="64.0" prefWidth="245.0" text="Total vaccinations completed">
+            <Label layoutX="8.0" layoutY="254.0" prefHeight="64.0" prefWidth="261.0" text="Total vaccinations completed">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </children>

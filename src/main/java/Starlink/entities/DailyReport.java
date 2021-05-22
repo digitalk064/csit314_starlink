@@ -12,6 +12,16 @@ public class DailyReport {
     private int totalInfections;
     private int totalVaccinations;
 
+    public int getTotalInfections()
+    {
+        return totalInfections;
+    }
+
+    public int getTotalVaccinations()
+    {
+        return totalVaccinations;
+    }
+
     public DailyReport(){};
 
     public DailyReport(String date)
@@ -23,11 +33,11 @@ public class DailyReport {
     {
         try
         {
-            totalInfections = SQLHelper.selectStatement(String.format("select count(*) from publiUser where infectionStatus = %d and infectionTime = '%s' "
-            ,1, date)).getInt("count");
+            totalInfections = SQLHelper.selectStatement(String.format("select count(*) as count from publicUser where infectionStatus = %d and infectionTime >= '%s 00:00:00' and infectionTime <= '%s 23:59:59'"
+            ,1, date, date)).getInt("count");
 
-            totalVaccinations = SQLHelper.selectStatement(String.format("select count(*) from publiUser where vaxStatus = %d and vaxTime = '%s'", 
-            1, date)).getInt("count");          
+            totalVaccinations = SQLHelper.selectStatement(String.format("select count(*) as count from publicUser where vaxStatus = %d and vaxTime >= '%s 00:00:00' and vaxTime <= '%s 23:59:59'", 
+            1, date, date)).getInt("count");          
         }
         catch(Exception e)
         {

@@ -1,7 +1,12 @@
 package Starlink.views.admin;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.jfoenix.controls.JFXButton;
 
+import Starlink.controllers.admin.WeeklyReportController;
+import Starlink.entities.WeeklyReport;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +21,8 @@ import javafx.scene.Scene;
 
 public class WeeklyReportUI extends CommonUI {
 
+    WeeklyReportController controller;
+
     @FXML
     private JFXButton BacktoHomepageButton;
 
@@ -23,23 +30,54 @@ public class WeeklyReportUI extends CommonUI {
     private JFXButton logoutButton;
 
     @FXML
-    private Label fromDateWeekRepLabel;
+    private Label fromDateLabel;
 
     @FXML
-    private Label toDateWeekRepLabel;
+    private Label toDateLabel;
 
     @FXML
-    private Label casesWeeklyRepLabel;
+    private Label totalCasesLabel;
 
     @FXML
-    private Label vaxWeeklyRepLabel;
+    private Label totalVaxLabel;
 
     @FXML
-    private Label avgCaseLabel;
+    private Label avgCasesLabel;
 
     @FXML
     private Label avgVaxLabel;
 
+    @FXML
+    protected void initialize()// Called when the view is loaded
+    {
+        super.initialize();
+
+        controller = new WeeklyReportController();
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDate now = LocalDate.now();  
+        
+        try{
+            WeeklyReport report = controller.generateReport();
+            DisplayReport(report);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error generating daily report.");
+            e.printStackTrace();
+        }
+
+    }
+
+    void DisplayReport(WeeklyReport report)
+    {
+        fromDateLabel.setText(report.getStartDate());
+        toDateLabel.setText(report.getEndDate());
+        totalCasesLabel.setText(String.valueOf(report.getTotalInfections()));
+        totalVaxLabel.setText(String.valueOf(report.getTotalVaccinations()));
+        avgCasesLabel.setText(String.valueOf(report.getAvgInfections()));
+        avgVaxLabel.setText(String.valueOf(report.getavgVaccinations()));
+    }
 
     @FXML
     void onBacktoHomepageClicked(ActionEvent event) throws Exception {
