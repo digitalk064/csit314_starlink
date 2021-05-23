@@ -21,6 +21,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: "Run JUnit tests"
+      run: mvn -B test --file pom_prod.xml
     - name: "CI: Build with Maven and upload Artifact"
       run: mvn -B package --file pom_prod.xml
     - run: rm target/starlink-1.jar #Remove default jar
