@@ -52,6 +52,8 @@ public class PublicUser extends User{
 
     public boolean setVaxStatus(boolean vaxStatus) throws Exception{
         this.vaxStatus = vaxStatus;
+
+        //Also set the time of the vaccination to current date
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
         SQLHelper.updateStatement(String.format("update publicUser set vaxStatus = %d, vaxTime = '%s' where userID = '%s'",
             (vaxStatus ? 1 : 0), LocalDateTime.now().format(format), userid));
@@ -61,6 +63,8 @@ public class PublicUser extends User{
 
     public boolean setInfectionStatus(boolean infectionStatus) throws Exception{
         this.infectionStatus = infectionStatus;
+
+        //Also set the time of the infection to current date
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
         SQLHelper.updateStatement(String.format("update publicUser set infectionStatus = %d, infectionTime = '%s' where userID = '%s'",
             (infectionStatus ? 1 : 0), LocalDateTime.now().format(format), userid));
@@ -75,7 +79,6 @@ public class PublicUser extends User{
         //Automatically fill in remaining information
         ResultSet results = SQLHelper.selectStatement(String.format("select * from publicUser where userid = %d", userid));
         if(results.next()){ //If there are any rows returned at all we have succeeded
-            //Save the userType and userid from the logged in account to the persistent variables
             name = results.getString("name");
             IDNum = results.getString("IDNum");
             vaxStatus = results.getBoolean("vaxStatus");

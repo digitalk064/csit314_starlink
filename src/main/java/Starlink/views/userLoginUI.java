@@ -64,7 +64,7 @@ public class userLoginUI extends CommonUI {
     void onSubmit(ActionEvent event) throws Exception {
         usernameField.validate();
         passwordField.validate();
-        if(!usernameField.validate() || !passwordField.validate())
+        if (!usernameField.validate() || !passwordField.validate())
             return;
         stage = (Stage) rootPane.getScene().getWindow();
         System.out.println("Login button pressed");
@@ -76,8 +76,8 @@ public class userLoginUI extends CommonUI {
         try {
             User user = control.validate(username, password);
             // If we reach this code, login successful
-            // Save the logged in User into the stage
-            stage.setUserData(user);
+            // Save the logged in User
+            setLoggedInUser(user);
             goToHomePage(user);
         } catch (Exception e) {
             // Show error dialog
@@ -96,19 +96,17 @@ public class userLoginUI extends CommonUI {
         if (user instanceof HealthOrganization)
             url = "admin/homepage_admin.fxml";
 
-
-        //public user homepage
+        // public user homepage
         else if (user instanceof PublicUser)
             url = "publicUser/homepage_publicUser.fxml";
 
-
-        //health staff homepage
+        // health staff homepage
         else if (user instanceof HealthStaff)
-             url = "healthStaff/homepage_HealthStaff.fxml";
+            url = "healthStaff/homepage_HealthStaff.fxml";
 
-        //business homepage
+        // business homepage
         else if (user instanceof Business)
-        url = "business/homepage_Business.fxml";
+            url = "business/homepage_Business.fxml";
 
         else // Other homepages later
             url = "homepage_test.fxml";

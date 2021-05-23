@@ -1,7 +1,7 @@
 package Starlink.views;
 
 import Starlink.Starlink;
-
+import Starlink.entities.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -27,6 +27,7 @@ import javafx.scene.Node;
 
 public class CommonUI {
     protected Stage stage; //The current stage (window)
+    public static User user; //Logged in user
     
     //FXML callbacks
     @FXML
@@ -66,4 +67,16 @@ public class CommonUI {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static User getLoggedInUser()
+    {
+        return user;
+    }
+    
+    protected void setLoggedInUser(User user)
+    {
+        CommonUI.user = user;
+        stage.setUserData(user);
+    }
+
 }

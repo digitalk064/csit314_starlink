@@ -6,6 +6,7 @@ import Starlink.controllers.admin.SearchPublicAccController;
 import Starlink.controllers.healthStaff.AlertPublicUserController;
 import Starlink.controllers.healthStaff.GenerateVaxCertController;
 import Starlink.controllers.healthStaff.InfectionStatusController;
+import Starlink.controllers.healthStaff.ViewNumberOfInfectedController;
 import Starlink.entities.PublicUser;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
@@ -49,6 +50,7 @@ public class HealthStaffHomepageUI extends CommonUI{
     GenerateVaxCertController vaxController;
     InfectionStatusController infectionController;
     AlertPublicUserController alertPublicController;
+    ViewNumberOfInfectedController viewInfectedCountController;
 
 
     @FXML
@@ -77,9 +79,9 @@ public class HealthStaffHomepageUI extends CommonUI{
     private Text header;
 
 
-    //infected  count sprint 5
+    //infected count
     @FXML
-    private Label infectedCount;
+    private Label infectedCountLabel;
 
     //Because each result row is a FXML file with the controller being set to this
     //When we load the results they will call the initialize method again which is wrong
@@ -106,6 +108,7 @@ public class HealthStaffHomepageUI extends CommonUI{
         vaxController = new GenerateVaxCertController();
         infectionController = new InfectionStatusController();
         alertPublicController = new AlertPublicUserController();
+        viewInfectedCountController = new ViewNumberOfInfectedController();
         searchByDropdown.getItems().add("ID number");
         searchByDropdown.getItems().add("Name");
         searchByDropdown.setValue("ID number");
@@ -116,8 +119,21 @@ public class HealthStaffHomepageUI extends CommonUI{
             System.out.println("Error in onSearchClicked:");
             e.printStackTrace();
         }
+        try{
+            int numberOfInfected = viewInfectedCountController.getNumberOfInfected();
+            DisplayNumberOfCases(numberOfInfected);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Error while getting number of infected users:");
+            e.printStackTrace();
+        }
     }
 
+    void DisplayNumberOfCases(int numberOfInfected)
+    {
+        infectedCountLabel.setText(String.valueOf(numberOfInfected));
+    }
 
     @FXML
     void onLogoutClicked(ActionEvent event) throws Exception {
