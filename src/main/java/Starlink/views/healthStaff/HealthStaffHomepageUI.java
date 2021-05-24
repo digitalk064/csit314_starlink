@@ -103,7 +103,7 @@ public class HealthStaffHomepageUI extends CommonUI{
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
+        header.setText(String.format("Hello, %s.", user.getID()));
         searchController = new SearchPublicAccController();
         vaxController = new GenerateVaxCertController();
         infectionController = new InfectionStatusController();

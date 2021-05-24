@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
 
 import Starlink.controllers.admin.DailyReportController;
-import Starlink.entities.DailyReport;
+import Starlink.entities.Report;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +37,9 @@ public class DailyReportUI extends CommonUI {
     private Label vaxLabel;
 
     @FXML
+    private JFXTextArea locationsText;
+
+    @FXML
     protected void initialize()// Called when the view is loaded
     {
         super.initialize();
@@ -48,7 +52,7 @@ public class DailyReportUI extends CommonUI {
         dateLabel.setText(now.toString());
         
         try{
-            DailyReport report = controller.generateReport();
+            Report report = controller.generateDailyReport();
             DisplayReport(report);
         }
         catch(Exception e)
@@ -59,10 +63,16 @@ public class DailyReportUI extends CommonUI {
 
     }
 
-    void DisplayReport(DailyReport report)
+    void DisplayReport(Report report)
     {
         casesLabel.setText(String.valueOf(report.getTotalInfections()));
         vaxLabel.setText(String.valueOf(report.getTotalVaccinations()));
+        String locationsAsText = "";
+        for(int i = 0; i < report.getLocations().size(); i++)
+        {
+            locationsAsText += String.format("%d. %s\n", (i+1), report.getLocations().get(i));
+        }
+        locationsText.setText(locationsAsText);
     }
 
     @FXML

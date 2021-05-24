@@ -1,11 +1,11 @@
 package Starlink.controllers.healthStaff;
 
-import Starlink.entities.HealthStaff;
-import Starlink.views.CommonUI;
+import Starlink.entities.PublicUser;
 
 public class ViewNumberOfInfectedController {
     public int getNumberOfInfected() throws Exception
     {
-        return ((HealthStaff)CommonUI.getLoggedInUser()).getNumberOfInfected();
+        PublicUser count = new PublicUser();
+        return count.getNumberOfInfected();
     }
 }

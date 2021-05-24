@@ -35,7 +35,7 @@ public class BusinessHomepageUI extends CommonUI {
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s. You are a %s", user.getID(), user.getUserType()));
+        header.setText(String.format("Hello, %s.", user.getID()));
     }
 
 

@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
 
 import Starlink.controllers.admin.WeeklyReportController;
-import Starlink.entities.WeeklyReport;
+import Starlink.entities.Report;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,9 @@ public class WeeklyReportUI extends CommonUI {
     private Label avgVaxLabel;
 
     @FXML
+    private JFXTextArea locationsText;
+
+    @FXML
     protected void initialize()// Called when the view is loaded
     {
         super.initialize();
@@ -58,7 +62,7 @@ public class WeeklyReportUI extends CommonUI {
         LocalDate now = LocalDate.now();  
         
         try{
-            WeeklyReport report = controller.generateReport();
+            Report report = controller.generateWeeklyReport();
             DisplayReport(report);
         }
         catch(Exception e)
@@ -69,14 +73,20 @@ public class WeeklyReportUI extends CommonUI {
 
     }
 
-    void DisplayReport(WeeklyReport report)
+    void DisplayReport(Report report)
     {
         fromDateLabel.setText(report.getStartDate());
         toDateLabel.setText(report.getEndDate());
         totalCasesLabel.setText(String.valueOf(report.getTotalInfections()));
         totalVaxLabel.setText(String.valueOf(report.getTotalVaccinations()));
-        avgCasesLabel.setText(String.valueOf(report.getAvgInfections()));
-        avgVaxLabel.setText(String.valueOf(report.getavgVaccinations()));
+        avgCasesLabel.setText(String.format("%.2f", report.getAvgInfections()));
+        avgVaxLabel.setText(String.format("%.2f", report.getavgVaccinations()));
+        String locationsAsText = "";
+        for(int i = 0; i < report.getLocations().size(); i++)
+        {
+            locationsAsText += String.format("%d. %s\n", (i+1), report.getLocations().get(i));
+        }
+        locationsText.setText(locationsAsText);
     }
 
     @FXML

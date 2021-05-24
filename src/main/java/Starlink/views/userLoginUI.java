@@ -82,12 +82,12 @@ public class userLoginUI extends CommonUI {
         } catch (Exception e) {
             // Show error dialog
             e.printStackTrace();
-            showInvalid(e.getMessage());
+            showError(e.getMessage());
         }
     }
 
-    void showInvalid(String errorMsg) {
-        CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + errorMsg);
+    void showError(String error) {
+        CreateDialog(rootPane, "Error", "Failed to login. Error message: \n" + error);
     }
 
     // Switching scene template

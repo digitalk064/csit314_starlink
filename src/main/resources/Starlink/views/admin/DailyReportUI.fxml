@@ -37,7 +37,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="349.0" prefHeight="34.0" prefWidth="245.0" text="Possible Exposures Locations">
+            <Label layoutX="14.0" layoutY="349.0" prefHeight="34.0" prefWidth="303.0" text="Locations visited by new cases">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXTextArea layoutX="14.0" layoutY="390.0" prefHeight="139.0" prefWidth="363.0" text="1. Marina Bay&#10;2. Mellenia Walk&#10;3. Jem&#10;4. Vivocity&#10;5. Sentosa cove&#10;6. Changi" />
+            <JFXTextArea fx:id="locationsText" editable="false" layoutX="14.0" layoutY="390.0" prefHeight="139.0" prefWidth="363.0" text="1. Marina Bay&#10;2. Mellenia Walk&#10;3. Jem&#10;4. Vivocity&#10;5. Sentosa cove&#10;6. Changi" />
             <Label layoutX="103.0" layoutY="54.0" prefHeight="41.0" prefWidth="219.0" text="COVID-19 situation report">
                <font>
                   <Font size="18.0" />

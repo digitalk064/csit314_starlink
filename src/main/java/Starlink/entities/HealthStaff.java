@@ -156,16 +156,4 @@ public class HealthStaff extends User{
             throw e;
         }
     }
-
-    public int getNumberOfInfected() throws Exception
-    {
-        try{
-            return SQLHelper.selectStatement(String.format("select count(*) as count from publicUser where infectionStatus = %d", 1)).getInt("count");
-
-        }catch(Exception e)
-        {
-            throw e;
-        }
-    }
-
 }
