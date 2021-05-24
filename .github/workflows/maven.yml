@@ -10,10 +10,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  test_and_build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -21,6 +19,13 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_prod.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - name: "Run JUnit tests"
       run: mvn -B test --file pom_prod.xml
     - name: "CI: Build with Maven and upload Artifact"
