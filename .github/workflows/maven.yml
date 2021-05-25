@@ -26,6 +26,8 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_prod.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+    - name: "Prepare headless test"
+      run: sudo apt install openjfx 
     - name: "Headless Test & Build with Maven and upload Artifact"
       uses: GabrielBB/xvfb-action@v1
       with:
