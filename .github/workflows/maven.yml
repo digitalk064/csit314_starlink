@@ -35,7 +35,7 @@ jobs:
       with:
         run: mvn clean test --file pom_ci_test.xml # Use the test pom file
     - name: "Build with Maven and upload Artifact"
-      run: mvn -B package --file pom_ci_prod.xml -DskipTests #Skip the test
+      run: mvn -B package --file pom_ci_prod.xml -Dmaven.test.skip=true -DskipTests #Skip the test
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
