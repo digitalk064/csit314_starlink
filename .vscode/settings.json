@@ -1,4 +1,4 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.debug.settings.vmArgs": "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix --add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix --add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix --add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix --add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix --add-exports=javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-opens=java.base/java.lang.reflect=com.jfoenix",
+    "java.debug.settings.vmArgs": "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix --add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix --add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix --add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix --add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix --add-exports=javafx.graphics/com.sun.javafx.scene=com.jfoenix --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=com.jfoenix",
 }
