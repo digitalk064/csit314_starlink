@@ -26,9 +26,7 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_prod.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - name: "Run JUnit tests"
-      run: mvn -B test --file pom_prod.xml
-    - name: "CI: Build with Maven and upload Artifact"
+    - name: "Test & Build with Maven and upload Artifact"
       run: mvn -B package --file pom_prod.xml
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging

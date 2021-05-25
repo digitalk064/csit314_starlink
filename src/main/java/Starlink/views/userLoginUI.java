@@ -38,13 +38,13 @@ public class userLoginUI extends CommonUI {
     private Button loginButton;
 
     @FXML
-    private StackPane rootPane;
+    StackPane rootPane;
 
     @FXML
-    private JFXTextField usernameField;
+    JFXTextField usernameField;
 
     @FXML
-    private JFXPasswordField passwordField;
+    JFXPasswordField passwordField;
 
     // FXML callbacks
     @FXML
@@ -66,7 +66,7 @@ public class userLoginUI extends CommonUI {
         passwordField.validate();
         if (!usernameField.validate() || !passwordField.validate())
             return;
-        stage = (Stage) rootPane.getScene().getWindow();
+
         System.out.println("Login button pressed");
         // Get the user's text input from the fields
         username = usernameField.getText();
@@ -78,12 +78,13 @@ public class userLoginUI extends CommonUI {
             // If we reach this code, login successful
             // Save the logged in User
             setLoggedInUser(user);
-            goToHomePage(user);
         } catch (Exception e) {
             // Show error dialog
             e.printStackTrace();
             showError(e.getMessage());
+            return;
         }
+        goToHomePage(user);
     }
 
     void showError(String error) {
