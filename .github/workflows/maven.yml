@@ -28,6 +28,8 @@ jobs:
           ${{ runner.os }}-maven-
     - name: "Prepare headless test"
       run: sudo apt install openjfx 
+    - run: sudo apt-get update
+    - run: sudo apt-get install libswt-gtk-3-java 
     - name: "Headless Test & Build with Maven and upload Artifact"
       uses: GabrielBB/xvfb-action@v1
       with:
