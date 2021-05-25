@@ -24,6 +24,7 @@ public class userLoginUITest {
     public static void setUpApp() throws Exception{
         SQLHelper.startDBConnection("contactTracing.db");
         //Create javafx thread
+        //To inject data into the boundary, we have no choice but to start the javafx thread
         Thread t = new Thread("JavaFX Init Thread") {
             public void run() {
                 Starlink.launch(Starlink.class, new String[0]);
@@ -40,6 +41,7 @@ public class userLoginUITest {
         //Create boundary object
         this.boundary = new userLoginUI();
         //Initialize the UI elements
+        //These dont work without the javafx thread
         boundary.usernameField = new JFXTextField();
         boundary.passwordField = new JFXPasswordField();
         boundary.rootPane = new StackPane();

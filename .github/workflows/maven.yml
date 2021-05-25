@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test_and_build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,17 +23,19 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_prod.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_ci_prod.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - name: "Prepare headless test"
-      run: sudo apt-get update
-    - run: sudo apt install openjfx 
-    - run: sudo apt install libswt-gtk-4-java
-    - name: "Headless Test & Build with Maven and upload Artifact"
+    # - name: "Prepare headless test"
+    #   run: sudo apt-get update
+    # - run: sudo apt install openjfx 
+    # - run: sudo apt install libswt-gtk-4-java
+    - name: "Headless Test with JUnit"
       uses: GabrielBB/xvfb-action@v1
       with:
-        run: mvn -B package --file pom_prod.xml 
+        run: mvn clean test --file pom_ci_test.xml # Use the test pom file
+    - name: "Build with Maven and upload Artifact"
+      run: mvn -B package --file pom_ci_prod.xml -DskipTests #Skip the test
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
