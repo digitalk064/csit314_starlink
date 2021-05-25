@@ -33,7 +33,7 @@ jobs:
     - name: "Headless Test & Build with Maven and upload Artifact"
       uses: GabrielBB/xvfb-action@v1
       with:
-        run: mvn -B package --file pom_prod.xml
+        run: mvn -B package --file pom_prod.xml 
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
