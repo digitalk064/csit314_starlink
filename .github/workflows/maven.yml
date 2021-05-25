@@ -26,9 +26,12 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_prod.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    - name: "Build with Maven and upload Artifact (Skip tests)"
-    #We skip tests because it's impossible to run on a command line environment
-      run: mvn -B package --file pom_prod.xml -DskipTests
+    - name: "Prepare headless test"
+      run: sudo apt-get update
+    - run: sudo apt install openjfx 
+    - run: sudo apt install libswt-gtk-4-java
+    - name: "Build with Maven and upload Artifact"
+      run: mvn -B package --file pom_prod.xml
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
