@@ -26,16 +26,13 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom_ci_prod.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
-    # - name: "Prepare headless test"
-    #   run: sudo apt-get update
-    # - run: sudo apt install openjfx 
-    # - run: sudo apt install libswt-gtk-4-java
     - name: "Headless Test with JUnit"
+    #xvfb is a linux package that allows running GUI in command line environment(headless) to help boundary testing
       uses: GabrielBB/xvfb-action@v1
       with:
         run: mvn clean test --file pom_ci_test.xml # Use the test pom file
     - name: "Build with Maven and upload Artifact"
-      run: mvn -B package --file pom_ci_prod.xml -Dmaven.test.skip=true -DskipTests #Skip the test
+      run: mvn -B package --file pom_ci_prod.xml -Dmaven.test.skip=true -DskipTests #Skip the test when building
     - run: rm target/starlink-1.jar #Remove default jar
     - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v2
