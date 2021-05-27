@@ -7,6 +7,11 @@ import javafx.application.Platform;
 public class HealthOrganization extends User{
     private String name;
 
+    public String getName()
+    {
+        return name;
+    }
+
     //Constructors
     public HealthOrganization() {};
     public HealthOrganization(int userid, String username, String password, String email) throws Exception {

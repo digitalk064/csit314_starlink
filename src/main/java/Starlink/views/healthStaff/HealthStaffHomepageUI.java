@@ -7,6 +7,7 @@ import Starlink.controllers.healthStaff.AlertPublicUserController;
 import Starlink.controllers.healthStaff.GenerateVaxCertController;
 import Starlink.controllers.healthStaff.InfectionStatusController;
 import Starlink.controllers.healthStaff.ViewNumberOfInfectedController;
+import Starlink.entities.HealthStaff;
 import Starlink.entities.PublicUser;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
@@ -103,7 +104,7 @@ public class HealthStaffHomepageUI extends CommonUI{
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s.", user.getID()));
+        header.setText(String.format("Hello, %s.", ((HealthStaff)user).getName()));
         searchController = new SearchPublicAccController();
         vaxController = new GenerateVaxCertController();
         infectionController = new InfectionStatusController();

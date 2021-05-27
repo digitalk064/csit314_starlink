@@ -2,6 +2,7 @@ package Starlink.views.admin;
 
 import Starlink.Starlink;
 import Starlink.controllers.general.userLoginController;
+import Starlink.entities.HealthOrganization;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
 import javafx.fxml.FXML;
@@ -57,7 +58,7 @@ public class AdminHomepageUI extends CommonUI {
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s.", user.getID()));
+        header.setText(String.format("Hello, %s.", ((HealthOrganization)user).getName()));
     }
 
     @FXML

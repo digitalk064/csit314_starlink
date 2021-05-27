@@ -69,7 +69,7 @@ public class PublicUserHomepageUI extends CommonUI {
         vaxController = new viewVaccinationController();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s.", user.getID()));
+        header.setText(String.format("Hello, %s.", ((PublicUser)user).getName()));
         try{
             isVaccinated = vaxController.getVaxStatus((PublicUser)user);
             displayVaxStatus();

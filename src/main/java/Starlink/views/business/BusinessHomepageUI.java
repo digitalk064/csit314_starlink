@@ -2,6 +2,7 @@ package Starlink.views.business;
 
 import com.jfoenix.controls.JFXButton;
 
+import Starlink.entities.Business;
 import Starlink.entities.User;
 import Starlink.views.CommonUI;
 import javafx.event.ActionEvent;
@@ -35,7 +36,7 @@ public class BusinessHomepageUI extends CommonUI {
         super.initialize();
         // Get the logged in user
         user = (User) stage.getUserData();
-        header.setText(String.format("Hello, %s.", user.getID()));
+        header.setText(String.format("Hello, %s.", ((Business)user).getName()));
     }
 
 
