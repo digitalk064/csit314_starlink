@@ -17,7 +17,7 @@
       </JFXButton>
       <Pane layoutX="428.0" layoutY="136.0" prefHeight="557.0" prefWidth="425.0" style="-fx-background-color: #ffff;">
          <children>
-            <Label layoutX="158.0" layoutY="20.0" prefHeight="34.0" prefWidth="109.0" text="Daily Report">
+            <Label alignment="CENTER" layoutX="2.0" layoutY="20.0" prefHeight="34.0" prefWidth="425.0" text="Daily Report" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
@@ -58,7 +58,7 @@
                </font>
             </Label>
             <JFXTextArea fx:id="locationsText" editable="false" layoutX="14.0" layoutY="390.0" prefHeight="139.0" prefWidth="363.0" text="1. Marina Bay&#10;2. Mellenia Walk&#10;3. Jem&#10;4. Vivocity&#10;5. Sentosa cove&#10;6. Changi" />
-            <Label layoutX="103.0" layoutY="54.0" prefHeight="41.0" prefWidth="219.0" text="COVID-19 situation report">
+            <Label alignment="CENTER" layoutX="2.0" layoutY="54.0" prefHeight="41.0" prefWidth="425.0" text="COVID-19 situation report">
                <font>
                   <Font size="18.0" />
                </font>

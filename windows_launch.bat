@@ -1,2 +1,2 @@
-java -jar --module-path lib/javafx-sdk-16/lib --add-modules javafx.controls,javafx.fxml --add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED --add-exports=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED --add-exports=javafx.base/com.sun.javafx.binding=ALL-UNNAMED --add-exports=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED --add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED --add-exports=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED csit314_starlink.jar
+java -jar --add-opens=java.base/java.lang.reflect=ALL-UNNAMED csit314_starlink.jar
 pause

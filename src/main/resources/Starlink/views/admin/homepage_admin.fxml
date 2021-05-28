@@ -15,11 +15,11 @@
                   <Font size="29.0" />
                </font>
             </Text>
-            <JFXButton fx:id="manageHealthButton" buttonType="RAISED" layoutX="500.0" layoutY="352.0" onAction="#onManageHealthStaffAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Health Staff Account" />
-            <JFXButton fx:id="managePublicButton" buttonType="RAISED" layoutX="278.0" layoutY="352.0" onAction="#onManagePublicUserAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Public User Account" />
-            <JFXButton fx:id="manageBusinessButton" buttonType="RAISED" layoutX="728.0" layoutY="352.0" onAction="#onManageBusinessAccountClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Manage Business Account" />
-            <JFXButton fx:id="dailyreportBtn" buttonType="RAISED" layoutX="272.0" layoutY="516.0" onAction="#onDailyRepClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffff;" text="Daily reports" />
-            <JFXButton fx:id="weeklyreportBtn" buttonType="RAISED" layoutX="500.0" layoutY="516.0" onAction="#onWeeklyRepClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffff;" text="Weekly reports" />
+            <JFXButton fx:id="manageHealthButton" buttonType="RAISED" layoutX="526.0" layoutY="352.0" onAction="#onManageHealthStaffAccountClicked" prefHeight="64.0" prefWidth="212.0" style="-fx-background-color: #ffffff;" text="Manage Health Staff Account" />
+            <JFXButton fx:id="managePublicButton" buttonType="RAISED" layoutX="278.0" layoutY="352.0" onAction="#onManagePublicUserAccountClicked" prefHeight="64.0" prefWidth="212.0" style="-fx-background-color: #ffffff;" text="Manage Public User Account" />
+            <JFXButton fx:id="manageBusinessButton" buttonType="RAISED" layoutX="773.0" layoutY="352.0" onAction="#onManageBusinessAccountClicked" prefHeight="64.0" prefWidth="212.0" style="-fx-background-color: #ffffff;" text="Manage Business Account" />
+            <JFXButton fx:id="dailyreportBtn" buttonType="RAISED" layoutX="278.0" layoutY="516.0" onAction="#onDailyRepClicked" prefHeight="64.0" prefWidth="212.0" style="-fx-background-color: #ffff;" text="Daily reports" />
+            <JFXButton fx:id="weeklyreportBtn" buttonType="RAISED" layoutX="526.0" layoutY="516.0" onAction="#onWeeklyRepClicked" prefHeight="64.0" prefWidth="212.0" style="-fx-background-color: #ffff;" text="Weekly reports" />
             <JFXButton fx:id="logoutButton" buttonType="RAISED" defaultButton="false" layoutX="1066.0" layoutY="21.0" onAction="#onLogoutClicked" prefHeight="64.0" prefWidth="191.0" style="-fx-background-color: #ffffff;" text="Logout">
                <font>
                   <Font size="25.0" />

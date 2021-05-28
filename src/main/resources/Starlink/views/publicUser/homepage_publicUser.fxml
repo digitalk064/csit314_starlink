@@ -15,7 +15,7 @@
             <Font size="29.0" />
          </font>
       </Text>
-      <Label layoutX="102.0" layoutY="222.0" prefHeight="39.0" prefWidth="222.0" text="Vaccination Status :">
+      <Label layoutX="102.0" layoutY="222.0" prefHeight="39.0" prefWidth="392.0" text="Vaccination Status :">
          <font>
             <Font size="24.0" />
          </font>

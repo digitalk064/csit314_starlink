@@ -28,6 +28,7 @@ public class Starlink extends Application {
         Parent loginRoot = FXMLLoader.load(getClass().getResource("views/login.fxml"));
         primaryStage.setScene(new Scene(loginRoot));
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Starlink");
         primaryStage.show();
     }
 
