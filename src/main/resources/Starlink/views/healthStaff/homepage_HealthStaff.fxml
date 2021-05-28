@@ -25,15 +25,11 @@
             <Font size="29.0" />
          </font>
       </Text>
-      <Label layoutX="846.0" layoutY="158.0" prefHeight="44.0" prefWidth="177.0" text="Total infected cases:">
+      <Label fx:id="infectedCountLabel" layoutX="846.0" layoutY="158.0" prefHeight="44.0" prefWidth="177.0" text="Total infected cases:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="infectedCountLabel" layoutX="965.0" layoutY="158.0" prefHeight="44.0" prefWidth="76.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <Label layoutX="217.0" layoutY="656.0" prefHeight="17.0" prefWidth="521.0" text="Showing first 100 results" />
    </children>
 </AnchorPane>

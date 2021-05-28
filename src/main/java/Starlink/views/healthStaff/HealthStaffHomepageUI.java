@@ -133,7 +133,7 @@ public class HealthStaffHomepageUI extends CommonUI{
 
     void DisplayNumberOfCases(int numberOfInfected)
     {
-        infectedCountLabel.setText(String.valueOf(numberOfInfected));
+        infectedCountLabel.setText("Total infected cases: " + String.valueOf(numberOfInfected));
     }
 
     @FXML
